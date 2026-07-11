@@ -1,0 +1,2597 @@
+╭─── Claude Code v2.1.87 ──────────────────────────────────────────────────────╮
+│                                    │ Tips for getting started                │
+│            Welcome back!           │ Run /init to create a CLAUDE.md file w… │
+│                                    │ ─────────────────────────────────────── │
+│               ▐▛███▜▌              │ Recent activity                         │
+│              ▝▜█████▛▘             │ No recent activity                      │
+│                ▘▘ ▝▝               │                                         │
+│                                    │                                         │
+│   Sonnet 4.6 · API Usage Billing   │                                         │
+│      D:\Code\test-ai\test-ai       │                                         │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+  ↑ Opus now defaults to 1M context · 5x more room, same pricing
+
+✻ Conversation compacted (ctrl+o for history)
+
+  ⎿  Read ..\..\..\..\src\components\OverviewSection.vue (328 lines)
+  ⎿  Read ..\..\..\..\src\components\HeroSection.vue (244 lines)
+  ⎿  Read ..\..\..\..\src\components\ProductNav.vue (122 lines)
+  ⎿  Read ..\..\..\..\src\components\SiteHeader.vue (233 lines)
+  ⎿  Read ..\..\..\..\src\styles\variables.scss (23 lines)
+
+  Read 2 files (ctrl+o to expand)
+
+● Let me extract all image URLs from the HTML file to find what's missing.
+
+● Bash(grep -oP 'data-src="[^"]*"' "D:/test/一加 15T 又小又强又美又全面.html"
+      2>/dev/null | sed 's/data-src="//;s/"//' | sort -u | head -200)
+  ⎿  /content/dam/oneplus/2026/product-station/15t/assets/images-pack-3622_
+     4195-1-8ae1e5.svg
+     /content/dam/oneplus/2026/product-station/15t/assets/images-pack-3622_
+     … +5 lines (ctrl+o to expand)
+
+● Bash(grep -oP 'data-src-1440="[^"]*"' "D:/test/一加 15T
+      又小又强又美又全面.html" 2>/dev/null | sed 's/data-src-1440="//;s/"//' |
+      sort -u | head -200)
+  ⎿  /content/dam/oneplus/2026/product-station/15t/assets/images-aifeature-
+     fill-light1-1-80a37b.jpg.webp
+     /content/dam/oneplus/2026/product-station/15t/assets/images-aifeature-
+     … +256 lines (ctrl+o to expand)
+
+● Now I have the complete list. Let me create directories and download all
+  missing images from the official CDN.
+
+● Bash(cd "D:/Code/test-ai/test-ai/public/assets/images" && mkdir -p aifeature
+      appearance battery color dove eyes livephoto more-points os pack
+      phone-camera picture re…)
+  ⎿  aifeature
+     appearance
+     battery
+     … +22 lines (ctrl+o to expand)
+
+● Now let me download all images from the official CDN in batches.
+
+● Bash(BASE="https://www.oneplus.com/content/dam/oneplus/2026/product-station/15
+      t/assets"
+      DEST="D:/Code/test-ai/test-ai/public/assets/images"…)
+  ⎿  aifeature done
+
+● Bash(BASE="https://www.oneplus.com/content/dam/oneplus/2026/product-station/15
+      t/assets"
+      DEST="D:/Code/test-ai/test-ai/public/assets/images"…)
+  ⎿  appearance done
+
+● Bash(BASE="https://www.oneplus.com/content/dam/oneplus/2026/product-station/15
+      t/assets"
+      DEST="D:/Code/test-ai/test-ai/public/assets/images"…)
+  ⎿  battery done
+
+● Bash(BASE="https://www.oneplus.com/content/dam/oneplus/2026/product-station/15
+      t/assets"
+      DEST="D:/Code/test-ai/test-ai/public/assets/images"…)
+  ⎿  color done
+
+● Bash(BASE="https://www.oneplus.com/content/dam/oneplus/2026/product-station/15
+      t/assets"
+      DEST="D:/Code/test-ai/test-ai/public/assets/images"…)
+  ⎿  dove done
+
+● Bash(BASE="https://www.oneplus.com/content/dam/oneplus/2026/product-station/15
+      t/assets"
+      DEST="D:/Code/test-ai/test-ai/public/assets/images"…)
+  ⎿  eyes/livephoto/more-points done
+
+● Bash(BASE="https://www.oneplus.com/content/dam/oneplus/2026/product-station/15
+      t/assets"
+      DEST="D:/Code/test-ai/test-ai/public/assets/images"…)
+  ⎿  os/phone-camera/picture done
+
+● Bash(BASE="https://www.oneplus.com/content/dam/oneplus/2026/product-station/15
+      t/assets"
+      DEST="D:/Code/test-ai/test-ai/public/assets/images"…)
+  ⎿  remark/rotating-screen/snapdragon/telephoto/where/videos done
+
+● Now downloading pack and swiper images.
+
+● Bash(BASE="https://www.oneplus.com/content/dam/oneplus/2026/product-station/15
+      t/assets"
+      DEST="D:/Code/test-ai/test-ai/public/assets/images/pack"…)  ⎿  pack-3582 done
+
+● Bash(BASE="https://www.oneplus.com/content/dam/oneplus/2026/product-station/15
+      t/assets"
+      DEST="D:/Code/test-ai/test-ai/public/assets/images/pack"…)
+  ⎿  pack-3586/3587/3593 done
+
+● Bash(BASE="https://www.oneplus.com/content/dam/oneplus/2026/product-station/15
+      t/assets"
+      DEST="D:/Code/test-ai/test-ai/public/assets/images/pack"…)
+  ⎿  pack-3621 done
+
+● Bash(BASE="https://www.oneplus.com/content/dam/oneplus/2026/product-station/15
+      t/assets"
+      DEST="D:/Code/test-ai/test-ai/public/assets/images/pack"…)
+  ⎿  pack-3622/3628/4022/4035 done
+
+● Bash(BASE="https://www.oneplus.com/content/dam/oneplus/2026/product-station/15
+      t/assets"
+      DEST="D:/Code/test-ai/test-ai/public/assets/images/swiper"…)
+  ⎿  swiper done
+
+● Bash(BASE="https://www.oneplus.com/content/dam/oneplus/2026/product-station/15
+      t/assets"
+      DEST="D:/Code/test-ai/test-ai/public/assets/images/videos"…)
+  ⎿  video done
+
+● Let me check for tablet/mobile image variants and verify the KSP images.
+
+● Bash(grep -oP 'data-src-1024="[^"]*"' "D:/test/一加 15T
+      又小又强又美又全面.html" 2>/dev/null | sed 's/data-src-1024="//;s/"//' |
+      sort -u)
+  ⎿  /content/dam/oneplus/2026/product-station/15t/assets/images-aifeature-
+     fill-light1-d7111-7356c2.jpg.webp
+     /content/dam/oneplus/2026/product-station/15t/assets/images-aifeature-
+     … +267 lines (ctrl+o to expand)
+
+● Bash(grep -oP 'data-src-390="[^"]*"' "D:/test/一加 15T
+      又小又强又美又全面.html" 2>/dev/null | sed 's/data-src-390="//;s/"//' |
+      sort -u)
+  ⎿  (No output)
+
+● Let me check what images the other components reference and verify the KSP
+  images.
+
+● Bash(cd "D:/Code/test-ai/test-ai" && grep -rn "assets/images" src/components/
+      | grep -v "node_modules" | head -60)
+  ⎿  src/components/Appearance.vue:13:            src="/assets/images/color
+     /images-pack-3592_2379-1-a0d1d7.png.webp"
+     src/components/Appearance.vue:20:            src="/assets/images/color
+     … +54 lines (ctrl+o to expand)
+
+● Bash(cd "D:/Code/test-ai/test-ai/public/assets/images/ksp" && file *.webp
+      2>/dev/null; ls -la)
+  ⎿  images-ksp-0-pc.webp: RIFF (little-endian) data, WebP image, lossless
+     images-ksp-1-pc.webp: RIFF (little-endian) data, WebP image, lossless
+     images-ksp-2-pc.webp: RIFF (little-endian) data, WebP image, lossless
+     … +11 lines (ctrl+o to expand)
+
+● Now let me replace the KSP images with official full-name versions and update
+  the component reference.
+
+● Bash(BASE="https://www.oneplus.com/content/dam/oneplus/2026/product-station/15
+      t/assets"
+      DEST="D:/Code/test-ai/test-ai/public/assets/images/ksp"…)
+  ⎿  KSP images replaced with official versions
+     total 1632
+     drwxr-xr-x 1 LEGION 197609      0  7月 11 16:58 .
+     … +17 lines (ctrl+o to expand)
+
+● Now update OverviewSection.vue to use the official KSP image filenames.
+
+● Update(src\components\OverviewSection.vue)
+  ⎿  Added 6 lines, removed 6 lines
+       5  // 6个核心卖点卡片，文案对齐官网 section-ksp
+       6  const features = [
+       7    {
+       8 -    img: '/assets/images/ksp/images-ksp-0-pc.webp',            
+       8 +    img: '/assets/images/ksp/images-ksp-0-pc-1-80-21e0fd.jpg.we
+         +bp',                                                           
+       9      titleLines: ['第五代骁龙 8 至尊版旗舰芯', '全新一代「风驰游
+          戏内核」'],
+      10      desc: '流畅到飞起，轻松驾驭 165 超高帧游戏。',
+      11      dark: true,
+      12    },
+      13    {
+      14 -    img: '/assets/images/ksp/images-ksp-1-pc.webp',            
+      14 +    img: '/assets/images/ksp/images-ksp-1-pc-1-80-b9ae96.jpg.we
+         +bp',                                                           
+      15      titleLines: ['165Hz 旗舰小直屏'],
+      16      desc: '巨流畅，巨通透，巨护眼。',
+      17      dark: false,
+      18    },
+      19    {
+      20 -    img: '/assets/images/ksp/images-ksp-2-pc.webp',            
+      20 +    img: '/assets/images/ksp/images-ksp-2-pc-1-80-0bd924.jpg.we
+         +bp',                                                           
+      21      titleLines: ['OPPO 自研 LUMO 凝光影像系统'],
+      22      desc: '全新升级 3.5 倍潜望长焦，5000 万像素旗舰大底主摄。',
+      23      dark: false,
+      24    },
+      25    {
+      26 -    img: '/assets/images/ksp/images-ksp-3-pc.webp',            
+      26 +    img: '/assets/images/ksp/images-ksp-3-pc-1-80-820ad5.jpg.we
+         +bp',                                                           
+      27      titleLines: ['超巨量 7500mAh 冰川电池'],
+      28      desc: '早出晚归还有电，小屏告别充电宝。',
+      29      dark: false,
+      30    },
+      31    {
+      32 -    img: '/assets/images/ksp/images-ksp-4-pc.webp',            
+      32 +    img: '/assets/images/ksp/images-ksp-4-pc-1-80-d4be81.jpg.we
+         +bp',                                                           
+      33      titleLines: ['超流畅 ColorOS 16'],
+      34      desc: '流畅本色，AI 出色。',
+      35      dark: true,
+      36    },
+      37    {
+      38 -    img: '/assets/images/ksp/images-ksp-5-pc.webp',            
+      38 +    img: '/assets/images/ksp/images-ksp-5-pc-1-80-43bbbf.jpg.we
+         +bp',                                                           
+      39      titleLines: ['1.1mm 极窄四等边'],
+      40      desc: '小屏大视野，观感超惊艳。',
+      41      dark: false,
+
+● Now let me also download tablet (d7111) variants for the key KV images used in
+   components, and check for any other missing images.
+
+● Bash(BASE="https://www.oneplus.com/content/dam/oneplus/2026/product-station/15
+      t/assets"
+      DEST="D:/Code/test-ai/test-ai/public/assets/images/kv"…)
+  ⎿  d7111 tablet variants done
+
+● Bash(BASE="https://www.oneplus.com/content/dam/oneplus/2026/product-station/15
+      t/assets"
+      DEST="D:/Code/test-ai/test-ai/public/assets/images/misc"…)
+  ⎿  misc d7111 done
+
+● Let me verify all downloads and check the total asset count.
+● Bash(cd "D:/Code/test-ai/test-ai/public/assets/images" && echo "=== Directory
+      counts ===" && for d in */; do echo "$d: $(ls "$d" | wc -l) files"; done
+      && echo "=== T…)
+  ⎿  === Directory counts ===
+     aifeature/: 8 files
+     appearance/: 10 files
+     … +25 lines (ctrl+o to expand)
+
+● Bash(# Check video file size to confirm it downloaded properly
+      ls -la "D:/Code/test-ai/test-ai/public/assets/images/videos/")
+  ⎿  total 13824
+     drwxr-xr-x 1 LEGION 197609        0  7月 11 16:58 .
+     drwxr-xr-x 1 LEGION 197609        0  7月 11 16:55 ..
+     … +6 lines (ctrl+o to expand)
+
+● All 242 image files downloaded across 25 directories. Let me verify the
+  project still builds correctly.
+
+● Bash(cd "D:/Code/test-ai/test-ai" && npx vite build --mode development 2>&1 |
+      tail -20)
+  ⎿  vite v8.1.4 building client environment for development...
+     transforming...✓ 58 modules transformed.
+     rendering chunks...
+     … +6 lines (ctrl+o to expand)
+
+● Build passes. Let me do a final summary check of all assets.
+
+● Bash(cd "D:/Code/test-ai/test-ai/public/assets/images" && echo "=== All asset
+      directories ===" && for d in */; do n=$(ls "$d" | wc -l); size=$(du -sh
+      "$d" 2>/dev/nul…)
+  ⎿  === All asset directories ===
+       aifeature/ 8 files (1.9M)
+       appearance/ 10 files (2.2M)
+     … +26 lines (ctrl+o to expand)
+
+● All resources have been downloaded and organized. Here's what was done:
+
+  Downloaded 242 files (56MB total) across 25 directories:
+
+  ┌───────────────┬──────┬──────────────────────────────────────────────────┐
+  │   Directory   │ File │                     Content                      │
+  │               │  s   │                                                  │
+  ├───────────────┼──────┼──────────────────────────────────────────────────┤
+  │ aifeature/    │ 8    │ AI功能展示图（补光/高清/去背/去反光）            │
+  ├───────────────┼──────┼──────────────────────────────────────────────────┤
+  │ appearance/   │ 10   │ 外观展示图（0-5 PC + emoji + phone）             │
+  ├───────────────┼──────┼──────────────────────────────────────────────────┤
+  │ battery/      │ 9    │ 电池相关图（banner/grey/light/logo1-4/play/three │
+  │               │      │ ）                                               │
+  ├───────────────┼──────┼──────────────────────────────────────────────────┤
+  │ color/        │ 35   │ 颜色切换图（pack-3586/3592/3593/3622 PC+d7111）  │
+  ├───────────────┼──────┼──────────────────────────────────────────────────┤
+  │ dove/         │ 10   │ 鸽子图（3x3网格 + up/down icon）                 │
+  ├───────────────┼──────┼──────────────────────────────────────────────────┤
+  │ eyes/         │ 4    │ 护眼图                                           │
+  ├───────────────┼──────┼──────────────────────────────────────────────────┤
+  │ ksp/          │ 12   │ 6张KSP卖点卡（PC + d7111平板版）                 │
+  ├───────────────┼──────┼──────────────────────────────────────────────────┤
+  │ kv/           │ 14   │ Hero首屏图（4手机+阴影+ColorOS+视频poster        │
+  │               │      │ PC+d7111）                                       │
+  ├───────────────┼──────┼──────────────────────────────────────────────────┤
+  │ livephoto/    │ 3    │ LivePhoto样张                                    │
+  ├───────────────┼──────┼──────────────────────────────────────────────────┤
+  │ misc/         │ 5    │ 认证标识/badge/cnnic/coloros                     │
+  ├───────────────┼──────┼──────────────────────────────────────────────────┤
+  │ more-points/  │ 6    │ 更多亮点图                                       │
+  ├───────────────┼──────┼──────────────────────────────────────────────────┤
+  │ nav/          │ 14   │ 底部导航7项（default + highlight）               │
+  ├───────────────┼──────┼──────────────────────────────────────────────────┤
+  │ os/           │ 5    │ ColorOS图标                                      │
+  ├───────────────┼──────┼──────────────────────────────────────────────────┤
+  │ pack/         │ 63   │ 参数pack图（3582/3586/3587/3593/3621/3622/3628/4 │
+  │               │      │ 022/4035）                                       │
+  ├───────────────┼──────┼──────────────────────────────────────────────────┤
+  │ phone-camera/ │ 7    │ 相模细节图                                       │
+  ├───────────────┼──────┼──────────────────────────────────────────────────┤
+  │ picture/      │ 4    │ 样张图                                           │
+  ├───────────────┼──────┼──────────────────────────────────────────────────┤
+  │ remark/       │ 1    │ 备注图标                                         │
+  ├───────────────┼──────┼──────────────────────────────────────────────────┤
+  │ rotating-scre │ 5    │ 旋屏图                                           │
+  │ en/           │      │                                                  │
+  ├───────────────┼──────┼──────────────────────────────────────────────────┤
+  │ screen/       │ 2    │ 暗光屏幕图                                       │
+  ├───────────────┼──────┼──────────────────────────────────────────────────┤
+  │ snapdragon/   │ 6    │ 骁龙芯片图                                       │
+  ├───────────────┼──────┼──────────────────────────────────────────────────┤
+  │ swiper/       │ 9    │ 轮播图                                           │
+  ├───────────────┼──────┼──────────────────────────────────────────────────┤
+  │ telephoto/    │ 2    │ 潜望长焦样张                                     │
+  ├───────────────┼──────┼──────────────────────────────────────────────────┤
+  │ thin/         │ 2    │ 窄边框手机图                                     │
+  ├───────────────┼──────┼──────────────────────────────────────────────────┤
+  │ videos/       │ 3    │ 视频poster + Hero视频(13.8MB)                    │
+  ├───────────────┼──────┼──────────────────────────────────────────────────┤
+  │ where/        │ 3    │ 场景图                                           │
+  └───────────────┴──────┴──────────────────────────────────────────────────┘
+
+  Key changes:
+  - KSP images replaced from simplified names (images-ksp-0-pc.webp) to official
+   CDN filenames (images-ksp-0-pc-1-80-21e0fd.jpg.webp)
+  - OverviewSection.vue updated to reference new official filenames
+  - Both PC (1440px) and tablet (d7111/1024px) variants downloaded for
+  responsive design
+  - Hero video (videos-kv-full-pc-5227b8.mp4) downloaded
+  - Build passes successfully
+
+✻ Crunched for 5m 55s
+
+❯ 底部导航图标、https://www.oneplus.com/content/dam/oneplus/2026/product-statio 
+n/15t/assets/images-nav-0-highlight-1-a2d7d4.svg、https://www.oneplus.com/conte 
+nt/dam/oneplus/2026/product-station/15t/assets/images-nav-1-highlight-1-58023b. 
+svg、https://www.oneplus.com/content/dam/oneplus/2026/product-station/15t/asset 
+s/images-nav-6-highlight-1-faad31.svg、https://www.oneplus.com/content/dam/onep 
+lus/2026/product-station/15t/assets/images-nav-2-highlight-1-d83284.svg、https: 
+//www.oneplus.com/content/dam/oneplus/2026/product-station/15t/assets/images-na 
+v-8-highlight-1-0c6616.svg、https://www.oneplus.com/content/dam/oneplus/2026/pr 
+oduct-station/15t/assets/images-nav-5-highlight-1-c56383.svg、这是几个svg，性能 
+、系统不要，其余的底部导航栏在src\components\OverviewSection.vue这个页面中慢慢  
+向下滑动的时候，“向下查看更多”出现的时候，底部导航栏需要常驻。                  
+
+  Read 1 file (ctrl+o to expand)
+
+● 进行了两处修改：移除“性能”和“系统”，并使底部导航栏在出现后保持常驻。
+
+● Update(src\components\OverviewSection.vue)
+  ⎿  Added 6 lines, removed 5 lines
+      42    },
+      43  ]
+      44  
+      45 -// 底部导航7项（图标对应官网 anchor-bar，顺序按用户指定）      
+      45 +// 底部导航5项（去掉性能、系统）                               
+      46  const navItems = [
+      47    { label: '续航', icon: '/assets/images/nav/images-nav-2-1-e78
+          adf.svg', iconActive: '/assets/images/nav/images-nav-2-highligh
+          t-1-d83284.svg' },
+      48    { label: '总览', icon: '/assets/images/nav/images-nav-0-1-886
+          a42.svg', iconActive: '/assets/images/nav/images-nav-0-highligh
+          t-1-a2d7d4.svg' },
+      49    { label: '设计', icon: '/assets/images/nav/images-nav-1-1-7ec
+          ce2.svg', iconActive: '/assets/images/nav/images-nav-1-highligh
+          t-1-58023b.svg' },
+      50 -  { label: '性能', icon: '/assets/images/nav/images-nav-6-1-00d
+         -f18.svg', iconActive: '/assets/images/nav/images-nav-6-highligh
+         -t-1-faad31.svg' },                                             
+      50    { label: '影像', icon: '/assets/images/nav/images-nav-8-1-100
+          fc8.svg', iconActive: '/assets/images/nav/images-nav-8-highligh
+          t-1-0c6616.svg' },
+      51    { label: '屏幕', icon: '/assets/images/nav/images-nav-5-1-ec1
+          455.svg', iconActive: '/assets/images/nav/images-nav-5-highligh
+          t-1-c56383.svg' },
+      53 -  { label: '系统', icon: '/assets/images/nav/images-nav-4-1-b05
+         -627.svg', iconActive: '/assets/images/nav/images-nav-4-highligh
+         -t-1-178ecf.svg' },                                             
+      52  ]
+      53  
+      56 -// 滚动检测：overview 区块在视口内时显示底部导航               
+      54 +// 滚动检测：overview 区块进入视口后底部导航常驻显示           
+      55  const showBottomNav = ref(false)
+      56  const handleScroll = () => {
+      57 +  if (showBottomNav.value) return                              
+      58    const el = document.getElementById('section-overview')
+      59    if (!el) return
+      60    const rect = el.getBoundingClientRect()
+      62 -  showBottomNav.value = rect.top < window.innerHeight && rect.b
+         -ottom > 0                                                      
+      61 +  if (rect.top < window.innerHeight && rect.bottom > 0) {      
+      62 +    showBottomNav.value = true                                 
+      63 +  }                                                            
+      64  }
+      65  onMounted(() => window.addEventListener('scroll', handleScroll)
+          )
+      66  onUnmounted(() => window.removeEventListener('scroll', handleSc
+          roll))
+
+● 完成。进行了两处修改：
+
+  1. 移除了“性能”和“系统” — 底部导航栏现在有 5 个项目：续航 / 总览 / 设计 / 影像
+   / 屏幕
+  2. 底部导航栏现在持久显示 —
+  一旦总览区域进入视口（“向下查看更多”出现时），showBottomNav 将锁定为 true
+  并不再变回 false，无论后续滚动位置如何，导航栏都会保持可见。
+
+✻ Worked for 40s
+
+❯ 常驻显示黑色...不要鼠标悬浮上去才显示                                         
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(src\components\OverviewSection.vue)
+  ⎿  Added 4 lines, removed 10 lines
+      283  
+      284      &:hover {
+      285        transform: scale(1.08);
+      286 -                                                              
+      287 -      .nav-icon-default { display: none; }                    
+      288 -      .nav-icon-active { display: block; }                    
+      289 -      .nav-label {                                            
+      290 -        color: $color-black;                                  
+      291 -        font-weight: 600;                                     
+      292 -      }                                                       
+      286      }
+      287  
+      288      .nav-icon {
+     ...
+      293        @include mo { width: 24px; height: 24px; }
+      294      }
+      295  
+      303 -    .nav-icon-active {                                        
+      296 +    /* 常驻显示高亮（黑色）图标 */                            
+      297 +    .nav-icon-default {                                       
+      298        display: none;
+      299      }
+      300  
+      301      .nav-label {
+      302        font-size: 12px;
+      309 -      color: $color-text-secondary;                           
+      310 -      transition: color 0.2s ease, font-weight 0.2s ease;     
+      303 +      color: $color-black;                                    
+      304 +      font-weight: 600;                                       
+      305        white-space: nowrap;
+      306  
+      307        @include mo { font-size: 11px; }
+
+● 已完成。底部导航栏现在默认显示高亮（黑色）图标和黑色加粗文字，不再需要鼠标悬浮
+  。悬停时仅保留缩放效果。
+
+❯ src\components\OverviewSection.vue在这个页面向下滑动的时候出现“向下查看更多", 
+底部导航栏才会出现                                                              
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(src\components\OverviewSection.vue)
+  ⎿  Added 2 lines, removed 2 lines
+      51    { label: '屏幕', icon: '/assets/images/nav/images-nav-5-1-ec1
+          455.svg', iconActive: '/assets/images/nav/images-nav-5-highligh
+          t-1-c56383.svg' },
+      52  ]
+      53  
+      54 -// 滚动检测：overview 区块进入视口后底部导航常驻显示           
+      54 +// 滚动检测："向下查看更多"进入视口后底部导航常驻显示          
+      55  const showBottomNav = ref(false)
+      56  const handleScroll = () => {
+      57    if (showBottomNav.value) return
+      58 -  const el = document.getElementById('section-overview')       
+      58 +  const el = document.querySelector('.overview-section .scroll-
+         +tip')                                                          
+      59    if (!el) return
+      60    const rect = el.getBoundingClientRect()
+      61    if (rect.top < window.innerHeight && rect.bottom > 0) {
+
+● 已完成。现在改为检测 .scroll-tip（“向下查看更多”）元素，只有当滚动到该元素进入
+  视口时，底部导航栏才会出现并常驻。
+
+❯ src\components\DesignColor.vue这个页面中，需要实现：景，手持白色手机，页面上  
+方展示两行核心文案「轻巧的一小部，漂亮的一大步」，向下滚动后该文案平滑淡出，自  
+动切入配色轮换动画；                                                            
+整体动效：全程顺滑连续的视差滚动联动效果，无生硬分页跳转，元素淡入淡出、缓慢位  
+移渐变，整体是一加手机官网极简高级留白的数码产品宣传网页视觉风格。图片分别是：h 
+ttps://www.oneplus.com/content/dam/oneplus/2026/product-station/15t/assets/imag 
+es-color-phone-0-1-1f753e.png，你先都用这个图吧（如果本地有三张图，就用三张）， 
+下载到本地（本地没有的情况下），                                                
+  ⎿  ⧉ Selected 1 lines from ..\..\..\src\components\DesignColor.vue in Visual 
+     Studio Code
+
+  Searched for 1 pattern, read 1 file (ctrl+o to expand)
+
+● 3张颜色手机图片已下载完成。现在我将使用 GSAP ScrollTrigger
+  的固定视差滚动效果来重写 DesignColor.vue。
+● Write(src\components\DesignColor.vue)
+  ⎿  Added 135 lines, removed 199 lines
+        1 -<!-- 设计与配色：大字标题 + 三种配色切换交互（白巧/抹茶/可可）
+          - -->                                                          
+        1 +<!-- 设计与配色：视差滚动联动 - 标题淡出 + 三配色轮换 -->     
+        2  <script setup>
+        3 -import { ref } from 'vue'                                     
+        3 +import { ref, onMounted, onUnmounted } from 'vue'             
+        4 +import gsap from 'gsap'                                       
+        5 +import { ScrollTrigger } from 'gsap/ScrollTrigger'            
+        6  
+        5 -// 三种配色：可可、白巧、抹茶                                 
+        6 -const currentColor = ref(0)                                   
+        7 +gsap.registerPlugin(ScrollTrigger)                            
+        8 +                                                              
+        9 +const sectionRef = ref(null)                                  
+       10 +                                                              
+       11 +// 三种配色，初始展示白巧                                     
+       12  const colors = [
+        8 -  {                                                           
+        9 -    name: '纯粹可可',                                         
+       10 -    leftWord: '纯粹',                                         
+       11 -    rightWord: '可可',                                        
+       12 -    dotColor: '#5D4E3A',                                      
+       13 -    image: '/assets/images/color/images-pack-3586_1506-1-fddc5
+          -c.png.webp',                                                  
+       14 -  },                                                          
+       15 -  {                                                           
+       16 -    name: '治愈白巧',                                         
+       17 -    leftWord: '治愈',                                         
+       18 -    rightWord: '白巧',                                        
+       19 -    dotColor: '#F0EDE6',                                      
+       20 -    image: '/assets/images/color/images-pack-3586_1508-1-40998
+          -6.png.webp',                                                  
+       21 -  },                                                          
+       22 -  {                                                           
+       23 -    name: '松弛抹茶',                                         
+       24 -    leftWord: '松弛',                                         
+       25 -    rightWord: '抹茶',                                        
+       26 -    dotColor: '#A3B59A',                                      
+       27 -    image: '/assets/images/color/images-pack-3586_1510-1-a0d90
+          -a.png.webp',                                                  
+       28 -  },                                                          
+       13 +  { name: '治愈白巧', image: '/assets/images/color/images-colo
+          +r-phone-1-1-84e994.png' },                                    
+       14 +  { name: '纯粹可可', image: '/assets/images/color/images-colo
+          +r-phone-0-1-1f753e.png' },                                    
+       15 +  { name: '松弛抹茶', image: '/assets/images/color/images-colo
+          +r-phone-2-1-372a9d.png' },                                    
+       16  ]
+       17 +                                                              
+       18 +let ctx                                                       
+       19 +                                                              
+       20 +onMounted(() => {                                             
+       21 +  ctx = gsap.context(() => {                                  
+       22 +    // 初始状态：只显示第一张（白巧）                         
+       23 +    gsap.set(['.phone-1', '.phone-2'], { opacity: 0 })        
+       24 +    gsap.set(['.label-1', '.label-2'], { opacity: 0, y: 20 }) 
+       25 +                                                              
+       26 +    const tl = gsap.timeline({                                
+       27 +      scrollTrigger: {                                        
+       28 +        trigger: sectionRef.value,                            
+       29 +        start: 'top top',                                     
+       30 +        end: '+=250%',                                        
+       31 +        pin: true,                                            
+       32 +        scrub: 1,                                             
+       33 +        anticipatePin: 1,                                     
+       34 +      },                                                      
+       35 +    })                                                        
+       36 +                                                              
+       37 +    // Phase 1：标题平滑淡出上移                              
+       38 +    tl.to('.headline', { opacity: 0, y: -60, duration: 0.2, ea
+          +se: 'power2.out' }, 0)                                        
+       39 +                                                              
+       40 +    // 手机整体缓慢缩放（视差感）                             
+       41 +    tl.to('.phone-stage', { scale: 0.88, duration: 1, ease: 'n
+          +one' }, 0)                                                    
+       42 +                                                              
+       43 +    // Phase 2：白巧 → 可可                                   
+       44 +    tl.to('.phone-0', { opacity: 0, duration: 0.25, ease: 'pow
+          +er2.inOut' }, 0.15)                                           
+       45 +    tl.to('.phone-1', { opacity: 1, duration: 0.25, ease: 'pow
+          +er2.inOut' }, 0.15)                                           
+       46 +    tl.to('.label-0', { opacity: 0, y: -20, duration: 0.15, ea
+          +se: 'power2.out' }, 0.2)                                      
+       47 +    tl.to('.label-1', { opacity: 1, y: 0, duration: 0.15, ease
+          +: 'power2.out' }, 0.25)                                       
+       48 +                                                              
+       49 +    // Phase 3：可可 → 抹茶                                   
+       50 +    tl.to('.phone-1', { opacity: 0, duration: 0.25, ease: 'pow
+          +er2.inOut' }, 0.55)                                           
+       51 +    tl.to('.phone-2', { opacity: 1, duration: 0.25, ease: 'pow
+          +er2.inOut' }, 0.55)                                           
+       52 +    tl.to('.label-1', { opacity: 0, y: -20, duration: 0.15, ea
+          +se: 'power2.out' }, 0.6)                                      
+       53 +    tl.to('.label-2', { opacity: 1, y: 0, duration: 0.15, ease
+          +: 'power2.out' }, 0.65)                                       
+       54 +  }, sectionRef.value)                                        
+       55 +})                                                            
+       56 +                                                              
+       57 +onUnmounted(() => {                                           
+       58 +  if (ctx) ctx.revert()                                       
+       59 +})                                                            
+       60  </script>
+       61  
+       62  <template>
+       33 -  <section class="design-color">                              
+       34 -    <div class="color-inner">                                 
+       35 -      <div class="title-area animate-in">                     
+       36 -        <div class="title-line">轻巧的一小部</div>            
+       37 -        <div class="title-line">漂亮的一大步</div>            
+       38 -      </div>                                                  
+       39 -      <div class="subtitle animate-in">款款都是<span class="hi
+          -ghlight">主打色</span></div>                                  
+       40 -      <div class="phone-display">                             
+       41 -        <div class="color-words left">                        
+       42 -          <span                                               
+       43 -            v-for="(c, i) in colors"                          
+       44 -            :key="'l' + i"                                    
+       45 -            class="word"                                      
+       46 -            :class="{ active: currentColor === i }"           
+       47 -            >{{ c.leftWord }}</span                           
+       48 -          >                                                   
+       49 -        </div>                                                
+       50 -        <div class="phone-wrapper">                           
+       51 -          <img                                                
+       52 -            v-for="(c, i) in colors"                          
+       53 -            :key="'p' + i"                                    
+       54 -            :src="c.image"                                    
+       55 -            :alt="c.name"                                     
+       56 -            class="phone-img"                                 
+       57 -            :class="{ active: currentColor === i }"           
+       58 -          />                                                  
+       59 -        </div>                                                
+       60 -        <div class="color-words right">                       
+       61 -          <span                                               
+       62 -            v-for="(c, i) in colors"                          
+       63 -            :key="'r' + i"                                    
+       64 -            class="word"                                      
+       65 -            :class="{ active: currentColor === i }"           
+       66 -            >{{ c.rightWord }}</span                          
+       67 -          >                                                   
+       68 -        </div>                                                
+       69 -      </div>                                                  
+       70 -      <div class="color-buttons">                             
+       71 -        <div                                                  
+       72 -          v-for="(c, i) in colors"                            
+       73 -          :key="'b' + i"                                      
+       74 -          class="color-btn"                                   
+       75 -          :class="{ active: currentColor === i }"             
+       76 -          @click="currentColor = i"                           
+       77 -        >                                                     
+       78 -          <span class="btn-dot" :style="{ background: c.dotCol
+          -or }"></span>                                                 
+       79 -          <span class="btn-label">{{ c.name }}</span>         
+       80 -        </div>                                                
+       81 -      </div>                                                  
+       63 +  <section ref="sectionRef" class="design-color">             
+       64 +    <!-- 核心文案：向下滚动后平滑淡出 -->                     
+       65 +    <div class="headline">                                    
+       66 +      <p class="headline-line">轻巧的一小部</p>               
+       67 +      <p class="headline-line">漂亮的一大步</p>               
+       68      </div>
+       69 +                                                              
+       70 +    <!-- 手机展示：三张配色图堆叠，滚动驱动交叉淡入淡出 -->   
+       71 +    <div class="phone-stage">                                 
+       72 +      <img                                                    
+       73 +        v-for="(c, i) in colors"                              
+       74 +        :key="i"                                              
+       75 +        :class="'phone-' + i"                                 
+       76 +        class="phone-img"                                     
+       77 +        :src="c.image"                                        
+       78 +        :alt="c.name"                                         
+       79 +      />                                                      
+       80 +    </div>                                                    
+       81 +                                                              
+       82 +    <!-- 配色名称 -->                                         
+       83 +    <div class="color-labels">                                
+       84 +      <span                                                   
+       85 +        v-for="(c, i) in colors"                              
+       86 +        :key="i"                                              
+       87 +        :class="'label-' + i"                                 
+       88 +        class="color-label"                                   
+       89 +      >{{ c.name }}</span>                                    
+       90 +    </div>                                                    
+       91    </section>
+       92  </template>
+       93  
+       94  <style scoped lang="scss">
+       95  .design-color {
+       96    width: 100%;
+       89 -  min-height: calc(100vh - #{$nav-height});                   
+       97 +  height: 100vh;                                              
+       98    background: $color-white;
+       99    display: flex;
+      100 +  flex-direction: column;                                     
+      101    align-items: center;
+      102    justify-content: center;
+       94 -  padding: 80px 0;                                            
+      103 +  position: relative;                                         
+      104 +  overflow: hidden;                                           
+      105  
+       96 -  .color-inner {                                              
+       97 -    max-width: $max-width;                                    
+       98 -    width: 100%;                                              
+       99 -    padding: 0 64px;                                          
+      106 +  /* 核心文案：上方居中 */                                    
+      107 +  .headline {                                                 
+      108 +    position: absolute;                                       
+      109 +    top: 14vh;                                                
+      110 +    left: 50%;                                                
+      111 +    transform: translateX(-50%);                              
+      112      text-align: center;
+      113 +    z-index: 2;                                               
+      114 +    will-change: opacity, transform;                          
+      115  
+      102 -    @include mo {                                             
+      103 -      padding: 0 16px;                                        
+      104 -    }                                                         
+      105 -  }                                                           
+      106 -                                                              
+      107 -  .title-area {                                               
+      108 -    .title-line {                                             
+      109 -      font-size: 96px;                                        
+      116 +    .headline-line {                                          
+      117 +      font-size: 80px;                                        
+      118        font-weight: 700;
+      111 -      line-height: 1.2;                                       
+      119 +      line-height: 1.25;                                      
+      120        color: $color-black;
+      121 +      letter-spacing: 2px;                                    
+      122  
+      114 -      @include pad {                                          
+      115 -        font-size: 48px;                                      
+      116 -      }                                                       
+      117 -      @include mo {                                           
+      118 -        font-size: 40px;                                      
+      119 -      }                                                       
+      123 +      @include pad { font-size: 44px; }                       
+      124 +      @include mo { font-size: 32px; }                        
+      125      }
+      126    }
+      127  
+      123 -  .subtitle {                                                 
+      124 -    font-size: 48px;                                          
+      125 -    margin-top: 45px;                                         
+      126 -    color: $color-text-secondary;                             
+      127 -                                                              
+      128 -    .highlight {                                              
+      129 -      color: $color-black;                                    
+      130 -      position: relative;                                     
+      131 -    }                                                         
+      132 -                                                              
+      133 -    @include pad {                                            
+      134 -      font-size: 26px;                                        
+      135 -    }                                                         
+      136 -    @include mo {                                             
+      137 -      font-size: 24px;                                        
+      138 -    }                                                         
+      139 -  }                                                           
+      140 -                                                              
+      141 -  .phone-display {                                            
+      128 +  /* 手机展示区域：居中 */                                    
+      129 +  .phone-stage {                                              
+      130      position: relative;
+      143 -    margin: 40px auto;                                        
+      144 -    max-width: 928px;                                         
+      145 -    display: flex;                                            
+      146 -    align-items: center;                                      
+      147 -    justify-content: center;                                  
+      131 +    width: 420px;                                             
+      132 +    height: 560px;                                            
+      133 +    will-change: transform;                                   
+      134  
+      149 -    .color-words {                                            
+      150 -      width: 200px;                                           
+      151 -      position: relative;                                     
+      152 -      height: 100px;                                          
+      135 +    @include pad { width: 300px; height: 400px; }             
+      136 +    @include mo { width: 240px; height: 320px; }              
+      137  
+      154 -      .word {                                                 
+      155 -        font-size: 80px;                                      
+      156 -        font-weight: 700;                                     
+      157 -        opacity: 0;                                           
+      158 -        transition: opacity 0.5s;                             
+      159 -        position: absolute;                                   
+      160 -        top: 0;                                               
+      161 -                                                              
+      162 -        &.active {                                            
+      163 -          opacity: 1;                                         
+      164 -        }                                                     
+      165 -      }                                                       
+      166 -                                                              
+      167 -      &.left {                                                
+      168 -        text-align: right;                                    
+      169 -                                                              
+      170 -        .word {                                               
+      171 -          right: 0;                                           
+      172 -        }                                                     
+      173 -      }                                                       
+      174 -      &.right {                                               
+      175 -        text-align: left;                                     
+      176 -                                                              
+      177 -        .word {                                               
+      178 -          left: 0;                                            
+      179 -        }                                                     
+      180 -      }                                                       
+      138 +    .phone-img {                                              
+      139 +      position: absolute;                                     
+      140 +      inset: 0;                                               
+      141 +      width: 100%;                                            
+      142 +      height: 100%;                                           
+      143 +      object-fit: contain;                                    
+      144 +      will-change: opacity;                                   
+      145      }
+      182 -                                                              
+      183 -    .phone-wrapper {                                          
+      184 -      position: relative;                                     
+      185 -      width: 400px;                                           
+      186 -      height: 500px;                                          
+      187 -                                                              
+      188 -      .phone-img {                                            
+      189 -        position: absolute;                                   
+      190 -        top: 0;                                               
+      191 -        left: 0;                                              
+      192 -        width: 100%;                                          
+      193 -        height: 100%;                                         
+      194 -        object-fit: contain;                                  
+      195 -        opacity: 0;                                           
+      196 -        transition: opacity 0.5s;                             
+      197 -                                                              
+      198 -        &.active {                                            
+      199 -          opacity: 1;                                         
+      200 -        }                                                     
+      201 -      }                                                       
+      202 -    }                                                         
+      146    }
+      147  
+      205 -  .color-buttons {                                            
+      206 -    display: flex;                                            
+      207 -    justify-content: center;                                  
+      208 -    gap: 32px;                                                
+      209 -    margin-top: 40px;                                         
+      148 +  /* 配色名称：手机下方 */                                    
+      149 +  .color-labels {                                             
+      150 +    position: absolute;                                       
+      151 +    bottom: 12vh;                                             
+      152 +    left: 50%;                                                
+      153 +    transform: translateX(-50%);                              
+      154 +    width: 200px;                                             
+      155 +    height: 40px;                                             
+      156 +    text-align: center;                                       
+      157  
+      211 -    .color-btn {                                              
+      212 -      display: flex;                                          
+      213 -      flex-direction: column;                                 
+      214 -      align-items: center;                                    
+      215 -      gap: 8px;                                               
+      216 -      cursor: pointer;                                        
+      217 -      opacity: 0.5;                                           
+      218 -      transition: opacity 0.2s;                               
+      158 +    .color-label {                                            
+      159 +      position: absolute;                                     
+      160 +      top: 0;                                                 
+      161 +      left: 50%;                                              
+      162 +      transform: translateX(-50%);                            
+      163 +      font-size: 22px;                                        
+      164 +      font-weight: 500;                                       
+      165 +      color: $color-text-primary;                             
+      166 +      white-space: nowrap;                                    
+      167 +      will-change: opacity, transform;                        
+      168  
+      220 -      &.active {                                              
+      221 -        opacity: 1;                                           
+      222 -      }                                                       
+      223 -                                                              
+      224 -      .btn-dot {                                              
+      225 -        width: 32px;                                          
+      226 -        height: 32px;                                         
+      227 -        border-radius: 50%;                                   
+      228 -        border: 2px solid rgba(0, 0, 0, 0.1);                 
+      229 -      }                                                       
+      230 -                                                              
+      231 -      .btn-label {                                            
+      232 -        font-size: 14px;                                      
+      233 -        color: $color-text-primary;                           
+      234 -      }                                                       
+      169 +      @include pad { font-size: 18px; }                       
+      170 +      @include mo { font-size: 16px; }                        
+      171      }
+      172    }
+      173  }
+
+● Bash(cd "D:/Code/test-ai/test-ai" && npx vite build --mode development 2>&1 |
+      tail -10)
+  ⎿  vite v8.1.4 building client environment for development...
+     transforming...✓ 58 modules transformed.
+     rendering chunks...
+     … +6 lines (ctrl+o to expand)
+
+● Build passes. DesignColor.vue 已重写，实现了：
+
+  1. 初始画面：上方展示「轻巧的一小部 /
+  漂亮的一大步」两行核心文案，白巧手机居中展示，底部配色名称
+  2. 滚动联动（GSAP ScrollTrigger pin + scrub）：
+    - Phase 1（0-20%）：标题平滑淡出上移，手机缓慢缩放产生视差感
+    - Phase 2（15-40%）：白巧 → 可可，手机图交叉淡入淡出，配色名称同步切换
+    - Phase 3（55-80%）：可可 → 抹茶，同样交叉淡入淡出
+  3. 三种配色图：使用本地已有的 images-color-phone-0/1/2
+  三张图，初始展示白巧（phone-1），依次切换到可可（phone-0）、抹茶（phone-2）
+  4. 极简留白：纯白背景、大字标题、居中手机、无多余元素，全程 scrub: 1
+  无生硬跳转
+
+✻ Brewed for 1m 40s
+
+❯ ：为前景手机图添加 `<Transition name="fade">`，切换颜色时图片执行简单的 0.3s  
+淡入淡出切换，避免生硬的闪烁。                                                  
+                                                                                
+请给我完整的 `Template`、`Script` 和 `Style` (scoped)                           
+代码，要求代码结构清晰，CSS 类名语义化。由于没有真实的图片，请在图片 `src`      
+处先写好绑定逻辑，并加一段注释提醒我替换本地图片。                              
+
+  Read 1 file (ctrl+o to expand)
+
+● Write(src\components\DesignColor.vue)
+  ⎿  Added 52 lines, removed 41 lines
+      1 -<!-- 设计与配色：视差滚动联动 - 标题淡出 + 三配色轮换 -->       
+      1 +<!-- 设计与配色：GSAP 视差滚动联动 + Vue Transition 淡入淡出切换
+        +配色 -->                                                        
+      2  <script setup>
+      3  import { ref, onMounted, onUnmounted } from 'vue'
+      4  import gsap from 'gsap'
+     ...
+       8  
+       9  const sectionRef = ref(null)
+      10  
+      11 -// 三种配色，初始展示白巧                                      
+      11 +/* 当前激活配色索引，由 ScrollTrigger onUpdate 驱动 */         
+      12 +const currentColor = ref(0)                                    
+      13 +                                                               
+      14 +/*                                                             
+      15 + * 三种配色数据                                                
+      16 + * TODO: 图片已下载到 public/assets/images/color/，如需替换请修
+         +改下方路径                                                     
+      17 + *   - phone-0 → 纯粹可可                                      
+      18 + *   - phone-1 → 治愈白巧                                      
+      19 + *   - phone-2 → 松弛抹茶                                      
+      20 + */                                                            
+      21  const colors = [
+      22    { name: '治愈白巧', image: '/assets/images/color/images-color
+          -phone-1-1-84e994.png' },
+      23    { name: '纯粹可可', image: '/assets/images/color/images-color
+          -phone-0-1-1f753e.png' },
+     ...
+      28  
+      29  onMounted(() => {
+      30    ctx = gsap.context(() => {
+      22 -    // 初始状态：只显示第一张（白巧）                          
+      23 -    gsap.set(['.phone-1', '.phone-2'], { opacity: 0 })         
+      24 -    gsap.set(['.label-1', '.label-2'], { opacity: 0, y: 20 })  
+      25 -                                                               
+      31      const tl = gsap.timeline({
+      32        scrollTrigger: {
+      33          trigger: sectionRef.value,
+     ...
+      36          pin: true,
+      37          scrub: 1,
+      38          anticipatePin: 1,
+      39 +        /* 滚动进度驱动配色切换：0-30% 白巧 / 30-65% 可可 / 65-
+         +100% 抹茶 */                                                   
+      40 +        onUpdate: (self) => {                                  
+      41 +          const p = self.progress                              
+      42 +          if (p < 0.3) {                                       
+      43 +            currentColor.value = 0                             
+      44 +          } else if (p < 0.65) {                               
+      45 +            currentColor.value = 1                             
+      46 +          } else {                                             
+      47 +            currentColor.value = 2                             
+      48 +          }                                                    
+      49 +        },                                                     
+      50        },
+      51      })
+      52  
+      37 -    // Phase 1：标题平滑淡出上移                               
+      53 +    /* Phase 1：标题平滑淡出上移 */                            
+      54      tl.to('.headline', { opacity: 0, y: -60, duration: 0.2, eas
+          e: 'power2.out' }, 0)
+      55  
+      40 -    // 手机整体缓慢缩放（视差感）                              
+      56 +    /* 手机整体缓慢缩放，营造视差感 */                         
+      57      tl.to('.phone-stage', { scale: 0.88, duration: 1, ease: 'no
+          ne' }, 0)
+      42 -                                                               
+      43 -    // Phase 2：白巧 → 可可                                    
+      44 -    tl.to('.phone-0', { opacity: 0, duration: 0.25, ease: 'powe
+         -r2.inOut' }, 0.15)                                             
+      45 -    tl.to('.phone-1', { opacity: 1, duration: 0.25, ease: 'powe
+         -r2.inOut' }, 0.15)                                             
+      46 -    tl.to('.label-0', { opacity: 0, y: -20, duration: 0.15, eas
+         -e: 'power2.out' }, 0.2)                                        
+      47 -    tl.to('.label-1', { opacity: 1, y: 0, duration: 0.15, ease:
+         - 'power2.out' }, 0.25)                                         
+      48 -                                                               
+      49 -    // Phase 3：可可 → 抹茶                                    
+      50 -    tl.to('.phone-1', { opacity: 0, duration: 0.25, ease: 'powe
+         -r2.inOut' }, 0.55)                                             
+      51 -    tl.to('.phone-2', { opacity: 1, duration: 0.25, ease: 'powe
+         -r2.inOut' }, 0.55)                                             
+      52 -    tl.to('.label-1', { opacity: 0, y: -20, duration: 0.15, eas
+         -e: 'power2.out' }, 0.6)                                        
+      53 -    tl.to('.label-2', { opacity: 1, y: 0, duration: 0.15, ease:
+         - 'power2.out' }, 0.65)                                         
+      58    }, sectionRef.value)
+      59  })
+      60  
+     ...
+      71        <p class="headline-line">漂亮的一大步</p>
+      72      </div>
+      73  
+      70 -    <!-- 手机展示：三张配色图堆叠，滚动驱动交叉淡入淡出 -->    
+      74 +    <!-- 前景手机图：Vue Transition 0.3s 交叉淡入淡出 -->      
+      75      <div class="phone-stage">
+      72 -      <img                                                     
+      73 -        v-for="(c, i) in colors"                               
+      74 -        :key="i"                                               
+      75 -        :class="'phone-' + i"                                  
+      76 -        class="phone-img"                                      
+      77 -        :src="c.image"                                         
+      78 -        :alt="c.name"                                          
+      79 -      />                                                       
+      76 +      <Transition name="fade">                                 
+      77 +        <img                                                   
+      78 +          :key="currentColor"                                  
+      79 +          class="phone-img"                                    
+      80 +          :src="colors[currentColor].image"                    
+      81 +          :alt="colors[currentColor].name"                     
+      82 +        />                                                     
+      83 +      </Transition>                                            
+      84      </div>
+      85  
+      82 -    <!-- 配色名称 -->                                          
+      86 +    <!-- 配色名称：同步淡入淡出切换 -->                        
+      87      <div class="color-labels">
+      84 -      <span                                                    
+      85 -        v-for="(c, i) in colors"                               
+      86 -        :key="i"                                               
+      87 -        :class="'label-' + i"                                  
+      88 -        class="color-label"                                    
+      89 -      >{{ c.name }}</span>                                     
+      88 +      <Transition name="fade">                                 
+      89 +        <span :key="currentColor" class="color-label">         
+      90 +          {{ colors[currentColor].name }}                      
+      91 +        </span>                                                
+      92 +      </Transition>                                            
+      93      </div>
+      94    </section>
+      95  </template>
+     ...
+      106    position: relative;
+      107    overflow: hidden;
+      108  
+      106 -  /* 核心文案：上方居中 */                                    
+      109 +  /* ── 核心文案：上方居中 ── */                              
+      110    .headline {
+      111      position: absolute;
+      112      top: 14vh;
+     ...
+      128      }
+      129    }
+      130  
+      128 -  /* 手机展示区域：居中 */                                    
+      131 +  /* ── 手机展示区域：居中，承载 Transition 切换 ── */        
+      132    .phone-stage {
+      133      position: relative;
+      134      width: 420px;
+     ...
+      144        width: 100%;
+      145        height: 100%;
+      146        object-fit: contain;
+      144 -      will-change: opacity;                                   
+      147      }
+      148    }
+      149  
+      148 -  /* 配色名称：手机下方 */                                    
+      150 +  /* ── 配色名称：手机下方，同步 Transition ── */             
+      151    .color-labels {
+      152      position: absolute;
+      153      bottom: 12vh;
+     ...
+      166        font-weight: 500;
+      167        color: $color-text-primary;
+      168        white-space: nowrap;
+      167 -      will-change: opacity, transform;                        
+      169  
+      170        @include pad { font-size: 18px; }
+      171        @include mo { font-size: 16px; }
+      172      }
+      173    }
+      174  }
+      175 +                                                              
+      176 +/* ── Vue Transition：0.3s 交叉淡入淡出 ── */                 
+      177 +.fade-enter-active,                                           
+      178 +.fade-leave-active {                                          
+      179 +  transition: opacity 0.3s ease;                              
+      180 +}                                                             
+      181 +.fade-enter-from,                                             
+      182 +.fade-leave-to {                                              
+      183 +  opacity: 0;                                                 
+      184 +}                                                             
+      185  </style>
+
+● Bash(cd "D:/Code/test-ai/test-ai" && npx vite build --mode development 2>&1 |
+      tail -8)
+  ⎿  transforming...✓ 58 modules transformed.
+     rendering chunks...
+     computing gzip size...
+     … +5 lines (ctrl+o to expand)
+  ⎿  (timeout 1m)
+
+● Build passes.改动要点：
+
+  1. 配色切换改用 <Transition name="fade"> — 不再靠 GSAP 逐帧操作
+  opacity，而是通过 currentColor 索引驱动 :key 变化，Vue Transition 自动执行
+  0.3s 交叉淡入淡出，回滚也正确
+  2. ScrollTrigger onUpdate — 按滚动进度分段切换 currentColor（<30% 白巧 /
+  30-65% 可可 / >65% 抹茶），GSAP 仅负责 pin + 标题淡出 + 手机缩放视差
+  3. 图片 src 绑定逻辑 —
+  :src="colors[currentColor].image"，已加注释标注三种配色对应文件及替换提醒
+  4. 配色名称同步切换 — 同样用 <Transition name="fade"> 包裹，与手机图同步
+
+✻ Brewed for 1m 3s
+
+❯ 是页面切换，而是随着滚动进度逐渐发生的连续效果。滑动越多，动画进展越多：手机  
+越完整露出，手部拿取动作越明显，背景文字也越清晰。                              
+                                                                                
+整体效果要求：                                                                  
+- 向上滑动触发动画                                                              
+- 手机逐渐被手拿出来                                                            
+- 手机主体从遮挡/正位状态变为完整展示                                           
+- 手部动作自然、真实、有握持感                                                  
+- 背景文字随着滑动逐渐显现                                                      
+- 文字渐入、轻微位移动画                                                        
+- 白色极简背景                                                                  
+- 高级、干净、科技感                                                            
+- 类似手机官网产品介绍页的滚动交互动效                                          
+- 不要生硬切换，不要分页感，不要卡片轮播感                                      
+                                                                                
+总结一句话：                                                                    
+这是一个“向上滑动，手把手机拿出来，同时背景文字逐渐显示出来”的连续滚动动画。    
+
+  Read 1 file (ctrl+o to expand)
+
+● Write(src\components\DesignColor.vue)
+  ⎿  Added 124 lines, removed 91 lines
+      1 -<!-- 设计与配色：GSAP 视差滚动联动 + Vue Transition 淡入淡出切换
+        -配色 -->                                                        
+      1 +<!--                                                            
+      2 +  设计与配色：连续滚动动画                                      
+      3 +  向下滑动 → 手机从下方被「拿出来」+ 背景文字逐渐显现           
+      4 +  全程 scrub 连续驱动，无分页、无切换、无轮播感                 
+      5 +-->                                                             
+      6  <script setup>
+      7  import { ref, onMounted, onUnmounted } from 'vue'
+      8  import gsap from 'gsap'
+     ...
+      12  
+      13  const sectionRef = ref(null)
+      14  
+      11 -/* 当前激活配色索引，由 ScrollTrigger onUpdate 驱动 */         
+      12 -const currentColor = ref(0)                                    
+      15 +/* TODO: 替换为本地手机产品图（当前已使用 public/assets/images/
+         +color/ 中的白巧配色图） */                                     
+      16 +const phoneImage = '/assets/images/color/images-color-phone-1-1
+         +-84e994.png'                                                   
+      17 +const colorName = '治愈白巧'                                   
+      18  
+      14 -/*                                                             
+      15 - * 三种配色数据                                                
+      16 - * TODO: 图片已下载到 public/assets/images/color/，如需替换请修
+         -改下方路径                                                     
+      17 - *   - phone-0 → 纯粹可可                                      
+      18 - *   - phone-1 → 治愈白巧                                      
+      19 - *   - phone-2 → 松弛抹茶                                      
+      20 - */                                                            
+      21 -const colors = [                                               
+      22 -  { name: '治愈白巧', image: '/assets/images/color/images-color
+         --phone-1-1-84e994.png' },                                      
+      23 -  { name: '纯粹可可', image: '/assets/images/color/images-color
+         --phone-0-1-1f753e.png' },                                      
+      24 -  { name: '松弛抹茶', image: '/assets/images/color/images-color
+         --phone-2-1-372a9d.png' },                                      
+      25 -]                                                              
+      26 -                                                               
+      19  let ctx
+      20  
+      21  onMounted(() => {
+      22    ctx = gsap.context(() => {
+      23 +    /* ── 初始状态 ── */                                       
+      24 +    // 手机：在下方、侧转、缩小、不可见                        
+      25 +    gsap.set('.phone-img', {                                   
+      26 +      yPercent: 60,                                            
+      27 +      rotationY: 28,                                           
+      28 +      scale: 0.6,                                              
+      29 +      opacity: 0,                                              
+      30 +    })                                                         
+      31 +    // 握持遮罩：底部白色渐变，模拟手部遮挡                    
+      32 +    gsap.set('.grip-shadow', { opacity: 0.85 })                
+      33 +    // 背景文字：不可见、下移                                  
+      34 +    gsap.set('.bg-text-line', { opacity: 0, y: 50 })           
+      35 +    // 配色名称：不可见、下移                                  
+      36 +    gsap.set('.color-label', { opacity: 0, y: 20 })            
+      37 +                                                               
+      38      const tl = gsap.timeline({
+      39        scrollTrigger: {
+      40          trigger: sectionRef.value,
+      41          start: 'top top',
+      35 -        end: '+=250%',                                         
+      42 +        end: '+=300%',                                         
+      43          pin: true,
+      44          scrub: 1,
+      45          anticipatePin: 1,
+      39 -        /* 滚动进度驱动配色切换：0-30% 白巧 / 30-65% 可可 / 65-
+         -100% 抹茶 */                                                   
+      40 -        onUpdate: (self) => {                                  
+      41 -          const p = self.progress                              
+      42 -          if (p < 0.3) {                                       
+      43 -            currentColor.value = 0                             
+      44 -          } else if (p < 0.65) {                               
+      45 -            currentColor.value = 1                             
+      46 -          } else {                                             
+      47 -            currentColor.value = 2                             
+      48 -          }                                                    
+      49 -        },                                                     
+      46        },
+      47      })
+      48  
+      53 -    /* Phase 1：标题平滑淡出上移 */                            
+      54 -    tl.to('.headline', { opacity: 0, y: -60, duration: 0.2, eas
+         -e: 'power2.out' }, 0)                                          
+      49 +    /* ── Phase 1：手机被拿出（0 → 0.55）── */                 
+      50 +    tl.to('.phone-img', {                                      
+      51 +      yPercent: 0,                                             
+      52 +      rotationY: 0,                                            
+      53 +      scale: 1,                                                
+      54 +      opacity: 1,                                              
+      55 +      duration: 0.55,                                          
+      56 +      ease: 'power2.out',                                      
+      57 +    }, 0)                                                      
+      58  
+      56 -    /* 手机整体缓慢缩放，营造视差感 */                         
+      57 -    tl.to('.phone-stage', { scale: 0.88, duration: 1, ease: 'no
+         -ne' }, 0)                                                      
+      59 +    // 握持遮罩淡出，模拟手松开（0.2 → 0.55）                  
+      60 +    tl.to('.grip-shadow', {                                    
+      61 +      opacity: 0,                                              
+      62 +      duration: 0.35,                                          
+      63 +      ease: 'power2.out',                                      
+      64 +    }, 0.2)                                                    
+      65 +                                                               
+      66 +    /* ── Phase 2：背景文字逐渐显现（0.15 → 0.8）── */         
+      67 +    tl.to('.bg-text-line', {                                   
+      68 +      opacity: 1,                                              
+      69 +      y: 0,                                                    
+      70 +      duration: 0.65,                                          
+      71 +      ease: 'power2.out',                                      
+      72 +      stagger: 0.12,                                           
+      73 +    }, 0.15)                                                   
+      74 +                                                               
+      75 +    /* ── Phase 3：配色名称显现（0.6 → 0.95）── */             
+      76 +    tl.to('.color-label', {                                    
+      77 +      opacity: 1,                                              
+      78 +      y: 0,                                                    
+      79 +      duration: 0.35,                                          
+      80 +      ease: 'power2.out',                                      
+      81 +    }, 0.6)                                                    
+      82 +                                                               
+      83 +    /* ── Phase 4：手机最终微缩定格（0.8 → 1.0）── */          
+      84 +    tl.to('.phone-img', {                                      
+      85 +      scale: 0.9,                                              
+      86 +      duration: 0.2,                                           
+      87 +      ease: 'power2.out',                                      
+      88 +    }, 0.8)                                                    
+      89    }, sectionRef.value)
+      90  })
+      91  
+     ...
+       96  
+       97  <template>
+       98    <section ref="sectionRef" class="design-color">
+       68 -    <!-- 核心文案：向下滚动后平滑淡出 -->                     
+       69 -    <div class="headline">                                    
+       70 -      <p class="headline-line">轻巧的一小部</p>               
+       71 -      <p class="headline-line">漂亮的一大步</p>               
+       99 +    <!-- 背景文字：随滚动逐渐清晰 -->                         
+      100 +    <div class="bg-text">                                     
+      101 +      <p class="bg-text-line">轻巧的一小部</p>                
+      102 +      <p class="bg-text-line">漂亮的一大步</p>                
+      103      </div>
+      104  
+       74 -    <!-- 前景手机图：Vue Transition 0.3s 交叉淡入淡出 -->     
+      105 +    <!-- 前景手机：从下方被拿出，旋转回正，完整展示 -->       
+      106      <div class="phone-stage">
+       76 -      <Transition name="fade">                                
+       77 -        <img                                                  
+       78 -          :key="currentColor"                                 
+       79 -          class="phone-img"                                   
+       80 -          :src="colors[currentColor].image"                   
+       81 -          :alt="colors[currentColor].name"                    
+       82 -        />                                                    
+       83 -      </Transition>                                           
+      107 +      <div class="phone-clip">                                
+      108 +        <img class="phone-img" :src="phoneImage" :alt="colorNa
+          +me" />                                                        
+      109 +      </div>                                                  
+      110 +      <!-- 底部渐变遮罩：模拟握持遮挡，随手机露出淡出 -->     
+      111 +      <div class="grip-shadow"></div>                         
+      112      </div>
+      113  
+       86 -    <!-- 配色名称：同步淡入淡出切换 -->                       
+      114 +    <!-- 配色名称 -->                                         
+      115      <div class="color-labels">
+       88 -      <Transition name="fade">                                
+       89 -        <span :key="currentColor" class="color-label">        
+       90 -          {{ colors[currentColor].name }}                     
+       91 -        </span>                                               
+       92 -      </Transition>                                           
+      116 +      <span class="color-label">{{ colorName }}</span>        
+      117      </div>
+      118    </section>
+      119  </template>
+     ...
+      123    width: 100%;
+      124    height: 100vh;
+      125    background: $color-white;
+      102 -  display: flex;                                              
+      103 -  flex-direction: column;                                     
+      104 -  align-items: center;                                        
+      105 -  justify-content: center;                                    
+      126    position: relative;
+      127    overflow: hidden;
+      128 +  perspective: 1200px;                                        
+      129  
+      109 -  /* ── 核心文案：上方居中 ── */                              
+      110 -  .headline {                                                 
+      130 +  /* ── 背景文字：上方居中 ── */                              
+      131 +  .bg-text {                                                  
+      132      position: absolute;
+      112 -    top: 14vh;                                                
+      133 +    top: 15vh;                                                
+      134      left: 50%;
+      135      transform: translateX(-50%);
+      136      text-align: center;
+      116 -    z-index: 2;                                               
+      117 -    will-change: opacity, transform;                          
+      137 +    z-index: 1;                                               
+      138  
+      119 -    .headline-line {                                          
+      120 -      font-size: 80px;                                        
+      139 +    .bg-text-line {                                           
+      140 +      font-size: 72px;                                        
+      141        font-weight: 700;
+      122 -      line-height: 1.25;                                      
+      142 +      line-height: 1.3;                                       
+      143        color: $color-black;
+      144        letter-spacing: 2px;
+      145 +      will-change: opacity, transform;                        
+      146  
+      126 -      @include pad { font-size: 44px; }                       
+      127 -      @include mo { font-size: 32px; }                        
+      147 +      @include pad { font-size: 40px; }                       
+      148 +      @include mo { font-size: 30px; }                        
+      149      }
+      150    }
+      151  
+      131 -  /* ── 手机展示区域：居中，承载 Transition 切换 ── */        
+      152 +  /* ── 手机展示区域：居中 ── */                              
+      153    .phone-stage {
+      133 -    position: relative;                                       
+      134 -    width: 420px;                                             
+      135 -    height: 560px;                                            
+      136 -    will-change: transform;                                   
+      154 +    position: absolute;                                       
+      155 +    top: 50%;                                                 
+      156 +    left: 50%;                                                
+      157 +    transform: translate(-50%, -50%);                         
+      158 +    width: 400px;                                             
+      159 +    height: 520px;                                            
+      160 +    z-index: 2;                                               
+      161  
+      138 -    @include pad { width: 300px; height: 400px; }             
+      139 -    @include mo { width: 240px; height: 320px; }              
+      162 +    @include pad { width: 280px; height: 360px; }             
+      163 +    @include mo { width: 220px; height: 300px; }              
+      164  
+      141 -    .phone-img {                                              
+      165 +    /* 裁剪容器：手机从底部滑出时被裁剪，营造「被拿出」感 */  
+      166 +    .phone-clip {                                             
+      167        position: absolute;
+      168        inset: 0;
+      169 +      overflow: hidden;                                       
+      170 +    }                                                         
+      171 +                                                              
+      172 +    .phone-img {                                              
+      173 +      position: absolute;                                     
+      174 +      bottom: 0;                                              
+      175 +      left: 50%;                                              
+      176 +      transform: translateX(-50%);                            
+      177        width: 100%;
+      178        height: 100%;
+      179        object-fit: contain;
+      180 +      transform-origin: center bottom;                        
+      181 +      will-change: transform, opacity;                        
+      182      }
+      183 +                                                              
+      184 +    /* 底部握持遮罩：白色渐变，z-index 高于手机图 */          
+      185 +    .grip-shadow {                                            
+      186 +      position: absolute;                                     
+      187 +      bottom: 0;                                              
+      188 +      left: 0;                                                
+      189 +      right: 0;                                               
+      190 +      height: 120px;                                          
+      191 +      background: linear-gradient(to top, $color-white 25%, tr
+          +ansparent);                                                   
+      192 +      z-index: 3;                                             
+      193 +      pointer-events: none;                                   
+      194 +      will-change: opacity;                                   
+      195 +    }                                                         
+      196    }
+      197  
+      150 -  /* ── 配色名称：手机下方，同步 Transition ── */             
+      198 +  /* ── 配色名称：底部居中 ── */                              
+      199    .color-labels {
+      200      position: absolute;
+      201      bottom: 12vh;
+      202      left: 50%;
+      203      transform: translateX(-50%);
+      156 -    width: 200px;                                             
+      157 -    height: 40px;                                             
+      158 -    text-align: center;                                       
+      204 +    z-index: 2;                                               
+      205  
+      206      .color-label {
+      161 -      position: absolute;                                     
+      162 -      top: 0;                                                 
+      163 -      left: 50%;                                              
+      164 -      transform: translateX(-50%);                            
+      207        font-size: 22px;
+      208        font-weight: 500;
+      209        color: $color-text-primary;
+      210        white-space: nowrap;
+      211 +      will-change: opacity, transform;                        
+      212  
+      213        @include pad { font-size: 18px; }
+      214        @include mo { font-size: 16px; }
+      215      }
+      216    }
+      217  }
+      175 -                                                              
+      176 -/* ── Vue Transition：0.3s 交叉淡入淡出 ── */                 
+      177 -.fade-enter-active,                                           
+      178 -.fade-leave-active {                                          
+      179 -  transition: opacity 0.3s ease;                              
+      180 -}                                                             
+      181 -.fade-enter-from,                                             
+      182 -.fade-leave-to {                                              
+      183 -  opacity: 0;                                                 
+      184 -}                                                             
+      218  </style>
+
+● Bash(cd "D:/Code/test-ai/test-ai" && npx vite build --mode development 2>&1 |
+      tail -8)
+  ⎿  transforming...✓ 58 modules transformed.
+     rendering chunks...
+     computing gzip size...
+     … +5 lines (ctrl+o to expand)
+  ⎿  (timeout 1m)
+
+● Build passes.完全重写了 DesignColor.vue，实现连续滚动动画：
+
+  核心效果：向下滑动 -> 手机从下方被「拿出来」+ 背景文字逐渐显现，全程 scrub: 1
+  连续驱动，无任何分页/切换/轮播感。
+
+  动画阶段（全部由滚动进度连续控制）：
+
+  ┌───────┬───────────────┬─────────────────────────────────────────────────┐
+  │ 进度  │     元素      │                      动作                       │
+  ├───────┼───────────────┼─────────────────────────────────────────────────┤
+  │ 0 →   │ .phone-img    │ yPercent: 60→0（从底部滑出）、rotationY:        │
+  │ 55%   │               │ 28→0（侧转回正）、scale: 0.6→1、opacity: 0→1    │
+  ├───────┼───────────────┼─────────────────────────────────────────────────┤
+  │ 20 →  │ .grip-shadow  │ opacity: 0.85→0（底部白色渐变淡出，模拟手松开） │
+  │ 55%   │               │                                                 │
+  ├───────┼───────────────┼─────────────────────────────────────────────────┤
+  │ 15 →  │ .bg-text-line │ opacity: 0→1、y: 50→0、stagger:                 │
+  │ 80%   │               │ 0.12（两行文字依次渐入）                        │
+  ├───────┼───────────────┼─────────────────────────────────────────────────┤
+  │ 60 →  │ .color-label  │ opacity: 0→1、y: 20→0（配色名称最后显现）       │
+  │ 95%   │               │                                                 │
+  ├───────┼───────────────┼─────────────────────────────────────────────────┤
+  │ 80 →  │ .phone-img    │ scale: 1→0.9（微缩定格）                        │
+  │ 100%  │               │                                                 │
+  └───────┴───────────────┴─────────────────────────────────────────────────┘
+
+  关键实现：
+  - .phone-clip 设 overflow: hidden，手机从底部滑出时被裁剪，营造「被拿出」感
+  - .grip-shadow 底部白色渐变 z-index: 3，高于手机图，模拟手部遮挡后淡出
+  - perspective: 1200px + rotationY 让手机侧转回正有 3D 透视感
+  - transform-origin: center bottom，旋转锚点在底部（握持位置）
+  - 全程 power2.out 缓动，无弹性、无跳变
+
+✻ Worked for 2m 41s
+
+❯ gger`: containerRef, `pin`: true, `scrub`: 1, `start`: "top top", `end`:      
+"+=1500" }。                                                                    
+                                                                                
+**时间轴动画序列 (按顺序加入 tl)：**                                            
+1. 主标题 (`mainTitleRef`) 向上移动 100px 并 `opacity: 0`。同时手机图           
+(`phoneImgRef`) 从 `y: '50vh'` 移动到 `y: 0`。                                  
+2. 背景大字 (`bgTextRef`) 从 `scale: 0.8`, `opacity: 0` 动画到 `scale: 1`,      
+`opacity: 1`。                                                                  
+3. 底部 UI (`uiControlsRef`) 从 `y: 30`, `opacity: 0` 动画到 `y: 0`, `opacity:  
+1`。                                                                            
+4. 气泡 (`tooltipRef`) 从 `scale: 0`, `opacity: 0` 动画到 `scale: 1`, `opacity: 
+ 1`，使用 `ease: "back.out(1.7)"` 增加弹跳感。                                  
+                                                                                
+请提供完整的 Vue 组件代码（包含 Template, Script 中的 GSAP 逻辑，以及基础布局的 
+ CSS）。颜色切换等非滚动相关的交互逻辑可以先用占位结构代替，核心聚焦在 GSAP     
+滚动时间轴的实现上。                                                            
+
+  Read 1 file (ctrl+o to expand)
+
+● Write(src\components\DesignColor.vue)
+  ⎿  Added 188 lines, removed 122 lines
+      1  <!--
+      2 -  设计与配色：连续滚动动画                                      
+      3 -  向下滑动 → 手机从下方被「拿出来」+ 背景文字逐渐显现           
+      4 -  全程 scrub 连续驱动，无分页、无切换、无轮播感                 
+      2 +  设计与配色：GSAP 滚动时间轴                                   
+      3 +  pin + scrub 连续驱动，按顺序：标题淡出 → 手机滑入 → 背景大字缩
+        +放渐入 → 底部UI上移 → 气泡弹跳                                  
+      4  -->
+      5  <script setup>
+      6  import { ref, onMounted, onUnmounted } from 'vue'
+     ...
+       9  
+      10  gsap.registerPlugin(ScrollTrigger)
+      11  
+      13 -const sectionRef = ref(null)                                   
+      12 +/* ── 模板引用 ── */                                           
+      13 +const containerRef = ref(null)                                 
+      14 +const mainTitleRef = ref(null)                                 
+      15 +const phoneImgRef = ref(null)                                  
+      16 +const bgTextRef = ref(null)                                    
+      17 +const uiControlsRef = ref(null)                                
+      18 +const tooltipRef = ref(null)                                   
+      19  
+      15 -/* TODO: 替换为本地手机产品图（当前已使用 public/assets/images/
+         -color/ 中的白巧配色图） */                                     
+      20 +/* TODO: 替换为本地手机产品图（当前使用 public/assets/images/co
+         +lor/ 白巧配色图） */                                           
+      21  const phoneImage = '/assets/images/color/images-color-phone-1-1
+          -84e994.png'
+      17 -const colorName = '治愈白巧'                                   
+      22  
+      23 +/* 占位：配色切换交互 */                                       
+      24 +const colors = [                                               
+      25 +  { name: '治愈白巧', dot: '#F0EDE6' },                        
+      26 +  { name: '纯粹可可', dot: '#5D4E3A' },                        
+      27 +  { name: '松弛抹茶', dot: '#A3B59A' },                        
+      28 +]                                                              
+      29 +const currentColor = ref(0)                                    
+      30 +                                                               
+      31  let ctx
+      32  
+      33  onMounted(() => {
+      34    ctx = gsap.context(() => {
+      23 -    /* ── 初始状态 ── */                                       
+      24 -    // 手机：在下方、侧转、缩小、不可见                        
+      25 -    gsap.set('.phone-img', {                                   
+      26 -      yPercent: 60,                                            
+      27 -      rotationY: 28,                                           
+      28 -      scale: 0.6,                                              
+      29 -      opacity: 0,                                              
+      30 -    })                                                         
+      31 -    // 握持遮罩：底部白色渐变，模拟手部遮挡                    
+      32 -    gsap.set('.grip-shadow', { opacity: 0.85 })                
+      33 -    // 背景文字：不可见、下移                                  
+      34 -    gsap.set('.bg-text-line', { opacity: 0, y: 50 })           
+      35 -    // 配色名称：不可见、下移                                  
+      36 -    gsap.set('.color-label', { opacity: 0, y: 20 })            
+      37 -                                                               
+      35      const tl = gsap.timeline({
+      36        scrollTrigger: {
+      40 -        trigger: sectionRef.value,                             
+      41 -        start: 'top top',                                      
+      42 -        end: '+=300%',                                         
+      37 +        trigger: containerRef.value,                           
+      38          pin: true,
+      39          scrub: 1,
+      45 -        anticipatePin: 1,                                      
+      40 +        start: 'top top',                                      
+      41 +        end: '+=1500',                                         
+      42        },
+      43      })
+      44  
+      49 -    /* ── Phase 1：手机被拿出（0 → 0.55）── */                 
+      50 -    tl.to('.phone-img', {                                      
+      51 -      yPercent: 0,                                             
+      52 -      rotationY: 0,                                            
+      53 -      scale: 1,                                                
+      54 -      opacity: 1,                                              
+      55 -      duration: 0.55,                                          
+      45 +    // 1. 主标题上移 100px + 淡出；同时手机从 y:'50vh' 滑入 y:0
+      46 +    tl.to(mainTitleRef.value, {                                
+      47 +      y: -100,                                                 
+      48 +      opacity: 0,                                              
+      49 +      duration: 0.3,                                           
+      50        ease: 'power2.out',
+      51      }, 0)
+      58 -                                                               
+      59 -    // 握持遮罩淡出，模拟手松开（0.2 → 0.55）                  
+      60 -    tl.to('.grip-shadow', {                                    
+      61 -      opacity: 0,                                              
+      62 -      duration: 0.35,                                          
+      52 +    tl.fromTo(phoneImgRef.value, {                             
+      53 +      y: '50vh',                                               
+      54 +    }, {                                                       
+      55 +      y: 0,                                                    
+      56 +      duration: 0.4,                                           
+      57        ease: 'power2.out',
+      64 -    }, 0.2)                                                    
+      58 +    }, 0)                                                      
+      59  
+      66 -    /* ── Phase 2：背景文字逐渐显现（0.15 → 0.8）── */         
+      67 -    tl.to('.bg-text-line', {                                   
+      60 +    // 2. 背景大字缩放渐入                                     
+      61 +    tl.fromTo(bgTextRef.value, {                               
+      62 +      scale: 0.8,                                              
+      63 +      opacity: 0,                                              
+      64 +    }, {                                                       
+      65 +      scale: 1,                                                
+      66        opacity: 1,
+      69 -      y: 0,                                                    
+      70 -      duration: 0.65,                                          
+      67 +      duration: 0.3,                                           
+      68        ease: 'power2.out',
+      72 -      stagger: 0.12,                                           
+      73 -    }, 0.15)                                                   
+      69 +    })                                                         
+      70  
+      75 -    /* ── Phase 3：配色名称显现（0.6 → 0.95）── */             
+      76 -    tl.to('.color-label', {                                    
+      77 -      opacity: 1,                                              
+      71 +    // 3. 底部 UI 上移渐入                                     
+      72 +    tl.fromTo(uiControlsRef.value, {                           
+      73 +      y: 30,                                                   
+      74 +      opacity: 0,                                              
+      75 +    }, {                                                       
+      76        y: 0,
+      79 -      duration: 0.35,                                          
+      77 +      opacity: 1,                                              
+      78 +      duration: 0.2,                                           
+      79        ease: 'power2.out',
+      81 -    }, 0.6)                                                    
+      80 +    })                                                         
+      81  
+      83 -    /* ── Phase 4：手机最终微缩定格（0.8 → 1.0）── */          
+      84 -    tl.to('.phone-img', {                                      
+      85 -      scale: 0.9,                                              
+      82 +    // 4. 气泡弹跳渐入                                         
+      83 +    tl.fromTo(tooltipRef.value, {                              
+      84 +      scale: 0,                                                
+      85 +      opacity: 0,                                              
+      86 +    }, {                                                       
+      87 +      scale: 1,                                                
+      88 +      opacity: 1,                                              
+      89        duration: 0.2,
+      87 -      ease: 'power2.out',                                      
+      88 -    }, 0.8)                                                    
+      89 -  }, sectionRef.value)                                         
+      90 +      ease: 'back.out(1.7)',                                   
+      91 +    })                                                         
+      92 +  }, containerRef.value)                                       
+      93  })
+      94  
+      95  onUnmounted(() => {
+     ...
+       98  </script>
+       99  
+      100  <template>
+       98 -  <section ref="sectionRef" class="design-color">             
+       99 -    <!-- 背景文字：随滚动逐渐清晰 -->                         
+      100 -    <div class="bg-text">                                     
+      101 -      <p class="bg-text-line">轻巧的一小部</p>                
+      102 -      <p class="bg-text-line">漂亮的一大步</p>                
+      101 +  <section ref="containerRef" class="design-color">           
+      102 +    <!-- 主标题：滚动后上移淡出 -->                           
+      103 +    <div ref="mainTitleRef" class="main-title">               
+      104 +      <p class="title-line">轻巧的一小部</p>                  
+      105 +      <p class="title-line">漂亮的一大步</p>                  
+      106      </div>
+      107  
+      105 -    <!-- 前景手机：从下方被拿出，旋转回正，完整展示 -->       
+      108 +    <!-- 背景大字：缩放渐入，作为手机背后的装饰文字 -->       
+      109 +    <div ref="bgTextRef" class="bg-text">                     
+      110 +      <span class="bg-text-word">漂亮的一大步</span>          
+      111 +    </div>                                                    
+      112 +                                                              
+      113 +    <!-- 前景手机图：从底部 50vh 滑入 -->                     
+      114      <div class="phone-stage">
+      107 -      <div class="phone-clip">                                
+      108 -        <img class="phone-img" :src="phoneImage" :alt="colorNa
+          -me" />                                                        
+      109 -      </div>                                                  
+      110 -      <!-- 底部渐变遮罩：模拟握持遮挡，随手机露出淡出 -->     
+      111 -      <div class="grip-shadow"></div>                         
+      115 +      <img ref="phoneImgRef" class="phone-img" :src="phoneImag
+          +e" alt="一加 15T" />                                          
+      116      </div>
+      117  
+      114 -    <!-- 配色名称 -->                                         
+      115 -    <div class="color-labels">                                
+      116 -      <span class="color-label">{{ colorName }}</span>        
+      118 +    <!-- 底部 UI：配色切换按钮 -->                            
+      119 +    <div ref="uiControlsRef" class="ui-controls">             
+      120 +      <button                                                 
+      121 +        v-for="(c, i) in colors"                              
+      122 +        :key="i"                                              
+      123 +        class="color-btn"                                     
+      124 +        :class="{ active: currentColor === i }"               
+      125 +        @click="currentColor = i"                             
+      126 +      >                                                       
+      127 +        <span class="color-dot" :style="{ background: c.dot }"
+          +></span>                                                      
+      128 +        <span class="color-name">{{ c.name }}</span>          
+      129 +      </button>                                               
+      130      </div>
+      131 +                                                              
+      132 +    <!-- 气泡提示：弹跳渐入 -->                               
+      133 +    <div ref="tooltipRef" class="tooltip">                    
+      134 +      <span class="tooltip-text">{{ colors[currentColor].name 
+          +}}</span>                                                     
+      135 +      <span class="tooltip-arrow"></span>                     
+      136 +    </div>                                                    
+      137    </section>
+      138  </template>
+      139  
+     ...
+      144    background: $color-white;
+      145    position: relative;
+      146    overflow: hidden;
+      128 -  perspective: 1200px;                                        
+      147  
+      130 -  /* ── 背景文字：上方居中 ── */                              
+      131 -  .bg-text {                                                  
+      148 +  /* ── 主标题：上方居中 ── */                                
+      149 +  .main-title {                                               
+      150      position: absolute;
+      133 -    top: 15vh;                                                
+      151 +    top: 14vh;                                                
+      152      left: 50%;
+      153      transform: translateX(-50%);
+      154      text-align: center;
+      137 -    z-index: 1;                                               
+      155 +    z-index: 3;                                               
+      156  
+      139 -    .bg-text-line {                                           
+      140 -      font-size: 72px;                                        
+      157 +    .title-line {                                             
+      158 +      font-size: 64px;                                        
+      159        font-weight: 700;
+      142 -      line-height: 1.3;                                       
+      160 +      line-height: 1.25;                                      
+      161        color: $color-black;
+      162        letter-spacing: 2px;
+      145 -      will-change: opacity, transform;                        
+      163  
+      147 -      @include pad { font-size: 40px; }                       
+      148 -      @include mo { font-size: 30px; }                        
+      164 +      @include pad { font-size: 36px; }                       
+      165 +      @include mo { font-size: 28px; }                        
+      166      }
+      167    }
+      168  
+      152 -  /* ── 手机展示区域：居中 ── */                              
+      153 -  .phone-stage {                                              
+      169 +  /* ── 背景大字：居中，手机背后 ── */                        
+      170 +  .bg-text {                                                  
+      171      position: absolute;
+      172      top: 50%;
+      173      left: 50%;
+      174      transform: translate(-50%, -50%);
+      158 -    width: 400px;                                             
+      159 -    height: 520px;                                            
+      160 -    z-index: 2;                                               
+      175 +    z-index: 1;                                               
+      176 +    pointer-events: none;                                     
+      177 +    white-space: nowrap;                                      
+      178  
+      162 -    @include pad { width: 280px; height: 360px; }             
+      163 -    @include mo { width: 220px; height: 300px; }              
+      179 +    .bg-text-word {                                           
+      180 +      font-size: 200px;                                       
+      181 +      font-weight: 800;                                       
+      182 +      color: rgba(0, 0, 0, 0.04);                             
+      183 +      letter-spacing: 10px;                                   
+      184  
+      165 -    /* 裁剪容器：手机从底部滑出时被裁剪，营造「被拿出」感 */  
+      166 -    .phone-clip {                                             
+      167 -      position: absolute;                                     
+      168 -      inset: 0;                                               
+      169 -      overflow: hidden;                                       
+      185 +      @include pad { font-size: 120px; }                      
+      186 +      @include mo { font-size: 72px; }                        
+      187      }
+      188 +  }                                                           
+      189  
+      190 +  /* ── 手机展示：居中 ── */                                  
+      191 +  .phone-stage {                                              
+      192 +    position: absolute;                                       
+      193 +    top: 50%;                                                 
+      194 +    left: 50%;                                                
+      195 +    transform: translate(-50%, -50%);                         
+      196 +    z-index: 2;                                               
+      197 +                                                              
+      198      .phone-img {
+      173 -      position: absolute;                                     
+      174 -      bottom: 0;                                              
+      175 -      left: 50%;                                              
+      176 -      transform: translateX(-50%);                            
+      177 -      width: 100%;                                            
+      178 -      height: 100%;                                           
+      199 +      width: 400px;                                           
+      200 +      height: auto;                                           
+      201        object-fit: contain;
+      180 -      transform-origin: center bottom;                        
+      181 -      will-change: transform, opacity;                        
+      202 +      will-change: transform;                                 
+      203 +                                                              
+      204 +      @include pad { width: 260px; }                          
+      205 +      @include mo { width: 200px; }                           
+      206      }
+      207 +  }                                                           
+      208  
+      184 -    /* 底部握持遮罩：白色渐变，z-index 高于手机图 */          
+      185 -    .grip-shadow {                                            
+      186 -      position: absolute;                                     
+      187 -      bottom: 0;                                              
+      188 -      left: 0;                                                
+      189 -      right: 0;                                               
+      190 -      height: 120px;                                          
+      191 -      background: linear-gradient(to top, $color-white 25%, tr
+          -ansparent);                                                   
+      192 -      z-index: 3;                                             
+      193 -      pointer-events: none;                                   
+      194 -      will-change: opacity;                                   
+      209 +  /* ── 底部 UI：配色切换按钮 ── */                           
+      210 +  .ui-controls {                                              
+      211 +    position: absolute;                                       
+      212 +    bottom: 10vh;                                             
+      213 +    left: 50%;                                                
+      214 +    transform: translateX(-50%);                              
+      215 +    display: flex;                                            
+      216 +    gap: 36px;                                                
+      217 +    z-index: 3;                                               
+      218 +                                                              
+      219 +    @include mo { gap: 20px; }                                
+      220 +                                                              
+      221 +    .color-btn {                                              
+      222 +      display: flex;                                          
+      223 +      flex-direction: column;                                 
+      224 +      align-items: center;                                    
+      225 +      gap: 8px;                                               
+      226 +      cursor: pointer;                                        
+      227 +      background: none;                                       
+      228 +      border: none;                                           
+      229 +      padding: 0;                                             
+      230 +      opacity: 0.5;                                           
+      231 +      transition: opacity 0.2s ease;                          
+      232 +                                                              
+      233 +      &.active { opacity: 1; }                                
+      234 +                                                              
+      235 +      .color-dot {                                            
+      236 +        width: 28px;                                          
+      237 +        height: 28px;                                         
+      238 +        border-radius: 50%;                                   
+      239 +        border: 2px solid rgba(0, 0, 0, 0.1);                 
+      240 +                                                              
+      241 +        @include mo { width: 22px; height: 22px; }            
+      242 +      }                                                       
+      243 +                                                              
+      244 +      .color-name {                                           
+      245 +        font-size: 13px;                                      
+      246 +        color: $color-text-primary;                           
+      247 +        white-space: nowrap;                                  
+      248 +                                                              
+      249 +        @include mo { font-size: 11px; }                      
+      250 +      }                                                       
+      251      }
+      252    }
+      253  
+      198 -  /* ── 配色名称：底部居中 ── */                              
+      199 -  .color-labels {                                             
+      254 +  /* ── 气泡提示 ── */                                        
+      255 +  .tooltip {                                                  
+      256      position: absolute;
+      201 -    bottom: 12vh;                                             
+      257 +    bottom: calc(10vh + 70px);                                
+      258      left: 50%;
+      259      transform: translateX(-50%);
+      204 -    z-index: 2;                                               
+      260 +    z-index: 4;                                               
+      261 +    pointer-events: none;                                     
+      262  
+      206 -    .color-label {                                            
+      207 -      font-size: 22px;                                        
+      208 -      font-weight: 500;                                       
+      209 -      color: $color-text-primary;                             
+      263 +    .tooltip-text {                                           
+      264 +      display: inline-block;                                  
+      265 +      padding: 6px 16px;                                      
+      266 +      background: $color-black;                               
+      267 +      color: $color-white;                                    
+      268 +      font-size: 13px;                                        
+      269 +      border-radius: 20px;                                    
+      270        white-space: nowrap;
+      211 -      will-change: opacity, transform;                        
+      271 +    }                                                         
+      272  
+      213 -      @include pad { font-size: 18px; }                       
+      214 -      @include mo { font-size: 16px; }                        
+      273 +    .tooltip-arrow {                                          
+      274 +      display: block;                                         
+      275 +      width: 0;                                               
+      276 +      height: 0;                                              
+      277 +      margin: 0 auto;                                         
+      278 +      border-left: 6px solid transparent;                     
+      279 +      border-right: 6px solid transparent;                    
+      280 +      border-top: 6px solid $color-black;                     
+      281      }
+      282    }
+      283  }
+
+● Bash(cd "D:/Code/test-ai/test-ai" && npx vite build --mode development 2>&1 |
+      tail -8)
+  ⎿  transforming...✓ 58 modules transformed.
+     rendering chunks...
+     computing gzip size...
+     … +5 lines (ctrl+o to expand)
+  ⎿  (timeout 1m)
+
+● Build passes。按你的规格完整重写了，核心结构：
+
+  Script - GSAP 时间轴（5个模板引用，顺序入场）：
+
+  ┌──────┬───────────────┬────────────────────────────┬──────────────────────┐
+  │ 步骤 │      Ref      │            动画            │       位置参数       │
+  ├──────┼───────────────┼────────────────────────────┼──────────────────────┤
+  │ 1    │ mainTitleRef  │ y: -100, opacity: 0        │ 0（同时开始）        │
+  ├──────┼───────────────┼────────────────────────────┼──────────────────────┤
+  │ 1    │ phoneImgRef   │ fromTo y:'50vh' -> y:0     │ 0（同时开始）        │
+  ├──────┼───────────────┼────────────────────────────┼──────────────────────┤
+  │ 2    │ bgTextRef     │ fromTo scale:0.8,opacity:0 │ 紧接步骤1            │
+  │      │               │  -> scale:1,opacity:1      │                      │
+  ├──────┼───────────────┼────────────────────────────┼──────────────────────┤
+  │ 3    │ uiControlsRef │ fromTo y:30,opacity:0 ->   │ 紧接步骤2            │
+  │      │               │ y:0,opacity:1              │                      │
+  ├──────┼───────────────┼────────────────────────────┼──────────────────────┤
+  │ 4    │ tooltipRef    │ fromTo scale:0,opacity:0   │ 紧接步骤3，ease:     │
+  │      │               │ -> scale:1,opacity:1       │ 'back.out(1.7)'      │
+  └──────┴───────────────┴────────────────────────────┴──────────────────────┘
+
+  ScrollTrigger 配置：trigger: containerRef, pin: true, scrub: 1, start: 'top 
+  top', end: '+=1500'
+
+  Template 结构：
+  - mainTitleRef - 主标题「轻巧的一小部 / 漂亮的一大步」，上方居中
+  - bgTextRef - 背景大字「漂亮的一大步」，居中 z-index:1，浅灰水印风格
+  - phoneImgRef - 手机产品图，居中 z-index:2
+  - uiControlsRef - 底部配色按钮（白巧/可可/抹茶），占位交互
+  - tooltipRef - 气泡提示，带向下箭头，弹跳入场
+
+  CSS 层级：bg-text(1) < phone(2) <
+  main-title/ui-controls/tooltip(3/4)，白色极简背景，类名语义化。
+
+✻ Churned for 1m 36s
+
+❯ 居中的图原本是竖着的，随着我滑动鼠标滚轮向上，图片缩小到80%且旋转到你现在这版 
+本的位置，...                                                                   
+
+  Read 1 file (ctrl+o to expand)
+● Update(src\components\DesignColor.vue)
+  ⎿  Added 5 lines, removed 3 lines
+      42        },
+      43      })
+      44  
+      45 -    // 1. 主标题上移 100px + 淡出；同时手机从 y:'50vh' 滑入 y:0
+      45 +    // 1. 主标题上移 100px + 淡出；同时手机从竖直 100% 缩小到 8
+         +0% 并旋转倾斜                                                  
+      46      tl.to(mainTitleRef.value, {
+      47        y: -100,
+      48        opacity: 0,
+     ...
+      50        ease: 'power2.out',
+      51      }, 0)
+      52      tl.fromTo(phoneImgRef.value, {
+      53 -      y: '50vh',                                               
+      53 +      scale: 1,                                                
+      54 +      rotation: 0,                                             
+      55      }, {
+      55 -      y: 0,                                                    
+      56 +      scale: 0.8,                                              
+      57 +      rotation: -8,                                            
+      58        duration: 0.4,
+      59        ease: 'power2.out',
+      60      }, 0)
+
+● Bash(cd "D:/Code/test-ai/test-ai" && npx vite build --mode development 2>&1 |
+      tail -6)
+  ⎿  computing gzip size...
+     dist/index.html                   0.42 kB │ gzip:  0.28 kB
+     dist/assets/index-TZfGbZgh.css   30.80 kB │ gzip:  4.89 kB
+     … +3 lines (ctrl+o to expand)
+  ⎿  (timeout 1m)
+
+● Build passes。手机动画改为：
+
+  - 起始：scale: 1, rotation: 0（竖直、原尺寸、居中）
+  - 滚动后：scale: 0.8, rotation: -8°（缩小到80%、轻微逆时针倾斜）
+
+  不再有 y: '50vh' -> y: 0 的底部滑入，手机始终居中，只做缩放+旋转。
+
+✻ Churned for 1m 24s
+
+❯ 件代码。要求包含 Template 结构、CSS                                           
+基础定位样式（确保图片能覆盖在文字上方）以及完整的 GSAP 时间轴控制逻辑。不需要  
+实现点击切换颜色的逻辑，只需完美实现这个滚动缩放与旋转的入场动画即可。          
+
+  Read 1 file (ctrl+o to expand)
+
+● Write(src\components\DesignColor.vue)
+  ⎿  Added 43 lines, removed 41 lines
+      1  <!--
+      2    设计与配色：GSAP 滚动时间轴
+      3 -  pin + scrub 连续驱动，按顺序：标题淡出 → 手机滑入 → 背景大字缩
+        -放渐入 → 底部UI上移 → 气泡弹跳                                  
+      3 +  pin + scrub 连续驱动：标题淡出 → 手机缩放旋转 → 背景大字渐入 →
+        + 底部UI上移 → 气泡弹跳                                          
+      4 +  核心焦点：手机图从竖直 100% 缩小到 80% 并旋转倾斜的连续滚动动 
+        +画                                                              
+      5  -->
+      6  <script setup>
+      7  import { ref, onMounted, onUnmounted } from 'vue'
+     ...
+      21  /* TODO: 替换为本地手机产品图（当前使用 public/assets/images/co
+          lor/ 白巧配色图） */
+      22  const phoneImage = '/assets/images/color/images-color-phone-1-1
+          -84e994.png'
+      23  
+      23 -/* 占位：配色切换交互 */                                       
+      24 +/* 占位数据（颜色切换逻辑暂未实现） */                         
+      25  const colors = [
+      26    { name: '治愈白巧', dot: '#F0EDE6' },
+      27    { name: '纯粹可可', dot: '#5D4E3A' },
+     ...
+      43        },
+      44      })
+      45  
+      45 -    // 1. 主标题上移 100px + 淡出；同时手机从竖直 100% 缩小到 8
+         -0% 并旋转倾斜                                                  
+      46 +    // ── 1. 主标题上移 100px + 淡出 ──                        
+      47 +    //    同时手机从竖直 100% 缩小到 80% 并旋转 -8° 倾斜       
+      48      tl.to(mainTitleRef.value, {
+      49        y: -100,
+      50        opacity: 0,
+     ...
+      61        ease: 'power2.out',
+      62      }, 0)
+      63  
+      62 -    // 2. 背景大字缩放渐入                                     
+      64 +    // ── 2. 背景大字缩放渐入 ──                               
+      65      tl.fromTo(bgTextRef.value, {
+      66        scale: 0.8,
+      67        opacity: 0,
+     ...
+      72        ease: 'power2.out',
+      73      })
+      74  
+      73 -    // 3. 底部 UI 上移渐入                                     
+      75 +    // ── 3. 底部 UI 上移渐入 ──                               
+      76      tl.fromTo(uiControlsRef.value, {
+      77        y: 30,
+      78        opacity: 0,
+     ...
+      83        ease: 'power2.out',
+      84      })
+      85  
+      84 -    // 4. 气泡弹跳渐入                                         
+      86 +    // ── 4. 气泡弹跳渐入 ──                                   
+      87      tl.fromTo(tooltipRef.value, {
+      88        scale: 0,
+      89        opacity: 0,
+     ...
+      103  
+      104  <template>
+      105    <section ref="containerRef" class="design-color">
+      104 -    <!-- 主标题：滚动后上移淡出 -->                           
+      105 -    <div ref="mainTitleRef" class="main-title">               
+      106 -      <p class="title-line">轻巧的一小部</p>                  
+      107 -      <p class="title-line">漂亮的一大步</p>                  
+      108 -    </div>                                                    
+      109 -                                                              
+      110 -    <!-- 背景大字：缩放渐入，作为手机背后的装饰文字 -->       
+      106 +    <!-- 背景大字：缩放渐入，z-index 最低 -->                 
+      107      <div ref="bgTextRef" class="bg-text">
+      108        <span class="bg-text-word">漂亮的一大步</span>
+      109      </div>
+      110  
+      115 -    <!-- 前景手机图：从底部 50vh 滑入 -->                     
+      111 +    <!-- 前景手机图：竖直 → 缩放80% + 旋转倾斜，覆盖在文字上方
+          + -->                                                          
+      112      <div class="phone-stage">
+      113        <img ref="phoneImgRef" class="phone-img" :src="phoneImag
+           e" alt="一加 15T" />
+      114      </div>
+      115  
+      120 -    <!-- 底部 UI：配色切换按钮 -->                            
+      116 +    <!-- 主标题：滚动后上移淡出 -->                           
+      117 +    <div ref="mainTitleRef" class="main-title">               
+      118 +      <p class="title-line">轻巧的一小部</p>                  
+      119 +      <p class="title-line">漂亮的一大步</p>                  
+      120 +    </div>                                                    
+      121 +                                                              
+      122 +    <!-- 底部 UI：配色按钮（占位） -->                        
+      123      <div ref="uiControlsRef" class="ui-controls">
+      124        <button
+      125          v-for="(c, i) in colors"
+      126          :key="i"
+      127          class="color-btn"
+      128          :class="{ active: currentColor === i }"
+      127 -        @click="currentColor = i"                             
+      129        >
+      130          <span class="color-dot" :style="{ background: c.dot }"
+           ></span>
+      131          <span class="color-name">{{ c.name }}</span>
+     ...
+      148    position: relative;
+      149    overflow: hidden;
+      150  
+      150 -  /* ── 主标题：上方居中 ── */                                
+      151 -  .main-title {                                               
+      152 -    position: absolute;                                       
+      153 -    top: 14vh;                                                
+      154 -    left: 50%;                                                
+      155 -    transform: translateX(-50%);                              
+      156 -    text-align: center;                                       
+      157 -    z-index: 3;                                               
+      158 -                                                              
+      159 -    .title-line {                                             
+      160 -      font-size: 64px;                                        
+      161 -      font-weight: 700;                                       
+      162 -      line-height: 1.25;                                      
+      163 -      color: $color-black;                                    
+      164 -      letter-spacing: 2px;                                    
+      165 -                                                              
+      166 -      @include pad { font-size: 36px; }                       
+      167 -      @include mo { font-size: 28px; }                        
+      168 -    }                                                         
+      169 -  }                                                           
+      170 -                                                              
+      171 -  /* ── 背景大字：居中，手机背后 ── */                        
+      151 +  /* ── 背景大字：居中，z-index:1（最底层）── */              
+      152    .bg-text {
+      153      position: absolute;
+      154      top: 50%;
+     ...
+      169      }
+      170    }
+      171  
+      192 -  /* ── 手机展示：居中 ── */                                  
+      172 +  /* ── 手机展示：居中，z-index:2（覆盖背景文字）── */        
+      173    .phone-stage {
+      174      position: absolute;
+      175      top: 50%;
+     ...
+      178      z-index: 2;
+      179  
+      180      .phone-img {
+      181 +      display: block;                                         
+      182        width: 400px;
+      183        height: auto;
+      184        object-fit: contain;
+     ...
+      189      }
+      190    }
+      191  
+      211 -  /* ── 底部 UI：配色切换按钮 ── */                           
+      192 +  /* ── 主标题：上方居中，z-index:3 ── */                     
+      193 +  .main-title {                                               
+      194 +    position: absolute;                                       
+      195 +    top: 14vh;                                                
+      196 +    left: 50%;                                                
+      197 +    transform: translateX(-50%);                              
+      198 +    text-align: center;                                       
+      199 +    z-index: 3;                                               
+      200 +                                                              
+      201 +    .title-line {                                             
+      202 +      font-size: 64px;                                        
+      203 +      font-weight: 700;                                       
+      204 +      line-height: 1.25;                                      
+      205 +      color: $color-black;                                    
+      206 +      letter-spacing: 2px;                                    
+      207 +                                                              
+      208 +      @include pad { font-size: 36px; }                       
+      209 +      @include mo { font-size: 28px; }                        
+      210 +    }                                                         
+      211 +  }                                                           
+      212 +                                                              
+      213 +  /* ── 底部 UI：配色按钮，z-index:3 ── */                    
+      214    .ui-controls {
+      215      position: absolute;
+      216      bottom: 10vh;
+     ...
+      255      }
+      256    }
+      257  
+      256 -  /* ── 气泡提示 ── */                                        
+      258 +  /* ── 气泡提示：z-index:4（最顶层）── */                    
+      259    .tooltip {
+      260      position: absolute;
+      261      bottom: calc(10vh + 70px);
+
+● Bash(cd "D:/Code/test-ai/test-ai" && npx vite build --mode development 2>&1 |
+      tail -6)
+  ⎿  computing gzip size...
+     dist/index.html                   0.42 kB │ gzip:  0.28 kB
+     dist/assets/index-CzRgAkx4.css   30.82 kB │ gzip:  4.89 kB
+     … +3 lines (ctrl+o to expand)
+  ⎿  (timeout 1m)
+
+● Build passes。整理完成，核心要点：
+
+  z-index 层级（确保图片覆盖文字上方）：
+
+  ┌─────┬────────────────────────────┬─────────┬──────────────────────────┐
+  │ 层  │            元素            │ z-index │           说明           │
+  ├─────┼────────────────────────────┼─────────┼──────────────────────────┤
+  │ 底  │ .bg-text                   │ 1       │ 背景大字水印，手机背后   │
+  ├─────┼────────────────────────────┼─────────┼──────────────────────────┤
+  │ 中  │ .phone-stage               │ 2       │ 手机产品图，覆盖在文字上 │
+  ├─────┼────────────────────────────┼─────────┼──────────────────────────┤
+  │ 上  │ .main-title / .ui-controls │ 3       │ 标题、按钮               │
+  ├─────┼────────────────────────────┼─────────┼──────────────────────────┤
+  │ 顶  │ .tooltip                   │ 4       │ 气泡提示                 │
+  └─────┴────────────────────────────┴─────────┴──────────────────────────┘
+
+  GSAP 时间轴（scrub: 1 连续驱动，无切换）：
+
+  1. mainTitleRef: y: -100, opacity: 0 + phoneImgRef: scale: 1->0.8, rotation: 
+  0->-8°（同时开始，position: 0）
+  2. bgTextRef: scale: 0.8->1, opacity: 0->1（紧接）
+  3. uiControlsRef: y: 30->0, opacity: 0->1（紧接）
+  4. tooltipRef: scale: 0->1, opacity: 0->1, ease: back.out(1.7)（紧接，弹跳）
+
+  Template 中 bg-text 排在 phone-stage 前面（DOM 顺序），配合 z-index
+  确保手机图始终在文字上方。颜色切换逻辑仅保留占位结构。
+
+✻ Baked for 1m 8s
+
+❯ 初始图片是旋转45° 然后随着滑动变成现在的角度                                  
+
+● Update(src\components\DesignColor.vue)
+  ⎿  Added 1 line, removed 1 line
+      53      }, 0)
+      54      tl.fromTo(phoneImgRef.value, {
+      55        scale: 1,
+      56 -      rotation: 0,                                             
+      56 +      rotation: 45,                                            
+      57      }, {
+      58        scale: 0.8,
+      59        rotation: -8,
+
+● 手机初始旋转改为 45°，随滚动旋转到 -8°，同时缩放到 80%。
+
+❯ 初始大小的图片只有30%的高度可以展示出来，而且初始的时候图片稍微比现在大20%    
+
+● Update(src\components\DesignColor.vue)
+  ⎿  Added 1 line, removed 1 line
+      52        ease: 'power2.out',
+      53      }, 0)
+      54      tl.fromTo(phoneImgRef.value, {
+      55 -      scale: 1,                                                
+      55 +      scale: 1.2,                                              
+      56        rotation: 45,
+      57      }, {
+      58        scale: 0.8,
+
+● 现在我需要添加裁剪效果，使得初始状态下只有 30% 的高度可见。我会添加一个带有
+  clip-path 动画的包裹容器。
+
+● Update(src\components\DesignColor.vue)
+  ⎿  Error editing file
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(src\components\DesignColor.vue)
+  ⎿  Error editing file
+
+  Read 1 file (ctrl+o to expand)
+
+● Bash(sed -n '111,114p'
+      "D:/Code/test-ai/test-ai/src/components/DesignColor.vue" | cat -A)
+  ⎿      <!-- M-eM-^IM-^MM-fM-^YM-/M-fM-^IM-^KM-fM-^\M-:M-eM-^[M->M-oM-<M-^
+     ZM-gM-+M-^VM-gM-^[M-4 M-bM-^FM-^R M-gM-<M-)M-fM-^TM->80% + M-fM-^WM-^K
+     M-hM-=M-,M-eM-^@M->M-fM-^VM-^\M-oM-<M-^LM-hM-&M-^FM-gM-^[M-^VM-eM-^\M-
+     … +5 lines (ctrl+o to expand)
+
+● Update(src\components\DesignColor.vue)
+  ⎿  Added 3 lines, removed 1 line
+      110  
+      111      <!-- 前景手机图：竖直 → 缩放80% + 旋转倾斜，覆盖在文字上方
+            -->
+      112      <div class="phone-stage">
+      113 -      <img ref="phoneImgRef" class="phone-img" :src="phoneImag
+          -e" alt="一加 15T" />                                          
+      113 +      <div class="phone-clip">                                
+      114 +        <img ref="phoneImgRef" class="phone-img" :src="phoneIm
+          +age" alt="一加 15T" />                                        
+      115 +      </div>                                                  
+      116      </div>
+      117  
+      118      <!-- 主标题：滚动后上移淡出 -->
+
+● 现在将 clip-path 动画和 .phone-clip 的 CSS 样式添加到时间轴中。
+
+● Update(src\components\DesignColor.vue)
+  ⎿  Added 8 lines
+      60        duration: 0.4,
+      61        ease: 'power2.out',
+      62      }, 0)
+      63 +    // phone-clip：初始仅露出顶部 30%，滚动后完整展示          
+      64 +    tl.fromTo('.phone-clip', {                                 
+      65 +      clipPath: 'inset(0 0 70% 0)',                            
+      66 +    }, {                                                       
+      67 +      clipPath: 'inset(0 0 0% 0)',                             
+      68 +      duration: 0.4,                                           
+      69 +      ease: 'power2.out',                                      
+      70 +    }, 0)                                                      
+      71  
+      72      // ── 2. 背景大字缩放渐入 ──
+      73      tl.fromTo(bgTextRef.value, {
+● 现在为 .phone-clip 添加 CSS。
+
+● Update(src\components\DesignColor.vue)
+  ⎿  Added 6 lines
+      187      transform: translate(-50%, -50%);
+      188      z-index: 2;
+      189  
+      190 +    .phone-clip {                                             
+      191 +      position: relative;                                     
+      192 +      overflow: hidden;                                       
+      193 +      will-change: clip-path;                                 
+      194 +    }                                                         
+      195 +                                                              
+      196      .phone-img {
+      197        display: block;
+      198        width: 400px;
+
+● Bash(cd "D:/Code/test-ai/test-ai" && npx vite build --mode development 2>&1 |
+      tail -6)
+  ⎿  computing gzip size...
+     dist/index.html                   0.42 kB │ gzip:  0.28 kB
+     dist/assets/index-CehviD4M.css   30.93 kB │ gzip:  4.91 kB
+     … +3 lines (ctrl+o to expand)
+  ⎿  (timeout 1m)
+
+● Build passes。改动：
+
+  1. 初始图片比现在大20%：scale: 1.2（已改）
+  2. 初始仅30%高度可见：新增 .phone-clip 包裹层，clipPath 从 inset(0 0 70% 
+  0)（底部裁掉70%，仅露顶部30%）动画到 inset(0 0 0% 0)（完整展示）
+  3. clip-path 独立于旋转：clip 在 .phone-clip 父容器上，scale+rotation 在
+  .phone-img 上，互不干扰
+
+✻ Baked for 1m 18s
+
+❯ 从顶部开始截取图片大小，接着，图片是放在这一屏最下面，底边距0，               
+  ⎿  ⧉ Selected 1 lines from src\App.vue in Visual Studio Code
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(src\components\DesignColor.vue)
+  ⎿  Added 3 lines, removed 3 lines
+      179      }
+      180    }
+      181  
+      182 -  /* ── 手机展示：居中，z-index:2（覆盖背景文字）── */        
+      182 +  /* ── 手机展示：底部贴边，z-index:2（覆盖背景文字）── */    
+      183    .phone-stage {
+      184      position: absolute;
+      185 -    top: 50%;                                                 
+      185 +    bottom: 0;                                                
+      186      left: 50%;
+      187 -    transform: translate(-50%, -50%);                         
+      187 +    transform: translateX(-50%);                              
+      188      z-index: 2;
+      189  
+      190      .phone-clip {
+
+● 手机图改为底部贴边（bottom: 0），clip-path 从顶部开始截取（inset(0 0 70% 0)
+  露出顶部30%），滚动后完整展示。
+
+❯ 算了，不截了，手机初始放大，但是距离顶部有距离，超出这一屏的加一个超出隐藏    
+  ⎿  ⧉ Selected 1 lines from src\App.vue in Visual Studio Code
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(src\components\DesignColor.vue)
+  ⎿  Removed 8 lines
+      60        duration: 0.4,
+      61        ease: 'power2.out',
+      62      }, 0)
+      63 -    // phone-clip：初始仅露出顶部 30%，滚动后完整展示          
+      64 -    tl.fromTo('.phone-clip', {                                 
+      65 -      clipPath: 'inset(0 0 70% 0)',                            
+      66 -    }, {                                                       
+      67 -      clipPath: 'inset(0 0 0% 0)',                             
+      68 -      duration: 0.4,                                           
+      69 -      ease: 'power2.out',                                      
+      70 -    }, 0)                                                      
+      63  
+      64      // ── 2. 背景大字缩放渐入 ──
+      65      tl.fromTo(bgTextRef.value, {
+
+● Update(src\components\DesignColor.vue)
+  ⎿  Added 1 line, removed 3 lines
+      110  
+      111      <!-- 前景手机图：竖直 → 缩放80% + 旋转倾斜，覆盖在文字上方
+            -->
+      112      <div class="phone-stage">
+      113 -      <div class="phone-clip">                                
+      114 -        <img ref="phoneImgRef" class="phone-img" :src="phoneIm
+          -age" alt="一加 15T" />                                        
+      115 -      </div>                                                  
+      113 +      <img ref="phoneImgRef" class="phone-img" :src="phoneImag
+          +e" alt="一加 15T" />                                          
+      114      </div>
+      115  
+      116      <!-- 主标题：滚动后上移淡出 -->
+
+● Update(src\components\DesignColor.vue)
+  ⎿  Added 2 lines, removed 8 lines
+      169      }
+      170    }
+      171  
+      172 -  /* ── 手机展示：底部贴边，z-index:2（覆盖背景文字）── */    
+      172 +  /* ── 手机展示：距顶部有距离，超出屏的由 section overflow:hi
+          +dden 裁掉 ── */                                               
+      173    .phone-stage {
+      174      position: absolute;
+      175 -    bottom: 0;                                                
+      175 +    top: 20vh;                                                
+      176      left: 50%;
+      177      transform: translateX(-50%);
+      178      z-index: 2;
+      179  
+      180 -    .phone-clip {                                             
+      181 -      position: relative;                                     
+      182 -      overflow: hidden;                                       
+      183 -      will-change: clip-path;                                 
+      184 -    }                                                         
+      185 -                                                              
+      180      .phone-img {
+      181        display: block;
+      182        width: 400px;
+
+● Bash(cd "D:/Code/test-ai/test-ai" && npx vite build --mode development 2>&1 |
+      tail -6)
+  ⎿  computing gzip size...
+     dist/index.html                   0.42 kB │ gzip:  0.28 kB
+     dist/assets/index-BUjXaptz.css   30.81 kB │ gzip:  4.89 kB
+     … +3 lines (ctrl+o to expand)
+  ⎿  (timeout 1m)
+
+● Build passes。改动：
+
+  1. 去掉 clip-path 截取 - 移除 .phone-clip 包裹层和对应的 GSAP 动画
+  2. 手机距顶部有距离 - .phone-stage 改为 top: 20vh（离顶部 20% 视口高度）
+  3. 超出隐藏 - section 本身已有 overflow: hidden，手机初始 scale: 1.2
+  放大后超出视口的部分自动被裁掉
+
+✻ Cogitated for 45s
+
+❯ 初始图片放大到原图的2倍，后来随着滑动稍微缩小                                 
+  ⎿  ⧉ Selected 1 lines from src\App.vue in Visual Studio Code
+
+● Update(src\components\DesignColor.vue)
+  ⎿  Added 1 line, removed 1 line
+      52        ease: 'power2.out',
+      53      }, 0)
+      54      tl.fromTo(phoneImgRef.value, {
+      55 -      scale: 1.2,                                              
+      55 +      scale: 2,                                                
+      56        rotation: 45,
+      57      }, {
+      58        scale: 0.8,
+
+● 初始 scale: 2（原图2倍），滚动后缩小到 scale: 0.8，超出视口部分由 section
+  overflow: hidden 裁掉。
+
+❯ 对的，但是图片初始距离顶部有距离，确保整张图片的顶部完全显示出来，距离顶部大  
+概30%                                                                           
+  ⎿  ⧉ Selected 1 lines from src\components\DesignColor.vue in Visual Studio 
+     Code
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(src\components\DesignColor.vue)
+  ⎿  Added 1 line, removed 1 line
+      172    /* ── 手机展示：距顶部有距离，超出屏的由 section overflow:hi
+           dden 裁掉 ── */
+      173    .phone-stage {
+      174      position: absolute;
+      175 -    top: 20vh;                                                
+      175 +    top: 30vh;                                                
+      176      left: 50%;
+      177      transform: translateX(-50%);
+      178      z-index: 2;
+
+● top: 30vh，图片顶部距视口顶部 30% 高度，确保整张图顶部完整显示，放大 2
+  倍后底部超出部分由 overflow: hidden 裁掉。
+
+❯ ok 在这页的代码基础上进行向上滑动的时候，图片旋转是以整张图片高20%，左右50%这 
+个位置为中心点进行旋转的，试试                                                  
+  Read 1 file (ctrl+o to expand)
+
+● Update(src\components\DesignColor.vue)
+  ⎿  Added 2 lines
+      54      tl.fromTo(phoneImgRef.value, {
+      55        scale: 3,
+      56        rotation: 45,
+      57 +      transformOrigin: '50% 20%',                              
+      58      }, {
+      59        scale: 0.8,
+      60        rotation: -8,
+      61 +      transformOrigin: '50% 20%',                              
+      62        duration: 0.4,
+      63        ease: 'power2.out',
+      64      }, 0)
+
+● 旋转中心点设为 transformOrigin: '50% 20%'（水平居中、垂直 20%
+  处），缩放和旋转都围绕这个点进行。
+
+❯ 错了 代码返回去，然后以图片右下角为中心点，进行旋转，                         
+
+● Update(src\components\DesignColor.vue)
+  ⎿  Added 2 lines, removed 2 lines
+      54      tl.fromTo(phoneImgRef.value, {
+      55        scale: 3,
+      56        rotation: 45,
+      57 -      transformOrigin: '50% 20%',                              
+      57 +      transformOrigin: '100% 100%',                            
+      58      }, {
+      59        scale: 0.8,
+      60        rotation: -8,
+      61 -      transformOrigin: '50% 20%',                              
+      61 +      transformOrigin: '100% 100%',                            
+      62        duration: 0.4,
+      63        ease: 'power2.out',
+      64      }, 0)
+
+● transformOrigin: '100% 100%'，以图片右下角为中心点进行旋转和缩放。
+
+❯ 算了 ，你给我恢复到上上一版                                                   
+
+● Update(src\components\DesignColor.vue)
+  ⎿  Removed 2 lines
+      54      tl.fromTo(phoneImgRef.value, {
+      55        scale: 3,
+      56        rotation: 45,
+      57 -      transformOrigin: '100% 100%',                            
+      57      }, {
+      58        scale: 0.8,
+      59        rotation: -8,
+      61 -      transformOrigin: '100% 100%',                            
+      60        duration: 0.4,
+      61        ease: 'power2.out',
+      62      }, 0)
+
+● 已恢复，去掉了 transformOrigin，旋转中心回到默认值（图片中心 50% 50%）。
