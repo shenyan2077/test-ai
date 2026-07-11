@@ -1,20 +1,15 @@
-<!-- 底部锚点导航栏：固定底部，白色透明毛玻璃，5个图标+文字（总览/设计/续航/影像/屏幕） -->
+<!-- 底部锚点导航栏：总览6卡片屏向下滑动后出现，5个均分模块，白色毛玻璃+黑灰图标文字 -->
 <template>
-  <div class="bottom-nav">
-    <div class="nav-scroll">
-      <div
-        v-for="(item, index) in navItems"
-        :key="item.id"
-        class="nav-btn"
-        :class="{ active: activeIndex === index }"
-        @click="scrollTo(index)"
-      >
-        <div class="img-group">
-          <img :src="item.icon" alt="" class="icon-normal" />
-          <img :src="item.iconHighlight" alt="" class="icon-white" />
-        </div>
-        <p>{{ item.label }}</p>
-      </div>
+  <div class="bottom-nav" :class="{ visible: isVisible }">
+    <div
+      v-for="(item, index) in navItems"
+      :key="item.id"
+      class="nav-item"
+      :class="{ active: activeIndex === index }"
+      @click="scrollTo(index)"
+    >
+      <img :src="item.icon" alt="" class="nav-icon" />
+      <span class="nav-label">{{ item.label }}</span>
     </div>
   </div>
 </template>
@@ -23,41 +18,25 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 
 const navItems = [
-  {
-    id: 'section-kv',
-    label: '总览',
-    icon: '/assets/images/nav/images-nav-0-1-886a42.svg',
-    iconHighlight: '/assets/images/nav/images-nav-0-highlight-1-a2d7d4.svg',
-  },
-  {
-    id: 'section-color',
-    label: '设计',
-    icon: '/assets/images/nav/images-nav-1-1-7ecce2.svg',
-    iconHighlight: '/assets/images/nav/images-nav-1-highlight-1-58023b.svg',
-  },
-  {
-    id: 'section-battery',
-    label: '续航',
-    icon: '/assets/images/nav/images-nav-2-1-e78adf.svg',
-    iconHighlight: '/assets/images/nav/images-nav-2-highlight-1-d83284.svg',
-  },
-  {
-    id: 'section-camera',
-    label: '影像',
-    icon: '/assets/images/nav/images-nav-8-1-100fc8.svg',
-    iconHighlight: '/assets/images/nav/images-nav-8-highlight-1-0c6616.svg',
-  },
-  {
-    id: 'rotating-screen',
-    label: '屏幕',
-    icon: '/assets/images/nav/images-nav-5-1-ec1455.svg',
-    iconHighlight: '/assets/images/nav/images-nav-5-highlight-1-c56383.svg',
-  },
+  { id: 'section-kv', label: '总览', icon: '/assets/images/nav/images-nav-0-1-886a42.svg' },
+  { id: 'section-color', label: '设计', icon: '/assets/images/nav/images-nav-1-1-7ecce2.svg' },
+  { id: 'section-battery', label: '续航', icon: '/assets/images/nav/images-nav-2-1-e78adf.svg' },
+  { id: 'section-camera', label: '影像', icon: '/assets/images/nav/images-nav-8-1-100fc8.svg' },
+  { id: 'rotating-screen', label: '屏幕', icon: '/assets/images/nav/images-nav-5-1-ec1455.svg' },
 ]
 
 const activeIndex = ref(0)
+const isVisible = ref(false)
 
 const handleScroll = () => {
+  // 滚动过 OverviewSection（总览6卡片）后显示
+  const overview = document.querySelector('.overview-section')
+  if (overview) {
+    const bottom = overview.getBoundingClientRect().bottom
+    isVisible.value = bottom < 0
+  }
+
+  // 高亮当前 section
   const scrollY = window.scrollY + window.innerHeight / 2
   for (let i = navItems.length - 1; i >= 0; i--) {
     const el = document.getElementById(navItems[i].id)
@@ -71,7 +50,7 @@ const handleScroll = () => {
 const scrollTo = (index) => {
   const el = document.getElementById(navItems[index].id)
   if (el) {
-    window.scrollTo({ top: el.offsetTop - 104, behavior: 'smooth' })
+    window.scrollTo({ top: el.offsetTop - 56, behavior: 'smooth' })
   }
 }
 
@@ -90,70 +69,57 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-top: 1px solid rgba(0, 0, 0, 0.08);
+  display: flex;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
 
   @include mo {
     display: none;
   }
 }
 
-.nav-scroll {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  max-width: $max-width;
-  margin: 0 auto;
-  padding: 12px 0;
-  gap: 0;
-}
-
-.nav-btn {
+.nav-item {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 6px;
-  padding: 8px 28px;
+  padding: 12px 0;
   cursor: pointer;
-  transition: opacity 0.2s;
-  opacity: 0.45;
+  transition: background 0.2s;
 
-  &:hover { opacity: 0.7; }
-  &.active { opacity: 1; }
-
-  .img-group {
-    position: relative;
-    height: 32px;
-    width: 32px;
+  &:hover {
+    background: rgba(0, 0, 0, 0.03);
   }
 
-  .icon-normal {
+  .nav-icon {
     width: 32px;
     height: 32px;
-  }
-
-  .icon-white {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 32px;
-    height: 32px;
-    opacity: 0;
+    object-fit: contain;
+    opacity: 0.45;
     transition: opacity 0.2s;
   }
 
-  &.active .icon-white {
+  &.active .nav-icon {
     opacity: 1;
   }
 
-  &.active .icon-normal {
-    opacity: 0;
-  }
-
-  p {
+  .nav-label {
     font-size: 16px;
     font-weight: 500;
-    color: $color-black;
-    white-space: nowrap;
+    color: rgba(0, 0, 0, 0.55);
+    transition: color 0.2s;
+  }
+
+  &.active .nav-label {
+    color: rgba(0, 0, 0, 0.95);
   }
 }
 </style>
