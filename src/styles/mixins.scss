@@ -1,0 +1,14 @@
+@mixin pc {
+  @media (min-width: 1200px) { @content; }
+}
+@mixin pad {
+  @media (min-width: 768px) and (max-width: 1199px) { @content; }
+}
+@mixin mo {
+  @media (max-width: 767px) { @content; }
+}
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
