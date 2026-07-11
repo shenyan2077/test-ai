@@ -19,6 +19,7 @@ import DarkNightDisplay from '@/components/DarkNightDisplay.vue'
 import EyeProtection from '@/components/EyeProtection.vue'
 import DimLightEye from '@/components/DimLightEye.vue'
 import MoreFeatures from '@/components/MoreFeatures.vue'
+import BottomNav from '@/components/BottomNav.vue'
 import NotesFooter from '@/components/NotesFooter.vue'
 import SiteFooter from '@/components/SiteFooter.vue'
 import { useScrollAnimation } from '@/composables/useScrollAnimation'
@@ -60,6 +61,7 @@ useScrollAnimation()
     </main>
     <NotesFooter />
     <SiteFooter />
+    <BottomNav />
   </div>
 </template>
 
