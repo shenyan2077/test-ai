@@ -36,11 +36,12 @@ useScrollAnimation()
       <div id="section-thin">
         <NarrowBezel />
       </div>
-      <div id="section-where">
-        <SmallScreen />
-      </div>
+    
       <div id="section-appearance">
         <Appearance />
+      </div>
+        <div id="section-where">
+        <SmallScreen />
       </div>
       <div id="section-light">
         <DisplayScreen />

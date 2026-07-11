@@ -1,0 +1,854 @@
+╭─── Claude Code v2.1.87 ──────────────────────────────────────────────────────╮
+│                                                    │ Tips for getting        │
+│                    Welcome back!                   │ started                 │
+│                                                    │ Run /init to create a … │
+│                       ▐▛███▜▌                      │ ─────────────────────── │
+│                      ▝▜█████▛▘                     │ Recent activity         │
+│                        ▘▘ ▝▝                       │ No recent activity      │
+│                                                    │                         │
+│ corp-dgov/anthropic/deepseek-… · API Usage Billing │                         │
+│              D:\Code\test-ai\test-ai               │                         │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+❯ hi                                                                            
+
+● Hi! How can I help you today?
+
+❯ 你是啥模型                                                                    
+
+● 我是 DeepSeek-V4-Pro，通过 Anthropic 的 Claude Code 平台运行。我目前以 1M
+  token 上下文窗口提供服务。
+
+❯ 首先读取我的docs\superpowers\plans\2026-07-11-oneplus-15t-replication.md，然  
+后读取我的D:\test\一加 15T 又小又强又美又全面.html，接着读取docs\superpowers\sp 
+ecs\2026-07-11-oneplus-15t-replication-design.md，看一下整体思路，              
+
+  Read 3 files (ctrl+o to expand)
+
+● 已读取完三个文件，以下是整体思路总结：
+
+  ---
+  整体思路
+
+  这是一个一加 15T 官方产品页的 Vue3 
+  复刻项目，采用**「结构优先，动画后加」**的策略，分 4 个阶段执行：
+
+  阶段 0 — 项目初始化
+
+  - Vite + Vue3 脚手架搭建
+  - 安装 GSAP + Sass 依赖
+  - 配置 SCSS 全局变量（颜色/字号/间距/断点）、mixin（响应式）、global reset
+  - 从 D:\test\_files\ 复制官方素材到 public/assets/images/ 按用途分类
+
+  阶段 1 — 13 个组件静态搭建（核心）
+
+  按原页面从上到下的顺序，每个 section 拆一个组件：
+
+  ┌─────┬───────────────┬───────────────────────────────────────────────────┐
+  │  #  │     组件      │                对应原页面 section                 │
+  ├─────┼───────────────┼───────────────────────────────────────────────────┤
+  │ 1   │ SiteHeader    │ 顶部一加导航栏                                    │
+  ├─────┼───────────────┼───────────────────────────────────────────────────┤
+  │ 2   │ ProductNav    │ 产品锚点吸顶导航（5项：总览/设计/续航/影像/屏幕） │
+  ├─────┼───────────────┼───────────────────────────────────────────────────┤
+  │ 3   │ HeroSection   │ 首屏大图 + 标语                                   │
+  ├─────┼───────────────┼───────────────────────────────────────────────────┤
+  │ 4   │ DesignColor   │ 配色切换（白巧/抹茶/可可）                        │
+  ├─────┼───────────────┼───────────────────────────────────────────────────┤
+  │ 5   │ NarrowBezel   │ 1.1mm 超窄四等边                                  │
+  ├─────┼───────────────┼───────────────────────────────────────────────────┤
+  │ 6   │ SmallScreen   │ 小屏手感 + 生活场景图                             │
+  ├─────┼───────────────┼───────────────────────────────────────────────────┤
+  │ 7   │ Appearance    │ 设计卖点卡片                                      │
+  ├─────┼───────────────┼───────────────────────────────────────────────────┤
+  │ 8   │ DisplayScreen │ 屏幕护眼参数                                      │
+  ├─────┼───────────────┼───────────────────────────────────────────────────┤
+  │ 9   │ LUMOCamera    │ 影像系统 + 双摄参数                               │
+  ├─────┼───────────────┼───────────────────────────────────────────────────┤
+  │ 10  │ Battery       │ 7500mAh 电池 + 充电组合                           │
+  ├─────┼───────────────┼───────────────────────────────────────────────────┤
+  │ 11  │ Durability    │ AI 实用好功能                                     │
+  ├─────┼───────────────┼───────────────────────────────────────────────────┤
+  │ 12  │ NotesFooter   │ 18条备注 + 免责声明                               │
+  ├─────┼───────────────┼───────────────────────────────────────────────────┤
+  │ 13  │ SiteFooter    │ 页脚链接 + 备案信息                               │
+  └─────┴───────────────┴───────────────────────────────────────────────────┘
+
+  跳过的模块：性能栏目（snapdragon/fps/cooling）和系统栏目（ColorOS 16）
+
+  阶段 2 — GSAP 动画与交互
+
+  - 封装 useScrollAnimation composable（ScrollTrigger 驱动淡入上移）
+  - Hero 首屏 GSAP timeline 入场动画
+  - ProductNav 吸顶 + 锚点高亮
+  - DesignColor 配色切换过渡
+  - hover 交互
+
+  阶段 3 — 收尾交付
+
+  - 三档断点（1920/1024/390）精调
+  - npm run build + dist 本地验证
+  - README + 聊天记录导出 + 打包
+
+  关键约束
+
+  - Node 22.12.10，Vue3 Composition API，SCSS scoped，不用 Tailwind
+  - 禁止 v-html / innerHTML / iframe
+  - 每个组件完成后 git commit
+  - 素材全部来自官方，不允许占位图
+
+  ---
+  需要我开始执行某个阶段，还是你想讨论/调整方案？
+
+❯ src\components\NarrowBezel.vue这个文件夹中样式有了                            
+基础动画也有一点了，but我们需要加一些东西：上面的手机向右旋转，下面的手机向左旋 
+转，最后图片居中，但是不要挡住中间的字，，页面最开始是“1.1mm                    
+超窄四等边”，随着滑动文字逐渐变小到12px，然后淡出，这时候“窄出手机新高度，满屏  
+精彩框不住。                                                                    
+                                                                                
+1.1mm 极窄四等边1，小屏大视野，观感超惊艳。一眼望去，满眼都沉浸，满屏皆精彩。”  
+文字就可以出现了 ，你详细看一下html的动画                                       
+
+  Searched for 1 pattern, read 1 file (ctrl+o to expand)
+
+● Let me read the original HTML's section-thin area in detail to understand the
+  full animation.
+
+  Searched for 1 pattern, read 1 file (ctrl+o to expand)
+
+● Now let me find the GSAP animation code for section-thin in the original HTML.
+
+  Searched for 2 patterns (ctrl+o to expand)
+
+● Let me find the actual JS animation code for the thin section.
+
+  Searched for 10 patterns, read 1 file (ctrl+o to expand)
+
+● Found it. Let me extract the full ani-thin animation logic.
+
+  Searched for 1 pattern (ctrl+o to expand)
+
+● Now I have the full picture. Let me analyze the original GSAP animation code
+  from the official site:
+
+  Original ani-thin animation logic (decoded from minified JS):
+  - ScrollTrigger: start: "top top", end: "top top-=800", pin + scrub
+  - Title .section-metal-text: scale 1→0.375, fontWeight 700→300, then opacity
+  1→0
+  - Subtitle .text-wrapper: opacity 0→1 (overlaps with title fade)
+  - Left phone (origin-bottom-right): rotate 0→48deg, x 0→180, y 0→vh(3), scale
+  1→0.5
+  - Right phone (origin-top-left): rotate 0→48deg, x 0→-180, y 0→-vh(3), scale
+  1→0.5
+
+  Now let me rewrite NarrowBezel.vue with the complete scroll-driven animation.
+
+  Read 1 file (ctrl+o to expand)
+
+● Now I have the complete picture. The original animation is a scroll-scrubbed 
+  GSAP timeline where:
+  - The section is sticky-pinned, animation driven by 800px of scroll
+  - Title scales 1→0.375, weight 700→300, then fades out
+  - Subtitle fades in as title fades
+  - Both phones rotate 48deg with scale 0.5 and move toward center
+
+  Let me rewrite the component.
+
+● Write(src\components\NarrowBezel.vue)
+  ⎿  Added 185 lines, removed 118 lines
+      1  <!--
+      2 -  1.1mm 超窄四等边：大字标题居中 + 副标题描述 + 两台手机对角放置
+        -（部分溢出）                                                    
+      3 -  对齐官方 section-thin 布局，GSAP 滚动入场动画                 
+      2 +  1.1mm 超窄四等边：scroll-driven 动画                          
+      3 +  - 大标题随滚动缩小至12px → 淡出                               
+      4 +  - 副标题淡入                                                  
+      5 +  - 上方手机向右旋转、下方手机向左旋转 → 最终居中不挡字         
+      6  -->
+      7  <script setup>
+      8  import { ref, onMounted, onUnmounted } from 'vue'
+     ...
+      16  
+      17  onMounted(() => {
+      18    ctx = gsap.context(() => {
+      19 +    const mainTitle = sectionRef.value.querySelector('.main-tit
+         +le')                                                           
+      20 +    const textWrapper = sectionRef.value.querySelector('.text-w
+         +rapper')                                                       
+      21 +    const phoneLeft = sectionRef.value.querySelector('.phone-le
+         +ft')                                                           
+      22 +    const phoneRight = sectionRef.value.querySelector('.phone-r
+         +ight')                                                         
+      23 +                                                               
+      24      const tl = gsap.timeline({
+      25        scrollTrigger: {
+      26          trigger: sectionRef.value,
+      20 -        start: 'top 80%',                                      
+      21 -        toggleActions: 'play none none none',                  
+      27 +        start: 'top top',                                      
+      28 +        end: 'bottom bottom',                                  
+      29 +        scrub: 1,                                              
+      30        },
+      31      })
+      32  
+      25 -    // 大标题渐入上移                                          
+      26 -    tl.from('.narrow-bezel .main-title', {                     
+      27 -      y: 40,                                                   
+      28 -      opacity: 0,                                              
+      29 -      duration: 0.6,                                           
+      30 -      ease: 'power2.out',                                      
+      31 -    })                                                         
+      32 -    // 副标题+描述渐入                                         
+      33 -    tl.from('.narrow-bezel .text-wrapper', {                   
+      34 -      y: 30,                                                   
+      35 -      opacity: 0,                                              
+      36 -      duration: 0.6,                                           
+      37 -      ease: 'power2.out',                                      
+      38 -    }, '-=0.3')                                                
+      39 -    // 左侧手机从左下角滑入                                    
+      40 -    tl.from('.narrow-bezel .phone-left', {                     
+      41 -      x: -150,                                                 
+      42 -      y: 150,                                                  
+      43 -      opacity: 0,                                              
+      44 -      duration: 0.8,                                           
+      45 -      ease: 'power2.out',                                      
+      46 -    }, '-=0.5')                                                
+      47 -    // 右侧手机从右上角滑入（同时）                            
+      48 -    tl.from('.narrow-bezel .phone-right', {                    
+      49 -      x: 150,                                                  
+      50 -      y: -150,                                                 
+      51 -      opacity: 0,                                              
+      52 -      duration: 0.8,                                           
+      53 -      ease: 'power2.out',                                      
+      54 -    }, '<')                                                    
+      33 +    // 1. 大标题：缩小到 12px 等效（128px * 0.094 ≈ 12px），字 
+         +重减轻                                                         
+      34 +    tl.fromTo(                                                 
+      35 +      mainTitle,                                               
+      36 +      { scale: 1, opacity: 1 },                                
+      37 +      { scale: 0.094, duration: 1, ease: 'none' }              
+      38 +    )                                                          
+      39 +    // 2. 标题淡出                                             
+      40 +    tl.to(mainTitle, { opacity: 0, duration: 0.3 }, '+=0.1')   
+      41 +    // 3. 副标题淡入（与标题淡出重叠）                         
+      42 +    tl.fromTo(                                                 
+      43 +      textWrapper,                                             
+      44 +      { opacity: 0 },                                          
+      45 +      { opacity: 1, duration: 0.5 },                           
+      46 +      '-=0.3'                                                  
+      47 +    )                                                          
+      48 +    // 4. 上方手机（右侧 phone-right）：向右旋转 + 缩小 + 向中 
+         +间移动                                                         
+      49 +    tl.fromTo(                                                 
+      50 +      phoneRight,                                              
+      51 +      { rotate: 0, x: 0, y: 0, scale: 1 },                     
+      52 +      { rotate: 48, x: -180, y: '-3vh', scale: 0.5, duration: 1
+         +, ease: 'none' },                                              
+      53 +      0                                                        
+      54 +    )                                                          
+      55 +    // 5. 下方手机（左侧 phone-left）：向左旋转（同向48deg但 or
+         +igin 不同产生视觉差异）                                        
+      56 +    //    实际使用 -48deg 实现向左旋转的视觉效果               
+      57 +    tl.fromTo(                                                 
+      58 +      phoneLeft,                                               
+      59 +      { rotate: 0, x: 0, y: 0, scale: 1 },                     
+      60 +      { rotate: -48, x: 180, y: '3vh', scale: 0.5, duration: 1,
+         + ease: 'none' },                                               
+      61 +      0                                                        
+      62 +    )                                                          
+      63    }, sectionRef.value)
+      64  })
+      65  
+     ...
+       69  </script>
+       70  
+       71  <template>
+       72 +  <!-- 外层足够高以产生滚动空间，sticky 内层固定视口 -->      
+       73    <section ref="sectionRef" class="narrow-bezel">
+       65 -    <!-- 居中文字内容 -->                                     
+       66 -    <div class="content-center">                              
+       67 -      <h2 class="main-title">1.1mm 超窄四等边</h2>            
+       68 -      <div class="text-wrapper">                              
+       69 -        <p class="sub-title">窄出手机新高度，满屏精彩框不住。<
+          -/p>                                                           
+       70 -        <p class="desc">1.1mm 极窄四等边<sup>1</sup>，小屏大视
+          -野，观感超惊艳。一眼望去，满眼都沉浸，满屏皆精彩。</p>        
+       74 +    <div class="sticky-wrapper">                              
+       75 +      <div class="sticky-content">                            
+       76 +        <!-- 标题：初始大字居中 -->                           
+       77 +        <h2 class="main-title">1.1mm 超窄四等边</h2>          
+       78 +                                                              
+       79 +        <!-- 副标题：初始隐藏 -->                             
+       80 +        <div class="text-wrapper">                            
+       81 +          <p class="sub-title">窄出手机新高度，满屏精彩框不住 
+          +。</p>                                                        
+       82 +          <p class="desc">                                    
+       83 +            1.1mm 极窄四等边<sup>1</sup>，小屏大视野，观感超惊
+          +艳。一眼望去，满眼都沉浸，满屏皆精彩。                        
+       84 +          </p>                                                
+       85 +        </div>                                                
+       86 +                                                              
+       87 +        <!-- 上方手机：从右下角伸出，origin-top-left，向右旋转
+          + -->                                                          
+       88 +        <div class="phone phone-right">                       
+       89 +          <img                                                
+       90 +            src="/assets/images/thin/images-thin-phone-0-1-236
+          +6b7.png.webp"                                                 
+       91 +            alt="一加15T 窄边框"                              
+       92 +          />                                                  
+       93 +        </div>                                                
+       94 +                                                              
+       95 +        <!-- 下方手机：从左上角伸出，origin-bottom-right，向左
+          +旋转 -->                                                      
+       96 +        <div class="phone phone-left">                        
+       97 +          <img                                                
+       98 +            src="/assets/images/thin/images-thin-phone-0-1-236
+          +6b7.png.webp"                                                 
+       99 +            alt="一加15T 窄边框"                              
+      100 +          />                                                  
+      101 +        </div>                                                
+      102        </div>
+      103      </div>
+       73 -                                                              
+       74 -    <!-- 左侧手机：从左上延伸，origin-bottom-right -->        
+       75 -    <div class="phone phone-left">                            
+       76 -      <img src="/assets/images/thin/images-thin-phone-0-1-2366
+          -b7.png.webp" alt="一加15T 窄边框" />                          
+       77 -    </div>                                                    
+       78 -    <!-- 右侧手机：从右下延伸，origin-top-left -->            
+       79 -    <div class="phone phone-right">                           
+       80 -      <img src="/assets/images/thin/images-thin-phone-0-1-2366
+          -b7.png.webp" alt="一加15T 窄边框" />                          
+       81 -    </div>                                                    
+      104    </section>
+      105  </template>
+      106  
+      107  <style scoped lang="scss">
+      108 +/* ── 外层：制造滚动空间 ── */                                
+      109  .narrow-bezel {
+      110    width: 100%;
+       88 -  height: 100vh;                                              
+       89 -  background: $color-white;                                   
+      111 +  // 足够的高度让 scrub 有滚动量                              
+      112 +  height: calc(100vh + 800px);                                
+      113    position: relative;
+      114 +}                                                             
+      115 +                                                              
+      116 +/* ── 内层 sticky 容器：固定在视口 ── */                      
+      117 +.sticky-wrapper {                                             
+      118 +  position: sticky;                                           
+      119 +  top: $nav-height;                                           
+      120 +  height: calc(100vh - #{$nav-height});                       
+      121    overflow: hidden;
+      122 +}                                                             
+      123 +                                                              
+      124 +.sticky-content {                                             
+      125 +  position: relative;                                         
+      126 +  width: 100%;                                                
+      127 +  height: 100%;                                               
+      128    display: flex;
+      129    align-items: center;
+      130    justify-content: center;
+      131 +  background: $color-white;                                   
+      132 +}                                                             
+      133  
+       96 -  /* ── 居中文字内容 ── */                                    
+       97 -  .content-center {                                           
+       98 -    position: relative;                                       
+       99 -    z-index: 2;                                               
+      100 -    display: flex;                                            
+      101 -    flex-direction: column;                                   
+      102 -    align-items: center;                                      
+      103 -    justify-content: center;                                  
+      104 -    text-align: center;                                       
+      134 +/* ── 大标题：初始居中，随滚动缩小 ── */                      
+      135 +.main-title {                                                 
+      136 +  position: absolute;                                         
+      137 +  z-index: 2;                                                 
+      138 +  font-size: 128px;                                           
+      139 +  font-weight: 700;                                           
+      140 +  line-height: 1;                                             
+      141 +  color: $color-black;                                        
+      142 +  text-align: center;                                         
+      143 +                                                              
+      144 +  @include pad {                                              
+      145 +    font-size: 69px;                                          
+      146    }
+      147 +  @include mo {                                               
+      148 +    font-size: 40px;                                          
+      149 +  }                                                           
+      150 +}                                                             
+      151  
+      107 -  .main-title {                                               
+      108 -    font-size: 128px;                                         
+      109 -    font-weight: 700;                                         
+      152 +/* ── 副标题：初始透明 ── */                                  
+      153 +.text-wrapper {                                               
+      154 +  position: absolute;                                         
+      155 +  z-index: 2;                                                 
+      156 +  text-align: center;                                         
+      157 +  opacity: 0;                                                 
+      158 +                                                              
+      159 +  .sub-title {                                                
+      160 +    font-size: 48px;                                          
+      161 +    font-weight: 300;                                         
+      162      line-height: 1;
+      163      color: $color-black;
+      112 -    text-align: center;                                       
+      164  
+      114 -    @include pad { font-size: 69px; }                         
+      115 -    @include mo { font-size: 40px; }                          
+      165 +    @include pad {                                            
+      166 +      font-size: 26px;                                        
+      167 +    }                                                         
+      168 +    @include mo {                                             
+      169 +      font-size: 32px;                                        
+      170 +      line-height: 1.3;                                       
+      171 +    }                                                         
+      172    }
+      173  
+      118 -  .text-wrapper {                                             
+      119 -    margin-top: 42px;                                         
+      120 -    text-align: center;                                       
+      174 +  .desc {                                                     
+      175 +    font-size: 18px;                                          
+      176 +    font-weight: 400;                                         
+      177 +    line-height: 1.4;                                         
+      178 +    color: rgba(0, 0, 0, 0.55);                               
+      179 +    margin-top: 16px;                                         
+      180 +    max-width: 600px;                                         
+      181  
+      122 -    @include pad { margin-top: 32px; }                        
+      123 -    @include mo { margin-top: 12px; }                         
+      124 -                                                              
+      125 -    .sub-title {                                              
+      126 -      font-size: 48px;                                        
+      127 -      font-weight: 300;                                       
+      128 -      line-height: 1;                                         
+      129 -      color: $color-black;                                    
+      130 -                                                              
+      131 -      @include pad { font-size: 26px; }                       
+      132 -      @include mo { font-size: 32px; line-height: 1.3; }      
+      182 +    @include pad {                                            
+      183 +      font-size: 10px;                                        
+      184 +      margin-top: 8px;                                        
+      185      }
+      134 -                                                              
+      135 -    .desc {                                                   
+      136 -      font-size: 18px;                                        
+      137 -      font-weight: 400;                                       
+      138 -      line-height: 1.4;                                       
+      139 -      color: rgba(0, 0, 0, 0.55);                             
+      140 -      margin-top: 16px;                                       
+      141 -      max-width: 600px;                                       
+      142 -                                                              
+      143 -      @include pad { font-size: 10px; margin-top: 8px; }      
+      144 -      @include mo { font-size: 14px; width: 328px; margin: 4px
+          - auto 0; }                                                    
+      186 +    @include mo {                                             
+      187 +      font-size: 14px;                                        
+      188 +      width: 328px;                                           
+      189 +      margin: 4px auto 0;                                     
+      190      }
+      191    }
+      192 +}                                                             
+      193  
+      148 -  /* ── 手机图：对角放置，部分溢出被 overflow:hidden 裁切 ── *
+          -/                                                             
+      149 -  .phone {                                                    
+      150 -    position: absolute;                                       
+      151 -    z-index: 1;                                               
+      194 +/* ── 手机图片：对角放置，部分溢出 ── */                      
+      195 +.phone {                                                      
+      196 +  position: absolute;                                         
+      197 +  z-index: 1;                                                 
+      198  
+      153 -    img {                                                     
+      154 -      width: 100%;                                            
+      155 -      height: 100%;                                           
+      156 -      object-fit: contain;                                    
+      157 -    }                                                         
+      199 +  img {                                                       
+      200 +    width: 100%;                                              
+      201 +    height: 100%;                                             
+      202 +    object-fit: contain;                                      
+      203 +  }                                                           
+      204  
+      159 -    /* 左侧手机：左上角延伸，transform-origin: bottom right */
+      160 -    &.phone-left {                                            
+      161 -      width: 800px;                                           
+      162 -      height: 1660px;                                         
+      163 -      left: -347px;                                           
+      164 -      top: -1390px;                                           
+      165 -      transform-origin: bottom right;                         
+      205 +  /* 下方手机：从左上角延伸 → 向左旋转：                      
+      206 +     origin-bottom-right 时 -48deg 产生"向左摆"的视觉效果 */  
+      207 +  &.phone-left {                                              
+      208 +    width: 800px;                                             
+      209 +    height: 1660px;                                           
+      210 +    left: -347px;                                             
+      211 +    top: -1390px;                                             
+      212 +    transform-origin: bottom right;                           
+      213  
+      167 -      @include pad { width: 433px; height: 898px; left: -188px
+          -; top: -752px; }                                              
+      168 -      @include mo { width: 580px; height: 1204px; left: -360px
+          -; top: -1000px; }                                             
+      214 +    @include pad {                                            
+      215 +      width: 433px;                                           
+      216 +      height: 898px;                                          
+      217 +      left: -188px;                                           
+      218 +      top: -752px;                                            
+      219      }
+      220 +    @include mo {                                             
+      221 +      width: 580px;                                           
+      222 +      height: 1204px;                                         
+      223 +      left: -360px;                                           
+      224 +      top: -1000px;                                           
+      225 +    }                                                         
+      226 +  }                                                           
+      227  
+      171 -    /* 右侧手机：右下角延伸，transform-origin: top left */    
+      172 -    &.phone-right {                                           
+      173 -      width: 800px;                                           
+      174 -      height: 1660px;                                         
+      175 -      right: -288px;                                          
+      176 -      bottom: -1380px;                                        
+      177 -      transform-origin: top left;                             
+      228 +  /* 上方手机：从右下角延伸 → 向右旋转：                      
+      229 +     origin-top-left 时 48deg 产生"向右摆"的视觉效果 */       
+      230 +  &.phone-right {                                             
+      231 +    width: 800px;                                             
+      232 +    height: 1660px;                                           
+      233 +    right: -288px;                                            
+      234 +    bottom: -1380px;                                          
+      235 +    transform-origin: top left;                               
+      236  
+      179 -      @include pad { width: 433px; height: 898px; right: -156p
+          -x; bottom: -746px; }                                          
+      180 -      @include mo { width: 580px; height: 1204px; right: -342p
+          -x; bottom: -1000px; }                                         
+      237 +    @include pad {                                            
+      238 +      width: 433px;                                           
+      239 +      height: 898px;                                          
+      240 +      right: -156px;                                          
+      241 +      bottom: -746px;                                         
+      242      }
+      243 +    @include mo {                                             
+      244 +      width: 580px;                                           
+      245 +      height: 1204px;                                         
+      246 +      right: -342px;                                          
+      247 +      bottom: -1000px;                                        
+      248 +    }                                                         
+      249    }
+      250  }
+      251  </style>
+● Wait, I need to fix the rotations. Let me re-check the original code — both
+  phones use +48deg, and the different transform-origin values (bottom-right vs
+  top-left) create the visual "right rotation" vs "left rotation" effect.
+
+● Update(src\components\NarrowBezel.vue)
+  ⎿  Added 5 lines, removed 4 lines
+      45        { opacity: 1, duration: 0.5 },
+      46        '-=0.3'
+      47      )
+      48 -    // 4. 上方手机（右侧 phone-right）：向右旋转 + 缩小 + 向中 
+         -间移动                                                         
+      48 +    // 4. 上方手机（phone-right, origin-top-left）：+48deg → 向
+         +右旋转                                                         
+      49 +    //    x 左移、y 上移、缩小 → 最终居中                      
+      50      tl.fromTo(
+      51        phoneRight,
+      52        { rotate: 0, x: 0, y: 0, scale: 1 },
+      53        { rotate: 48, x: -180, y: '-3vh', scale: 0.5, duration: 1
+          , ease: 'none' },
+      54        0
+      55      )
+      55 -    // 5. 下方手机（左侧 phone-left）：向左旋转（同向48deg但 or
+         -igin 不同产生视觉差异）                                        
+      56 -    //    实际使用 -48deg 实现向左旋转的视觉效果               
+      56 +    // 5. 下方手机（phone-left, origin-bottom-right）：+48deg →
+         + 向左旋转                                                      
+      57 +    //    x 右移、y 下移、缩小 → 最终居中                      
+      58      tl.fromTo(
+      59        phoneLeft,
+      60        { rotate: 0, x: 0, y: 0, scale: 1 },
+      60 -      { rotate: -48, x: 180, y: '3vh', scale: 0.5, duration: 1,
+         - ease: 'none' },                                               
+      61 +      { rotate: 48, x: 180, y: '3vh', scale: 0.5, duration: 1, 
+         +ease: 'none' },                                                
+      62        0
+      63      )
+      64    }, sectionRef.value)
+
+● Now let me fix the CSS comments to be clear about which phone is which.
+
+● Update(src\components\NarrowBezel.vue)
+  ⎿  Added 2 lines, removed 2 lines
+      203      object-fit: contain;
+      204    }
+      205  
+      206 -  /* 下方手机：从左上角延伸 → 向左旋转：                      
+      207 -     origin-bottom-right 时 -48deg 产生"向左摆"的视觉效果 */  
+      206 +  /* 下方手机（phone-left）：从左上角延伸，底部可见           
+      207 +     origin-bottom-right + 48deg → 视觉上向左旋转 */          
+      208    &.phone-left {
+      209      width: 800px;
+      210      height: 1660px;
+
+● Update(src\components\NarrowBezel.vue)
+  ⎿  Added 2 lines, removed 2 lines
+      226      }
+      227    }
+      228  
+      229 -  /* 上方手机：从右下角延伸 → 向右旋转：                      
+      230 -     origin-top-left 时 48deg 产生"向右摆"的视觉效果 */       
+      229 +  /* 上方手机（phone-right）：从右下角延伸，顶部可见          
+      230 +     origin-top-left + 48deg → 视觉上向右旋转 */              
+      231    &.phone-right {
+      232      width: 800px;
+      233      height: 1660px;
+
+● Let me verify the final file.
+
+  Read 1 file (ctrl+o to expand)
+
+● Done. Here's a summary of what was changed in NarrowBezel.vue:
+
+  核心变化
+
+  布局结构（匹配原站 sticky + scrub 方案）：
+  - 外层 section height: calc(100vh + 800px) 制造滚动空间
+  - 内层 .sticky-wrapper 用 position: sticky; top: 56px 固定在视口
+  - 内容和手机都放在 sticky 容器中，z-index: 2（文字） > z-index: 1（手机）
+
+  GSAP ScrollTrigger 动画（scrub: 1，滚动驱动）：
+
+  ┌──────┬──────────────────────────┬────────────────────────────────────────┐
+  │ 阶段 │           元素           │                  动画                  │
+  ├──────┼──────────────────────────┼────────────────────────────────────────┤
+  │ 1    │ .main-title              │ scale 1→0.094（128px→~12px），ease:    │
+  │      │                          │ none 线性跟随滚动                      │
+  ├──────┼──────────────────────────┼────────────────────────────────────────┤
+  │ 2    │ .main-title              │ opacity 1→0 淡出                       │
+  ├──────┼──────────────────────────┼────────────────────────────────────────┤
+  │ 3    │ .text-wrapper            │ opacity 0→1 淡入（与标题淡出重叠       │
+  │      │                          │ -=0.3）                                │
+  ├──────┼──────────────────────────┼────────────────────────────────────────┤
+  │ 4    │ .phone-right（上方手机） │ rotate 0→48deg + x -180 + y -3vh +     │
+  │      │                          │ scale 0.5                              │
+  ├──────┼──────────────────────────┼────────────────────────────────────────┤
+  │ 5    │ .phone-left（下方手机）  │ rotate 0→48deg + x 180 + y 3vh + scale │
+  │      │                          │  0.5                                   │
+  └──────┴──────────────────────────┴────────────────────────────────────────┘
+
+  旋转方向的秘密：两个手机都是 +48deg，但因为 transform-origin 不同：
+  - phone-right origin: top left → 视觉向右旋转
+  - phone-left origin: bottom right → 视觉向左旋转
+
+  运行 npm run dev 验证效果。
+
+✻ Cogitated for 3m 29s
+
+❯ 对的 大体动画是对的 ，但是我希望这个屏是一个单独的组件，不要和其他的混为一谈  
+，而且，这个页面给我的感觉为啥不是        <DesignColor />                       
+  ⎿  API Error: Stream ended without receiving any events
+  ⎿  Interrupted · What should Claude do instead?
+
+❯ 对的 大体动画是对的 ，但是我希望这个屏是一个单独的组件，不要和其他的混为一谈  
+，而且，这个页面给我的感觉为啥不是        <DesignColor />                       
+这个组件，一直在这个屏幕中滚动的感觉呢                                          
+
+● 明白了，问题是两个：
+  1. 组件应该是完全自包含的，不依赖外部的 sticky 布局
+  2. 页面没有"钉住"的感觉 — 应该像 DesignColor 那样，滚动时整个 section
+  固定在屏幕上，用户感觉在"这个屏幕内部"滚动
+
+  让我改用 GSAP 的 pin: true 方案，去掉 CSS sticky。
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(src\components\NarrowBezel.vue)
+  ⎿  Added 5 lines, removed 6 lines
+      25        scrollTrigger: {
+      26          trigger: sectionRef.value,
+      27          start: 'top top',
+      28 -        end: 'bottom bottom',                                  
+      28 +        end: '+=800',                                          
+      29          scrub: 1,
+      30 +        pin: true,                                             
+      31        },
+      32      })
+      33  
+      33 -    // 1. 大标题：缩小到 12px 等效（128px * 0.094 ≈ 12px），字 
+         -重减轻                                                         
+      34 +    // 1. 大标题：缩小到 12px 等效（128px * 0.094 ≈ 12px）     
+      35      tl.fromTo(
+      36        mainTitle,
+      37        { scale: 1, opacity: 1 },
+     ...
+      46        { opacity: 1, duration: 0.5 },
+      47        '-=0.3'
+      48      )
+      48 -    // 4. 上方手机（phone-right, origin-top-left）：+48deg → 向
+         -右旋转                                                         
+      49 -    //    x 左移、y 上移、缩小 → 最终居中                      
+      49 +    // 4. 上方手机（phone-right, origin-top-left）：+48deg → 向
+         +右旋转 → 居中                                                  
+      50      tl.fromTo(
+      51        phoneRight,
+      52        { rotate: 0, x: 0, y: 0, scale: 1 },
+      53        { rotate: 48, x: -180, y: '-3vh', scale: 0.5, duration: 1
+          , ease: 'none' },
+      54        0
+      55      )
+      56 -    // 5. 下方手机（phone-left, origin-bottom-right）：+48deg →
+         - 向左旋转                                                      
+      57 -    //    x 右移、y 下移、缩小 → 最终居中                      
+      56 +    // 5. 下方手机（phone-left, origin-bottom-right）：+48deg →
+         + 向左旋转 → 居中                                               
+      57      tl.fromTo(
+      58        phoneLeft,
+      59        { rotate: 0, x: 0, y: 0, scale: 1 },
+
+● Now update the template — remove the sticky wrapper, section itself is the
+  pinned container.
+
+● Update(src\components\NarrowBezel.vue)
+  ⎿  Added 23 lines, removed 27 lines
+       69  </script>
+       70  
+       71  <template>
+       72 -  <!-- 外层足够高以产生滚动空间，sticky 内层固定视口 -->      
+       72 +  <!-- GSAP pin 会将此 section 固定在视口，滚动 800px 驱动动画
+          + -->                                                          
+       73    <section ref="sectionRef" class="narrow-bezel">
+       74 -    <div class="sticky-wrapper">                              
+       75 -      <div class="sticky-content">                            
+       76 -        <!-- 标题：初始大字居中 -->                           
+       77 -        <h2 class="main-title">1.1mm 超窄四等边</h2>          
+       74 +    <!-- 标题：初始大字居中 -->                               
+       75 +    <h2 class="main-title">1.1mm 超窄四等边</h2>              
+       76  
+       79 -        <!-- 副标题：初始隐藏 -->                             
+       80 -        <div class="text-wrapper">                            
+       81 -          <p class="sub-title">窄出手机新高度，满屏精彩框不住 
+          -。</p>                                                        
+       82 -          <p class="desc">                                    
+       83 -            1.1mm 极窄四等边<sup>1</sup>，小屏大视野，观感超惊
+          -艳。一眼望去，满眼都沉浸，满屏皆精彩。                        
+       84 -          </p>                                                
+       85 -        </div>                                                
+       77 +    <!-- 副标题：初始隐藏 -->                                 
+       78 +    <div class="text-wrapper">                                
+       79 +      <p class="sub-title">窄出手机新高度，满屏精彩框不住。</p
+          +>                                                             
+       80 +      <p class="desc">                                        
+       81 +        1.1mm 极窄四等边<sup>1</sup>，小屏大视野，观感超惊艳。
+          +一眼望去，满眼都沉浸，满屏皆精彩。                            
+       82 +      </p>                                                    
+       83 +    </div>                                                    
+       84  
+       87 -        <!-- 上方手机：从右下角伸出，origin-top-left，向右旋转
+          - -->                                                          
+       88 -        <div class="phone phone-right">                       
+       89 -          <img                                                
+       90 -            src="/assets/images/thin/images-thin-phone-0-1-236
+          -6b7.png.webp"                                                 
+       91 -            alt="一加15T 窄边框"                              
+       92 -          />                                                  
+       93 -        </div>                                                
+       85 +    <!-- 上方手机：从右下角伸出，origin-top-left，向右旋转 -->
+       86 +    <div class="phone phone-right">                           
+       87 +      <img                                                    
+       88 +        src="/assets/images/thin/images-thin-phone-0-1-2366b7.
+          +png.webp"                                                     
+       89 +        alt="一加15T 窄边框"                                  
+       90 +      />                                                      
+       91 +    </div>                                                    
+       92  
+       95 -        <!-- 下方手机：从左上角伸出，origin-bottom-right，向左
+          -旋转 -->                                                      
+       96 -        <div class="phone phone-left">                        
+       97 -          <img                                                
+       98 -            src="/assets/images/thin/images-thin-phone-0-1-236
+          -6b7.png.webp"                                                 
+       99 -            alt="一加15T 窄边框"                              
+      100 -          />                                                  
+      101 -        </div>                                                
+      102 -      </div>                                                  
+       93 +    <!-- 下方手机：从左上角伸出，origin-bottom-right，向左旋转
+          + -->                                                          
+       94 +    <div class="phone phone-left">                            
+       95 +      <img                                                    
+       96 +        src="/assets/images/thin/images-thin-phone-0-1-2366b7.
+          +png.webp"                                                     
+       97 +        alt="一加15T 窄边框"                                  
+       98 +      />                                                      
+       99      </div>
+      100    </section>
+      101  </template>
+
+● Now update the SCSS — section is a simple full-viewport container, GSAP
+  handles pinning.
+
+● Update(src\components\NarrowBezel.vue)
+  ⎿  Added 3 lines, removed 17 lines
+      101  </template>
+      102  
+      103  <style scoped lang="scss">
+      104 -/* ── 外层：制造滚动空间 ── */                                
+      104 +/* ── 固定全屏 section，GSAP pin 自动添加 spacer ── */        
+      105  .narrow-bezel {
+      106    width: 100%;
+      107 -  // 足够的高度让 scrub 有滚动量                              
+      108 -  height: calc(100vh + 800px);                                
+      107 +  height: 100vh;                                              
+      108 +  background: $color-white;                                   
+      109    position: relative;
+      110 -}                                                             
+      111 -                                                              
+      112 -/* ── 内层 sticky 容器：固定在视口 ── */                      
+      113 -.sticky-wrapper {                                             
+      114 -  position: sticky;                                           
+      115 -  top: $nav-height;                                           
+      116 -  height: calc(100vh - #{$nav-height});                       
+      110    overflow: hidden;
+      118 -}                                                             
+      119 -                                                              
+      120 -.sticky-content {                                             
+      121 -  position: relative;                                         
+      122 -  width: 100%;                                                
+      123 -  height: 100%;                                               
+      111    display: flex;
+      112    align-items: center;
+      113    justify-content: center;
+      127 -  background: $color-white;                                   
+      114  }
+      115  
+      116  /* ── 大标题：初始居中，随滚动缩小 ── */
+
+● Let me verify the final state.
+
+  Read 1 file (ctrl+o to expand)
+
+● 完成。关键改动：
+
+  之前的问题：用 CSS position: sticky + 外层 height: calc(100vh + 800px)
+  手动撑滚动空间，导致组件和页面布局耦合，没有"钉住感"。
+
+  现在的方案：
+  - 组件是纯 100vh 的 section，GSAP pin: true 自动插入 spacer 撑出 800px
+  滚动距离
+  - scrub: 1 让动画完全跟随滚动，滚动 800px 期间 section 钉在屏幕上
+  - 所有 ScrollTrigger 逻辑在组件内自管理，onUnmounted 清理，和其他组件完全独立
+  - end: '+=800' 匹配原站的行为
+
+  现在滚到 NarrowBezel 时，整个屏幕会"钉住"，用户在 800px
+  滚动范围内看到标题缩小→淡出、副标题淡入、两台手机旋转居中的完整动画。跑 npm 
+  run dev 试一下。
+
+✻ Worked for 55s
+
+❯ 单手轻松拿捏                                                                    ⎿  API Error: Stream ended without receiving any events
+  ⎿  Interrupted · What should Claude do instead?

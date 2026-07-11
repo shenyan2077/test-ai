@@ -1,0 +1,1797 @@
+╭─── Claude Code v2.1.87 ──────────────────────────────────────────────────────╮
+│                                                    │ Tips for getting        │
+│                    Welcome back!                   │ started                 │
+│                                                    │ Run /init to create a … │
+│                       ▐▛███▜▌                      │ ─────────────────────── │
+│                      ▝▜█████▛▘                     │ Recent activity         │
+│                        ▘▘ ▝▝                       │ No recent activity      │
+│                                                    │                         │
+│ corp-dgov/anthropic/deepseek-… · API Usage Billing │                         │
+│              D:\Code\test-ai\test-ai               │                         │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+  ↑ Opus now defaults to 1M context · 5x more room, same pricing
+
+✻ Conversation compacted (ctrl+o for history)
+
+  ⎿  Referenced file C:\Users\LEGION\.claude\projects\D--Code-test-ai-test-ai\92
+     30b90b-91d2-4ef3-971c-469885b2ed3e\tool-results\bagtdf0hp.txt
+  ⎿  Read src\components\DesignColor.vue (309 lines)
+  ⎿  Read src\components\OverviewSection.vue (323 lines)
+  ⎿  Read src\components\HeroSection.vue (244 lines)
+  ⎿  Read src\components\ProductNav.vue (122 lines)
+
+  Read 1 file (ctrl+o to expand)
+
+● 看完了官方"款款都是主打色"区块的 HTML，布局和我们当前的 DesignColor.vue
+  差别比较大。下面是关键对比：
+
+  官方布局结构
+
+  1. 顶部水印标题（不是主标题，是暗水印）
+  - "轻巧的一小部 / 漂亮的一大步"，每个字是 split-char，初始 opacity: 
+  0.15（极淡），随滚动逐渐变亮
+  - 位于顶部居中
+
+  2. 副标题："款款都是主打色"
+  - "款款都是" 灰色 #00000073，"主打色" 黑色，"主打色"四角带两个装饰小 emoji 图
+
+  3. 中间三栏布局（核心差异）
+  [左词]  [手机]  [右词]
+   治愈            白巧
+   松弛            抹茶
+   纯粹            可可
+  - 左右词各 3 个绝对定位，只显示当前配色对应那个
+  - 手机 wrapper 初始 translate(-348px,120px) rotate(45deg) scale(1.5) +
+  origin-left，3 张手机图堆叠切换显隐
+  - 左右词间距 PC 390rpx、pad 211rpx
+
+  4. 配色按钮（横向胶囊，非竖排圆点）
+  - 3 个 bg-[#0000000F] rounded-full 胶囊，每个带图标 + 文字
+  - 顺序：治愈白巧 / 松弛抹茶 / 纯粹可可
+  - 图标：images-color-btn-0/1/2
+
+  5. 底部文案 + 链接
+  - 左侧：3 条配色描述（绝对定位切换）
+    - 治愈白巧：全白小屏机，小屏党的白月光。
+    - 松弛抹茶：超美小直屏，美得清新脱俗。
+    - 纯粹可可：超美小直屏，你的时尚搭子。
+  - 右侧："设计美图大赏" 链接 + 箭头图标 → 打开模态框
+
+  6. 模态框：全屏白底，大图 images-color-big-0/1/2-pc，左右箭头 + 页码 01/03
+
+  与当前 DesignColor.vue 的差异
+
+  ┌──────────┬──────────────────────┬───────────────────────────────────────┐
+  │    项    │         当前         │                 官方                  │
+  ├──────────┼──────────────────────┼───────────────────────────────────────┤
+  │ 背景大字 │ "计美图大赏"（错位） │ 顶部"轻巧的一小部/漂亮的一大步"暗水印 │
+  ├──────────┼──────────────────────┼───────────────────────────────────────┤
+  │ 副标题   │ 无                   │ "款款都是主打色" + 装饰图             │
+  ├──────────┼──────────────────────┼───────────────────────────────────────┤
+  │ 左右词   │ 无                   │ 治愈|白巧 等 3 对                     │
+  ├──────────┼──────────────────────┼───────────────────────────────────────┤
+  │ 配色按钮 │ 竖排圆点（左下角）   │ 横排胶囊（居中，带图标）              │
+  ├──────────┼──────────────────────┼───────────────────────────────────────┤
+  │ 底部描述 │ 无 tooltip 式        │ 每色一句描述 + "设计美图大赏"链接     │
+  ├──────────┼──────────────────────┼───────────────────────────────────────┤
+  │ 模态框   │ 无                   │ 大图浏览 + 翻页                       │
+  ├──────────┼──────────────────────┼───────────────────────────────────────┤
+  │ 手机图   │ 单 img 切 src        │ 3 张堆叠切显隐                        │
+  └──────────┴──────────────────────┴───────────────────────────────────────┘
+
+  要不要我按官方布局重构 DesignColor.vue？这是个较大改动，先确认范围：
+
+● User answered Claude's questions:
+  ⎿  · DesignColor.vue 要按官方布局重构到什么程度？ → 布局对齐，保留动效
+
+● 好的，布局对齐官方 + 保留你已调好的 GSAP 动效。先确认下 color/
+  目录里有哪些素材可用。
+
+  Read 1 file (ctrl+o to expand)
+
+● 所需素材齐全（btn-0/1/2 图标、arrow 箭头、color-0/1
+  装饰图、phone-0/1/2）。现在重构 DesignColor.vue：布局对齐官方（顶部水印+副标题
+  +左右词对+横向胶囊按钮+底部描述+设计美图大赏链接），保留你调好的 GSAP
+  手机动效参数。
+
+● Write(src\components\DesignColor.vue)
+  ⎿  Added 322 lines, removed 121 lines
+      1  <!--
+      2    设计与配色：GSAP 滚动时间轴 + 配色点击切换
+      3 -  极简纯白留白 / 黑白低饱和 / 轻奢干净数码产品海报风            
+      3 +  对齐官方"款款都是主打色"布局：顶部水印标题 + 副标题 + 左右词对
+        + + 手机 + 横向胶囊按钮 + 底部描述 + 设计美图大赏链接            
+      4  -->
+      5  <script setup>
+      6  import { ref, watch, onMounted, onUnmounted } from 'vue'
+     ...
+      11  
+      12  /* ── 模板引用 ── */
+      13  const containerRef = ref(null)
+      14 -const mainTitleRef = ref(null)                                 
+      14 +const watermarkRef = ref(null)                                 
+      15 +const subtitleRef = ref(null)                                  
+      16 +const leftWordsRef = ref(null)                                 
+      17 +const rightWordsRef = ref(null)                                
+      18  const phoneImgRef = ref(null)
+      16 -const bgTextRef = ref(null)                                    
+      17 -const uiControlsRef = ref(null)                                
+      18 -const tooltipRef = ref(null)                                   
+      19 +const buttonsRef = ref(null)                                   
+      20 +const bottomRef = ref(null)                                    
+      21  
+      20 -/* 三种配色，点击切换图片 */                                   
+      22 +/* 三种配色：顺序/图片映射对齐官方                             
+      23 +   0 治愈白巧 -> phone-1(白)  1 松弛抹茶 -> phone-2(绿)  2 纯粹
+         +可可 -> phone-0(棕) */                                         
+      24  const colors = [
+      22 -  { name: '治愈白巧', dot: '#F0EDE6', image: '/assets/images/co
+         -lor/images-color-phone-1-1-84e994.png' },                      
+      23 -  { name: '纯粹可可', dot: '#5D4E3A', image: '/assets/images/co
+         -lor/images-color-phone-0-1-1f753e.png' },                      
+      24 -  { name: '松弛抹茶', dot: '#A3B59A', image: '/assets/images/co
+         -lor/images-color-phone-2-1-372a9d.png' },                      
+      25 +  {                                                            
+      26 +    name: '治愈白巧',                                          
+      27 +    leftWord: '治愈',                                          
+      28 +    rightWord: '白巧',                                         
+      29 +    desc: '全白小屏机，小屏党的白月光。',                      
+      30 +    btnIcon: '/assets/images/color/images-color-btn-0-1-076a57.
+         +png.webp',                                                     
+      31 +    image: '/assets/images/color/images-color-phone-1-1-84e994.
+         +png',                                                          
+      32 +  },                                                           
+      33 +  {                                                            
+      34 +    name: '松弛抹茶',                                          
+      35 +    leftWord: '松弛',                                          
+      36 +    rightWord: '抹茶',                                         
+      37 +    desc: '超美小直屏，美得清新脱俗。',                        
+      38 +    btnIcon: '/assets/images/color/images-color-btn-1-1-cd2823.
+         +png.webp',                                                     
+      39 +    image: '/assets/images/color/images-color-phone-2-1-372a9d.
+         +png',                                                          
+      40 +  },                                                           
+      41 +  {                                                            
+      42 +    name: '纯粹可可',                                          
+      43 +    leftWord: '纯粹',                                          
+      44 +    rightWord: '可可',                                         
+      45 +    desc: '超美小直屏，你的时尚搭子。',                        
+      46 +    btnIcon: '/assets/images/color/images-color-btn-2-1-d5aa74.
+         +png.webp',                                                     
+      47 +    image: '/assets/images/color/images-color-phone-0-1-1f753e.
+         +png',                                                          
+      48 +  },                                                           
+      49  ]
+      50  const currentColor = ref(0)
+      51  
+     ...
+      75        },
+      76      })
+      77  
+      54 -    // ── 1. 主标题上移 100px + 淡出 ──                        
+      55 -    tl.to(mainTitleRef.value, {                                
+      56 -      y: -100,                                                 
+      78 +    // ── 1. 水印标题渐入（CSS 文字 0.15 亮度，容器 0->1）──   
+      79 +    tl.fromTo(watermarkRef.value, {                            
+      80        opacity: 0,
+      81 +    }, {                                                       
+      82 +      opacity: 1,                                              
+      83        duration: 0.3,
+      84        ease: 'power2.out',
+      85      }, 0)
+      61 -    //    同时手机缩放旋转位移                                 
+      86 +                                                               
+      87 +    // ── 2. 手机缩放旋转位移（用户调好的参数，保持不变）──    
+      88      tl.fromTo(phoneImgRef.value, {
+      89        scale: 3,
+      90        rotation: 45,
+     ...
+      101        ease: 'power2.out',
+      102      }, 0)
+      103  
+       78 -    // ── 2. 背景大字缩放渐入 ──                              
+       79 -    tl.fromTo(bgTextRef.value, {                              
+       80 -      scale: 0.8,                                             
+      104 +    // ── 3. 副标题"款款都是主打色"上移渐入 ──                
+      105 +    tl.fromTo(subtitleRef.value, {                            
+      106 +      y: 30,                                                  
+      107        opacity: 0,
+      108      }, {
+       83 -      scale: 1,                                               
+      109 +      y: 0,                                                   
+      110        opacity: 1,
+      111        duration: 0.3,
+      112        ease: 'power2.out',
+      113      })
+      114  
+       89 -    // ── 3. 底部 UI 上移渐入 ──                              
+       90 -    tl.fromTo(uiControlsRef.value, {                          
+      115 +    // ── 4. 左右词对渐入 ──                                  
+      116 +    tl.fromTo([leftWordsRef.value, rightWordsRef.value], {    
+      117 +      opacity: 0,                                             
+      118 +    }, {                                                      
+      119 +      opacity: 1,                                             
+      120 +      duration: 0.3,                                          
+      121 +      ease: 'power2.out',                                     
+      122 +    })                                                        
+      123 +                                                              
+      124 +    // ── 5. 配色胶囊按钮上移渐入 ──                          
+      125 +    tl.fromTo(buttonsRef.value, {                             
+      126        y: 30,
+      127        opacity: 0,
+      128      }, {
+     ...
+      132        ease: 'power2.out',
+      133      })
+      134  
+      100 -    // ── 4. 气泡弹跳渐入 ──                                  
+      101 -    tl.fromTo(tooltipRef.value, {                             
+      102 -      scale: 0,                                               
+      135 +    // ── 6. 底部描述+设计美图大赏链接上移渐入 ──             
+      136 +    tl.fromTo(bottomRef.value, {                              
+      137 +      y: 30,                                                  
+      138        opacity: 0,
+      139      }, {
+      105 -      scale: 1,                                               
+      140 +      y: 0,                                                   
+      141        opacity: 1,
+      142        duration: 0.2,
+      108 -      ease: 'back.out(1.7)',                                  
+      143 +      ease: 'power2.out',                                     
+      144      })
+      145    }, containerRef.value)
+      146  })
+     ...
+      152  
+      153  <template>
+      154    <section ref="containerRef" class="design-color">
+      120 -    <!-- 背景大字：缩放渐入，z-index 最低 -->                 
+      121 -    <div ref="bgTextRef" class="bg-text">                     
+      122 -      <span class="bg-text-word">计美图大赏</span>            
+      155 +    <!-- 顶部：水印标题 + 副标题"款款都是主打色" -->          
+      156 +    <div class="top-area">                                    
+      157 +      <div ref="watermarkRef" class="watermark">              
+      158 +        <p class="wm-line">轻巧的一小部</p>                   
+      159 +        <p class="wm-line">漂亮的一大步</p>                   
+      160 +      </div>                                                  
+      161 +      <div ref="subtitleRef" class="subtitle">                
+      162 +        <span class="sub-gray">款款都是</span>                
+      163 +        <span class="sub-black">                              
+      164 +          主打色                                              
+      165 +          <img class="emoji emoji-left" src="/assets/images/co
+          +lor/images-color-0-1-9d200e.png.webp" alt="" />               
+      166 +          <img class="emoji emoji-right" src="/assets/images/c
+          +olor/images-color-1-1-14637e.png.webp" alt="" />              
+      167 +        </span>                                               
+      168 +      </div>                                                  
+      169      </div>
+      170  
+      125 -    <!-- 前景手机图：GSAP 缩放旋转，点击按钮切换图片 -->      
+      171 +    <!-- 中间三栏：左词 | 手机 | 右词 -->                     
+      172 +    <div ref="leftWordsRef" class="left-words">               
+      173 +      <span                                                   
+      174 +        v-for="(c, i) in colors"                              
+      175 +        :key="i"                                              
+      176 +        class="word"                                          
+      177 +        :class="{ active: currentColor === i }"               
+      178 +      >{{ c.leftWord }}</span>                                
+      179 +    </div>                                                    
+      180 +                                                              
+      181      <div class="phone-stage">
+      182        <img
+      183          ref="phoneImgRef"
+     ...
+      187        />
+      188      </div>
+      189  
+      135 -    <!-- 主标题：滚动后上移淡出 -->                           
+      136 -    <div ref="mainTitleRef" class="main-title">               
+      137 -      <p class="title-line">轻巧的一小部</p>                  
+      138 -      <p class="title-line">漂亮的一大步</p>                  
+      190 +    <div ref="rightWordsRef" class="right-words">             
+      191 +      <span                                                   
+      192 +        v-for="(c, i) in colors"                              
+      193 +        :key="i"                                              
+      194 +        class="word"                                          
+      195 +        :class="{ active: currentColor === i }"               
+      196 +      >{{ c.rightWord }}</span>                               
+      197      </div>
+      198  
+      141 -    <!-- 底部左侧 UI：配色切换按钮 -->                        
+      142 -    <div ref="uiControlsRef" class="ui-controls">             
+      199 +    <!-- 横向胶囊按钮 -->                                     
+      200 +    <div ref="buttonsRef" class="color-buttons">              
+      201        <button
+      202          v-for="(c, i) in colors"
+      203          :key="i"
+      146 -        class="color-btn"                                     
+      204 +        class="color-pill"                                    
+      205          :class="{ active: currentColor === i }"
+      206          @click="currentColor = i"
+      207        >
+      150 -        <span class="color-dot" :style="{ background: c.dot }"
+          -></span>                                                      
+      151 -        <span class="color-name">{{ c.name }}</span>          
+      208 +        <img class="pill-icon" :src="c.btnIcon" :alt="c.name" 
+          +/>                                                            
+      209 +        <span class="pill-text">{{ c.name }}</span>           
+      210        </button>
+      211      </div>
+      212  
+      155 -    <!-- 气泡提示：弹跳渐入 -->                               
+      156 -    <div ref="tooltipRef" class="tooltip">                    
+      157 -      <span class="tooltip-text">{{ colors[currentColor].name 
+          -}}</span>                                                     
+      158 -      <span class="tooltip-arrow"></span>                     
+      213 +    <!-- 底部：配色描述（左）+ 设计美图大赏链接（右） -->     
+      214 +    <div ref="bottomRef" class="bottom-bar">                  
+      215 +      <div class="bottom-desc">                               
+      216 +        <div                                                  
+      217 +          v-for="(c, i) in colors"                            
+      218 +          :key="i"                                            
+      219 +          class="desc-item"                                   
+      220 +          :class="{ active: currentColor === i }"             
+      221 +        >                                                     
+      222 +          <p class="desc-title">{{ c.desc }}</p>              
+      223 +        </div>                                                
+      224 +      </div>                                                  
+      225 +      <div class="modal-link">                                
+      226 +        <img class="link-arrow" src="/assets/images/color/imag
+          +es-color-arrow-1-6af15e.png.webp" alt="" />                   
+      227 +        <span>设计美图大赏</span>                             
+      228 +      </div>                                                  
+      229      </div>
+      230    </section>
+      231  </template>
+     ...
+      238    position: relative;
+      239    overflow: hidden;
+      240  
+      171 -  /* ── 背景大字：居中，z-index:1（最底层）── */              
+      172 -  .bg-text {                                                  
+      241 +  /* ── 顶部区域：水印 + 副标题 ── */                         
+      242 +  .top-area {                                                 
+      243      position: absolute;
+      174 -    top: 50%;                                                 
+      244 +    top: 10vh;                                                
+      245      left: 50%;
+      176 -    transform: translate(-50%, -50%);                         
+      177 -    z-index: 1;                                               
+      178 -    pointer-events: none;                                     
+      179 -    white-space: nowrap;                                      
+      246 +    transform: translateX(-50%);                              
+      247 +    text-align: center;                                       
+      248 +    z-index: 3;                                               
+      249 +    width: max-content;                                       
+      250  
+      181 -    .bg-text-word {                                           
+      182 -      font-size: 200px;                                       
+      183 -      font-weight: 800;                                       
+      184 -      color: rgba(0, 0, 0, 0.04);                             
+      185 -      letter-spacing: 10px;                                   
+      251 +    .watermark {                                              
+      252 +      .wm-line {                                              
+      253 +        font-size: 64px;                                      
+      254 +        font-weight: 700;                                     
+      255 +        line-height: 1.2;                                     
+      256 +        color: $color-black;                                  
+      257 +        opacity: 0.15;                                        
+      258 +        letter-spacing: 2px;                                  
+      259  
+      187 -      @include pad { font-size: 120px; }                      
+      188 -      @include mo { font-size: 72px; }                        
+      260 +        @include pad { font-size: 36px; }                     
+      261 +        @include mo { font-size: 28px; }                      
+      262 +      }                                                       
+      263      }
+      264 +                                                              
+      265 +    .subtitle {                                               
+      266 +      margin-top: 24px;                                       
+      267 +      font-size: 48px;                                        
+      268 +      font-weight: 500;                                       
+      269 +      line-height: 1.2;                                       
+      270 +      position: relative;                                     
+      271 +                                                              
+      272 +      @include pad { font-size: 26px; margin-top: 16px; }     
+      273 +      @include mo { font-size: 24px; margin-top: 12px; }      
+      274 +                                                              
+      275 +      .sub-gray {                                             
+      276 +        color: rgba(0, 0, 0, 0.45);                           
+      277 +      }                                                       
+      278 +                                                              
+      279 +      .sub-black {                                            
+      280 +        color: $color-black;                                  
+      281 +        position: relative;                                   
+      282 +                                                              
+      283 +        .emoji {                                              
+      284 +          position: absolute;                                 
+      285 +          width: 41px;                                        
+      286 +          height: 41px;                                       
+      287 +          object-fit: contain;                                
+      288 +                                                              
+      289 +          @include pad { width: 24px; height: 24px; }         
+      290 +          @include mo { width: 24px; height: 24px; }          
+      291 +                                                              
+      292 +          &.emoji-left {                                      
+      293 +            bottom: -13px;                                    
+      294 +            left: -22px;                                      
+      295 +                                                              
+      296 +            @include mo { bottom: -11px; left: -9px; }        
+      297 +          }                                                   
+      298 +                                                              
+      299 +          &.emoji-right {                                     
+      300 +            top: -18px;                                       
+      301 +            right: -16px;                                     
+      302 +                                                              
+      303 +            @include mo { top: -12px; right: -12px; }         
+      304 +          }                                                   
+      305 +        }                                                     
+      306 +      }                                                       
+      307 +    }                                                         
+      308    }
+      309  
+      192 -  /* ── 手机展示：用 GSAP xPercent/yPercent 居中 ── */        
+      310 +  /* ── 左词：手机左侧，3 词绝对定位切换 ── */                
+      311 +  .left-words {                                               
+      312 +    position: absolute;                                       
+      313 +    top: 50%;                                                 
+      314 +    left: 18%;                                                
+      315 +    transform: translateY(-50%);                              
+      316 +    z-index: 3;                                               
+      317 +    width: 300px;                                             
+      318 +    height: 140px;                                            
+      319 +                                                              
+      320 +    @include pad { left: 10%; width: 180px; height: 90px; }   
+      321 +    @include mo { left: 8%; width: 100px; height: 56px; }     
+      322 +                                                              
+      323 +    .word {                                                   
+      324 +      position: absolute;                                     
+      325 +      top: 0;                                                 
+      326 +      left: 0;                                                
+      327 +      font-size: 140px;                                       
+      328 +      font-weight: 700;                                       
+      329 +      color: $color-black;                                    
+      330 +      opacity: 0;                                             
+      331 +      transition: opacity 0.4s ease;                          
+      332 +      letter-spacing: 5px;                                    
+      333 +      white-space: nowrap;                                    
+      334 +                                                              
+      335 +      &.active { opacity: 1; }                                
+      336 +                                                              
+      337 +      @include pad { font-size: 80px; }                       
+      338 +      @include mo { font-size: 48px; }                        
+      339 +    }                                                         
+      340 +  }                                                           
+      341 +                                                              
+      342 +  /* ── 右词：手机右侧，3 词绝对定位切换 ── */                
+      343 +  .right-words {                                              
+      344 +    position: absolute;                                       
+      345 +    top: 50%;                                                 
+      346 +    right: 18%;                                               
+      347 +    transform: translateY(-50%);                              
+      348 +    z-index: 3;                                               
+      349 +    width: 300px;                                             
+      350 +    height: 140px;                                            
+      351 +                                                              
+      352 +    @include pad { right: 10%; width: 180px; height: 90px; }  
+      353 +    @include mo { right: 8%; width: 100px; height: 56px; }    
+      354 +                                                              
+      355 +    .word {                                                   
+      356 +      position: absolute;                                     
+      357 +      top: 0;                                                 
+      358 +      right: 0;                                               
+      359 +      font-size: 140px;                                       
+      360 +      font-weight: 700;                                       
+      361 +      color: $color-black;                                    
+      362 +      opacity: 0;                                             
+      363 +      transition: opacity 0.4s ease;                          
+      364 +      letter-spacing: 5px;                                    
+      365 +      white-space: nowrap;                                    
+      366 +                                                              
+      367 +      &.active { opacity: 1; }                                
+      368 +                                                              
+      369 +      @include pad { font-size: 80px; }                       
+      370 +      @include mo { font-size: 48px; }                        
+      371 +    }                                                         
+      372 +  }                                                           
+      373 +                                                              
+      374 +  /* ── 手机展示：GSAP xPercent/yPercent 居中 ── */           
+      375    .phone-stage {
+      376      position: absolute;
+      377      top: 50%;
+     ...
+      390      }
+      391    }
+      392  
+      211 -  /* ── 主标题：上方居中，z-index:3 ── */                     
+      212 -  .main-title {                                               
+      393 +  /* ── 横向胶囊按钮 ── */                                    
+      394 +  .color-buttons {                                            
+      395      position: absolute;
+      214 -    top: 14vh;                                                
+      396 +    bottom: 16vh;                                             
+      397      left: 50%;
+      398      transform: translateX(-50%);
+      217 -    text-align: center;                                       
+      218 -    z-index: 3;                                               
+      219 -                                                              
+      220 -    .title-line {                                             
+      221 -      font-size: 64px;                                        
+      222 -      font-weight: 700;                                       
+      223 -      line-height: 1.25;                                      
+      224 -      color: $color-black;                                    
+      225 -      letter-spacing: 2px;                                    
+      226 -                                                              
+      227 -      @include pad { font-size: 36px; }                       
+      228 -      @include mo { font-size: 28px; }                        
+      229 -    }                                                         
+      230 -  }                                                           
+      231 -                                                              
+      232 -  /* ── 底部左侧 UI：配色切换按钮 ── */                       
+      233 -  .ui-controls {                                              
+      234 -    position: absolute;                                       
+      235 -    bottom: 8vh;                                              
+      236 -    left: 64px;                                               
+      399      display: flex;
+      238 -    flex-direction: column;                                   
+      239 -    gap: 20px;                                                
+      400 +    gap: 6px;                                                 
+      401      z-index: 3;
+      402  
+      242 -    @include mo { left: 24px; gap: 16px; }                    
+      403 +    @include pad { gap: 3px; }                                
+      404 +    @include mo { gap: 4px; bottom: 14vh; }                   
+      405  
+      244 -    .color-btn {                                              
+      406 +    .color-pill {                                             
+      407        display: flex;
+      408        align-items: center;
+      247 -      gap: 12px;                                              
+      248 -      cursor: pointer;                                        
+      249 -      background: none;                                       
+      409 +      gap: 8px;                                               
+      410 +      padding: 14px;                                          
+      411 +      background: rgba(0, 0, 0, 0.06);                        
+      412 +      border-radius: 999px;                                   
+      413        border: none;
+      251 -      padding: 0;                                             
+      252 -      opacity: 0.4;                                           
+      414 +      cursor: pointer;                                        
+      415 +      opacity: 0.5;                                           
+      416        transition: opacity 0.2s ease;
+      417  
+      418        &.active { opacity: 1; }
+      419  
+      257 -      .color-dot {                                            
+      258 -        width: 20px;                                          
+      259 -        height: 20px;                                         
+      260 -        border-radius: 50%;                                   
+      261 -        border: 1px solid rgba(0, 0, 0, 0.1);                 
+      262 -        flex-shrink: 0;                                       
+      420 +      @include pad { padding: 8px; gap: 4px; }                
+      421 +      @include mo { padding: 7px; gap: 6px; }                 
+      422  
+      264 -        @include mo { width: 16px; height: 16px; }            
+      423 +      .pill-icon {                                            
+      424 +        width: 32px;                                          
+      425 +        height: 32px;                                         
+      426 +        object-fit: contain;                                  
+      427 +                                                              
+      428 +        @include pad { width: 17px; height: 17px; }           
+      429 +        @include mo { width: 24px; height: 24px; }            
+      430        }
+      431  
+      267 -      .color-name {                                           
+      268 -        font-size: 14px;                                      
+      269 -        color: $color-text-primary;                           
+      432 +      .pill-text {                                            
+      433 +        font-size: 16px;                                      
+      434 +        font-weight: 500;                                     
+      435 +        color: $color-black;                                  
+      436          white-space: nowrap;
+      437  
+      438 +        @include pad { font-size: 9px; }                      
+      439          @include mo { font-size: 12px; }
+      440        }
+      441      }
+      442    }
+      443  
+      277 -  /* ── 气泡提示：z-index:4（最顶层）── */                    
+      278 -  .tooltip {                                                  
+      444 +  /* ── 底部：描述 + 设计美图大赏链接 ── */                   
+      445 +  .bottom-bar {                                               
+      446      position: absolute;
+      280 -    bottom: calc(8vh + 90px);                                 
+      281 -    left: 74px;                                               
+      282 -    z-index: 4;                                               
+      283 -    pointer-events: none;                                     
+      447 +    bottom: 6vh;                                              
+      448 +    left: 64px;                                               
+      449 +    right: 64px;                                              
+      450 +    display: flex;                                            
+      451 +    justify-content: space-between;                           
+      452 +    align-items: center;                                      
+      453 +    z-index: 3;                                               
+      454  
+      285 -    @include mo { left: 34px; }                               
+      455 +    @include pad { left: 24px; right: 24px; }                 
+      456 +    @include mo { left: 16px; right: 16px; }                  
+      457  
+      287 -    .tooltip-text {                                           
+      288 -      display: inline-block;                                  
+      289 -      padding: 6px 16px;                                      
+      290 -      background: $color-black;                               
+      291 -      color: $color-white;                                    
+      292 -      font-size: 13px;                                        
+      293 -      border-radius: 20px;                                    
+      294 -      white-space: nowrap;                                    
+      458 +    .bottom-desc {                                            
+      459 +      position: relative;                                     
+      460 +      height: 40px;                                           
+      461 +      width: 300px;                                           
+      462 +                                                              
+      463 +      @include mo { width: 180px; height: 36px; }             
+      464 +                                                              
+      465 +      .desc-item {                                            
+      466 +        position: absolute;                                   
+      467 +        top: 0;                                               
+      468 +        left: 0;                                              
+      469 +        opacity: 0;                                           
+      470 +        transition: opacity 0.4s ease;                        
+      471 +                                                              
+      472 +        &.active { opacity: 1; }                              
+      473 +                                                              
+      474 +        .desc-title {                                         
+      475 +          font-size: 18px;                                    
+      476 +          font-weight: 500;                                   
+      477 +          color: $color-black;                                
+      478 +          line-height: 1.4;                                   
+      479 +                                                              
+      480 +          @include pad { font-size: 12px; }                   
+      481 +          @include mo { font-size: 12px; }                    
+      482 +        }                                                     
+      483 +      }                                                       
+      484      }
+      485  
+      297 -    .tooltip-arrow {                                          
+      298 -      display: block;                                         
+      299 -      width: 0;                                               
+      300 -      height: 0;                                              
+      301 -      margin-top: -1px;                                       
+      302 -      border-left: 6px solid transparent;                     
+      303 -      border-right: 6px solid transparent;                    
+      304 -      border-bottom: 6px solid $color-black;                  
+      486 +    .modal-link {                                             
+      487 +      display: flex;                                          
+      488 +      align-items: center;                                    
+      489 +      gap: 12px;                                              
+      490 +      cursor: pointer;                                        
+      491 +      font-size: 16px;                                        
+      492 +      color: $color-black;                                    
+      493 +      white-space: nowrap;                                    
+      494 +                                                              
+      495 +      @include pad { gap: 6px; font-size: 9px; }              
+      496 +      @include mo { gap: 6px; font-size: 12px; }              
+      497 +                                                              
+      498 +      .link-arrow {                                           
+      499 +        width: 30px;                                          
+      500 +        height: 30px;                                         
+      501 +        object-fit: contain;                                  
+      502 +                                                              
+      503 +        @include pad { width: 17px; height: 17px; }           
+      504 +        @include mo { width: 18px; height: 18px; }            
+      505 +      }                                                       
+      506      }
+      507    }
+      508  }
+
+● 重构完成。改动总结：
+
+  布局对齐官方"款款都是主打色"：
+  - 顶部：水印标题"轻巧的一小部/漂亮的一大步"（opacity: 0.15 暗水印）+
+  副标题"款款都是主打色"（灰+黑双色，"主打色"四角带 2 个装饰 emoji 图）
+  - 中间三栏：左词（治愈/松弛/纯粹）｜手机｜右词（白巧/抹茶/可可），3
+  词绝对定位，当前配色对应那个 opacity:1，其余 0，CSS transition 切换
+  - 配色按钮：横向胶囊（bg: rgba(0,0,0,0.06) 圆角 999px），带图标+文字，3
+  个居中排列
+  - 底部：左侧配色描述（3 条切换）+ 右侧"设计美图大赏"链接带箭头图标
+
+  配色映射对齐官方：
+  - 0 治愈白巧 → phone-1（白）
+  - 1 松弛抹茶 → phone-2（绿）
+  - 2 纯粹可可 → phone-0（棕）
+  （之前 1/2 顺序是反的，已修正）
+
+  保留的动效（你调好的参数原样不动）：
+  - 手机 scale:3→2, rotation:45→10, y:800→300, xPercent:-70→-20, yPercent:-50
+  - ScrollTrigger pin:true, scrub:1, end:'+=1500'
+  - watch(currentColor) 图片淡入切换
+
+  移除的旧元素：背景大字"计美图大赏"、竖排圆点按钮、tooltip
+  气泡（均已替换为官方对应元素）。
+
+  未做模态框（按你选的"布局对齐，保留动效"范围）。需要的话可以再加。
+
+✻ Brewed for 4m 21s
+
+❯ 款款都是 主打色这几个字是在大概左上角的位置，你可以在读取一下源html,还有整体  
+的背景颜色是一个渐变色，渐变色的色系和下方按钮里面的色系差不多                  
+
+  Read 1 file (ctrl+o to expand)
+
+● 看清楚了官方结构。两个关键点：
+
+  1. "款款都是主打色"在左上角：官方 HTML 里水印"轻巧的一小部/漂亮的一大步"是
+  absolute top-0 
+  left-[50%]（顶部居中），而副标题"款款都是主打色"是正常流第一个元素、flex
+  左对齐 + mt-45rpx，所以它在内容区左上角，不是居中。
+  2. 渐变背景：官方有 color-bg 全屏 absolute div（line 1327），是 after-box 初始
+   opacity:0 随滚动渐入。色系你说和按钮配色差不多（白巧/抹茶/可可色调）。
+
+  更新代码：
+
+● Update(src\components\DesignColor.vue)
+  ⎿  Added 1 line
+      11  
+      12  /* ── 模板引用 ── */
+      13  const containerRef = ref(null)
+      14 +const colorBgRef = ref(null)                                   
+      15  const watermarkRef = ref(null)
+      16  const subtitleRef = ref(null)
+      17  const leftWordsRef = ref(null)
+
+● Update(src\components\DesignColor.vue)
+  ⎿  Added 11 lines
+      76        },
+      77      })
+      78  
+      79 +    // ── 0. 渐变背景上移渐入 ──                               
+      80 +    tl.fromTo(colorBgRef.value, {                              
+      81 +      opacity: 0,                                              
+      82 +      y: 100,                                                  
+      83 +    }, {                                                       
+      84 +      opacity: 1,                                              
+      85 +      y: 0,                                                    
+      86 +      duration: 0.4,                                           
+      87 +      ease: 'power2.out',                                      
+      88 +    }, 0)                                                      
+      89 +                                                               
+      90      // ── 1. 水印标题渐入（CSS 文字 0.15 亮度，容器 0->1）──
+      91      tl.fromTo(watermarkRef.value, {
+      92        opacity: 0,
+
+● 现在更新模板 - 将顶部区域分离为渐变背景、居中水印和左上角副标题：
+
+● Update(src\components\DesignColor.vue)
+  ⎿  Added 17 lines, removed 14 lines
+      164  
+      165  <template>
+      166    <section ref="containerRef" class="design-color">
+      167 -    <!-- 顶部：水印标题 + 副标题"款款都是主打色" -->          
+      168 -    <div class="top-area">                                    
+      169 -      <div ref="watermarkRef" class="watermark">              
+      170 -        <p class="wm-line">轻巧的一小部</p>                   
+      171 -        <p class="wm-line">漂亮的一大步</p>                   
+      172 -      </div>                                                  
+      173 -      <div ref="subtitleRef" class="subtitle">                
+      174 -        <span class="sub-gray">款款都是</span>                
+      175 -        <span class="sub-black">                              
+      176 -          主打色                                              
+      177 -          <img class="emoji emoji-left" src="/assets/images/co
+          -lor/images-color-0-1-9d200e.png.webp" alt="" />               
+      178 -          <img class="emoji emoji-right" src="/assets/images/c
+          -olor/images-color-1-1-14637e.png.webp" alt="" />              
+      179 -        </span>                                               
+      180 -      </div>                                                  
+      167 +    <!-- 渐变背景：色系对齐按钮配色（白巧/抹茶/可可），随滚动 
+          +渐入 -->                                                      
+      168 +    <div ref="colorBgRef" class="color-bg"></div>             
+      169 +                                                              
+      170 +    <!-- 顶部水印标题：居中 -->                               
+      171 +    <div ref="watermarkRef" class="watermark">                
+      172 +      <p class="wm-line">轻巧的一小部</p>                     
+      173 +      <p class="wm-line">漂亮的一大步</p>                     
+      174      </div>
+      175  
+      176 +    <!-- 副标题"款款都是主打色"：左上角 -->                   
+      177 +    <div ref="subtitleRef" class="subtitle">                  
+      178 +      <span class="sub-gray">款款都是</span>                  
+      179 +      <span class="sub-black">                                
+      180 +        主打色                                                
+      181 +        <img class="emoji emoji-left" src="/assets/images/colo
+          +r/images-color-0-1-9d200e.png.webp" alt="" />                 
+      182 +        <img class="emoji emoji-right" src="/assets/images/col
+          +or/images-color-1-1-14637e.png.webp" alt="" />                
+      183 +      </span>                                                 
+      184 +    </div>                                                    
+      185 +                                                              
+      186      <!-- 中间三栏：左词 | 手机 | 右词 -->
+      187      <div ref="leftWordsRef" class="left-words">
+      188        <span
+● 现在更新 CSS - 替换 .top-area
+  代码块，分开水印（居中）和副标题（左上角），添加渐变背景，将区域背景设为透明：
+
+● Update(src\components\DesignColor.vue)
+  ⎿  Added 55 lines, removed 46 lines
+      249  .design-color {
+      250    width: 100%;
+      251    height: 100vh;
+      252 -  background: $color-white;                                   
+      252 +  background: transparent;                                    
+      253    position: relative;
+      254    overflow: hidden;
+      255  
+      256 -  /* ── 顶部区域：水印 + 副标题 ── */                         
+      257 -  .top-area {                                                 
+      256 +  /* ── 渐变背景：色系对齐按钮配色（白巧/抹茶/可可）── */     
+      257 +  .color-bg {                                                 
+      258      position: absolute;
+      259 +    inset: 0;                                                 
+      260 +    z-index: 0;                                               
+      261 +    background: linear-gradient(180deg, #F0EDE6 0%, #E2E3D4 45
+          +%, #C8D0BE 100%);                                             
+      262 +    pointer-events: none;                                     
+      263 +  }                                                           
+      264 +                                                              
+      265 +  /* ── 水印标题：顶部居中 ── */                              
+      266 +  .watermark {                                                
+      267 +    position: absolute;                                       
+      268      top: 10vh;
+      269      left: 50%;
+      270      transform: translateX(-50%);
+      271      text-align: center;
+      272      z-index: 3;
+      264 -    width: max-content;                                       
+      273  
+      266 -    .watermark {                                              
+      267 -      .wm-line {                                              
+      268 -        font-size: 64px;                                      
+      269 -        font-weight: 700;                                     
+      270 -        line-height: 1.2;                                     
+      271 -        color: $color-black;                                  
+      272 -        opacity: 0.15;                                        
+      273 -        letter-spacing: 2px;                                  
+      274 +    .wm-line {                                                
+      275 +      font-size: 64px;                                        
+      276 +      font-weight: 700;                                       
+      277 +      line-height: 1.2;                                       
+      278 +      color: $color-black;                                    
+      279 +      opacity: 0.15;                                          
+      280 +      letter-spacing: 2px;                                    
+      281  
+      275 -        @include pad { font-size: 36px; }                     
+      276 -        @include mo { font-size: 28px; }                      
+      277 -      }                                                       
+      282 +      @include pad { font-size: 36px; }                       
+      283 +      @include mo { font-size: 28px; }                        
+      284      }
+      285 +  }                                                           
+      286  
+      280 -    .subtitle {                                               
+      281 -      margin-top: 24px;                                       
+      282 -      font-size: 48px;                                        
+      283 -      font-weight: 500;                                       
+      284 -      line-height: 1.2;                                       
+      285 -      position: relative;                                     
+      287 +  /* ── 副标题"款款都是主打色"：左上角 ── */                  
+      288 +  .subtitle {                                                 
+      289 +    position: absolute;                                       
+      290 +    top: 14vh;                                                
+      291 +    left: 64px;                                               
+      292 +    z-index: 3;                                               
+      293 +    font-size: 48px;                                          
+      294 +    font-weight: 500;                                         
+      295 +    line-height: 1.2;                                         
+      296  
+      287 -      @include pad { font-size: 26px; margin-top: 16px; }     
+      288 -      @include mo { font-size: 24px; margin-top: 12px; }      
+      297 +    @include pad { font-size: 26px; top: 12vh; left: 24px; }  
+      298 +    @include mo { font-size: 24px; top: 10vh; left: 16px; }   
+      299  
+      290 -      .sub-gray {                                             
+      291 -        color: rgba(0, 0, 0, 0.45);                           
+      292 -      }                                                       
+      300 +    .sub-gray {                                               
+      301 +      color: rgba(0, 0, 0, 0.45);                             
+      302 +    }                                                         
+      303  
+      294 -      .sub-black {                                            
+      295 -        color: $color-black;                                  
+      296 -        position: relative;                                   
+      304 +    .sub-black {                                              
+      305 +      color: $color-black;                                    
+      306 +      position: relative;                                     
+      307  
+      298 -        .emoji {                                              
+      299 -          position: absolute;                                 
+      300 -          width: 41px;                                        
+      301 -          height: 41px;                                       
+      302 -          object-fit: contain;                                
+      308 +      .emoji {                                                
+      309 +        position: absolute;                                   
+      310 +        width: 41px;                                          
+      311 +        height: 41px;                                         
+      312 +        object-fit: contain;                                  
+      313  
+      304 -          @include pad { width: 24px; height: 24px; }         
+      305 -          @include mo { width: 24px; height: 24px; }          
+      314 +        @include pad { width: 24px; height: 24px; }           
+      315 +        @include mo { width: 24px; height: 24px; }            
+      316  
+      307 -          &.emoji-left {                                      
+      308 -            bottom: -13px;                                    
+      309 -            left: -22px;                                      
+      317 +        &.emoji-left {                                        
+      318 +          bottom: -13px;                                      
+      319 +          left: -22px;                                        
+      320  
+      311 -            @include mo { bottom: -11px; left: -9px; }        
+      312 -          }                                                   
+      321 +          @include mo { bottom: -11px; left: -9px; }          
+      322 +        }                                                     
+      323  
+      314 -          &.emoji-right {                                     
+      315 -            top: -18px;                                       
+      316 -            right: -16px;                                     
+      324 +        &.emoji-right {                                       
+      325 +          top: -18px;                                         
+      326 +          right: -16px;                                       
+      327  
+      318 -            @include mo { top: -12px; right: -12px; }         
+      319 -          }                                                   
+      328 +          @include mo { top: -12px; right: -12px; }           
+      329          }
+      330        }
+      331      }
+
+● 我来核实一下最终文件是否正确。
+
+  Read 1 file (ctrl+o to expand)
+
+● 改好了，两处调整：
+
+  1. "款款都是主打色"移到左上角
+  - 从居中的 .top-area 容器里拆出来，改为 position: absolute; top: 14vh; left: 
+  64px
+  - 水印"轻巧的一小部/漂亮的一大步"保持顶部居中不动
+  - 对齐官方结构：水印 absolute top-0 left-[50%]
+  居中，副标题是正常流首个元素左对齐
+
+  2. 渐变背景
+  - 新增 .color-bg 全屏 div，z-index: 0，渐变色 linear-gradient(180deg, #F0EDE6 
+  0%, #E2E3D4 45%, #C8D0BE 100%) —— 从白巧奶白到抹茶灰绿，色系对齐按钮配色
+  - GSAP 加了一步：opacity:0, y:100 -> opacity:1, y:0，随滚动上移渐入（对齐官方
+  after-box color-bg 行为）
+  - section 背景改为 transparent 让渐变层显出来
+
+  手机动效参数（scale:3->2, rotation:45->10 等）和 ScrollTrigger 配置原样保留。
+
+✻ Sautéed for 1m 41s
+
+❯ 纯粹可可 这几个主题字大小calc(var(--rpx, 1px) * 210)                          
+
+  Searched for 1 pattern (ctrl+o to expand)
+
+● 项目里没定义 --rpx 变量，所以 calc(var(--rpx, 1px) * 210) 会回退为
+  210px。按官方 rpx 值更新左右主题字的三个断点：
+
+● Update(src\components\DesignColor.vue)
+  ⎿  Added 6 lines, removed 6 lines
+      348        position: absolute;
+      349        top: 0;
+      350        left: 0;
+      351 -      font-size: 140px;                                       
+      351 +      font-size: calc(var(--rpx, 1px) * 210);                 
+      352        font-weight: 700;
+      353        color: $color-black;
+      354        opacity: 0;
+     ...
+      358  
+      359        &.active { opacity: 1; }
+      360  
+      361 -      @include pad { font-size: 80px; }                       
+      362 -      @include mo { font-size: 48px; }                        
+      361 +      @include pad { font-size: calc(var(--rpx, 1px) * 118); }
+      362 +      @include mo { font-size: calc(var(--rpx, 1px) * 80); }  
+      363      }
+      364    }
+      365  
+     ...
+      380        position: absolute;
+      381        top: 0;
+      382        right: 0;
+      383 -      font-size: 140px;                                       
+      383 +      font-size: calc(var(--rpx, 1px) * 210);                 
+      384        font-weight: 700;
+      385        color: $color-black;
+      386        opacity: 0;
+     ...
+      390  
+      391        &.active { opacity: 1; }
+      392  
+      393 -      @include pad { font-size: 80px; }                       
+      394 -      @include mo { font-size: 48px; }                        
+      393 +      @include pad { font-size: calc(var(--rpx, 1px) * 118); }
+      394 +      @include mo { font-size: calc(var(--rpx, 1px) * 80); }  
+      395      }
+      396    }
+      397  
+
+● 左右主题字（治愈/白巧、松弛/抹茶、纯粹/可可）字号已更新为官方 rpx 值：
+
+  - PC：calc(var(--rpx, 1px) * 210) → 210px
+  - Pad：calc(var(--rpx, 1px) * 118) → 118px
+  - Mo：calc(var(--rpx, 1px) * 80) → 80px
+
+  .left-words .word 和 .right-words .word 两处同步更新。
+
+❯ 整个内容除了背景颜色，剩下的大概70%宽度                                       
+
+● 把所有内容包进一个 70% 宽度居中的容器，背景保持全屏。
+
+● Update(src\components\DesignColor.vue)
+  ⎿  Added 2 lines
+      167      <!-- 渐变背景：色系对齐按钮配色（白巧/抹茶/可可），随滚动
+           渐入 -->
+      168      <div ref="colorBgRef" class="color-bg"></div>
+      169  
+      170 +    <!-- 内容容器：70% 宽度居中 -->                           
+      171 +    <div class="content-wrapper">                             
+      172      <!-- 顶部水印标题：居中 -->
+      173      <div ref="watermarkRef" class="watermark">
+      174        <p class="wm-line">轻巧的一小部</p>
+
+● Update(src\components\DesignColor.vue)
+  ⎿  Added 1 line
+      244          <span>设计美图大赏</span>
+      245        </div>
+      246      </div>
+      247 +    </div>                                                    
+      248    </section>
+      249  </template>
+      250  
+
+● 现在添加 .content-wrapper 的 CSS：
+
+● Update(src\components\DesignColor.vue)
+  ⎿  Added 11 lines
+      256    position: relative;
+      257    overflow: hidden;
+      258  
+      259 +  /* ── 内容容器：70% 宽度居中 ── */                          
+      260 +  .content-wrapper {                                          
+      261 +    position: relative;                                       
+      262 +    width: 70%;                                               
+      263 +    height: 100%;                                             
+      264 +    margin: 0 auto;                                           
+      265 +                                                              
+      266 +    @include pad { width: 90%; }                              
+      267 +    @include mo { width: 100%; }                              
+      268 +  }                                                           
+      269 +                                                              
+      270    /* ── 渐变背景：色系对齐按钮配色（白巧/抹茶/可可）── */
+      271    .color-bg {
+      272      position: absolute;
+
+● 改好了。所有内容（水印、副标题、左右词、手机、按钮、底部栏）现在包在
+  .content-wrapper 里，width: 70%; margin: 0 auto，居中显示。渐变背景 .color-bg
+  保持全屏不受影响。
+
+  所有绝对定位的子元素现在以 70% 容器为参照：
+  - 手机 left: 50% -> 容器中心 = 视口中心
+  - 左词 left: 18% / 右词 right: 18% -> 相对 70% 容器内缩
+  - 副标题 left: 64px / 底部栏 left/right: 64px -> 相对容器边缘
+
+  Pad 90%、移动端 100%（小屏需要更多空间）。
+
+✻ Churned for 49s
+
+❯ 治愈白巧的图和纯粹可可的图换一下，然后治愈、白巧，这两个词中间有大概30%的距离 
+ ，背景颜色不要使一直纯绿色，可以随着切换手机颜色变的，然后文字颜色也是，backgr 
+ound: linear-gradient(180deg, #000 31.01%,                                      
+#e1fccf);类似这种渐变色，随着切换手机的话也会变的                               
+
+● 多个改动：换图、词距、随配色切换的渐变背景和文字色。让我逐步更新。
+
+  先更新 colors 数据 -- 换图 + 加渐变背景和深浅标记：
+
+● Update(src\components\DesignColor.vue)
+  ⎿  Added 10 lines, removed 3 lines
+      21  const bottomRef = ref(null)
+      22  
+      23  /* 三种配色：顺序/图片映射对齐官方
+      24 -   0 治愈白巧 -> phone-1(白)  1 松弛抹茶 -> phone-2(绿)  2 纯粹
+         -可可 -> phone-0(棕) */                                         
+      24 +   0 治愈白巧 -> phone-0  1 松弛抹茶 -> phone-2  2 纯粹可可 -> 
+         +phone-1                                                        
+      25 +   每色带渐变背景 + 深浅标记（dark=true 时文字变白）*/         
+      26  const colors = [
+      27    {
+      28      name: '治愈白巧',
+     ...
+      30      rightWord: '白巧',
+      31      desc: '全白小屏机，小屏党的白月光。',
+      32      btnIcon: '/assets/images/color/images-color-btn-0-1-076a57.
+          png.webp',
+      32 -    image: '/assets/images/color/images-color-phone-1-1-84e994.
+         -png',                                                          
+      33 +    image: '/assets/images/color/images-color-phone-0-1-1f753e.
+         +png',                                                          
+      34 +    bgGradient: 'linear-gradient(180deg, #FAFAFA 0%, #F0EDE6 50
+         +%, #E8E4D9 100%)',                                             
+      35 +    dark: false,                                               
+      36    },
+      37    {
+      38      name: '松弛抹茶',
+     ...
+      41      desc: '超美小直屏，美得清新脱俗。',
+      42      btnIcon: '/assets/images/color/images-color-btn-1-1-cd2823.
+          png.webp',
+      43      image: '/assets/images/color/images-color-phone-2-1-372a9d.
+          png',
+      44 +    bgGradient: 'linear-gradient(180deg, #1a2e1a 31%, #e1fccf 1
+         +00%)',                                                         
+      45 +    dark: true,                                                
+      46    },
+      47    {
+      48      name: '纯粹可可',
+     ...
+      50      rightWord: '可可',
+      51      desc: '超美小直屏，你的时尚搭子。',
+      52      btnIcon: '/assets/images/color/images-color-btn-2-1-d5aa74.
+          png.webp',
+      48 -    image: '/assets/images/color/images-color-phone-0-1-1f753e.
+         -png',                                                          
+      53 +    image: '/assets/images/color/images-color-phone-1-1-84e994.
+         +png',                                                          
+      54 +    bgGradient: 'linear-gradient(180deg, #2a2018 0%, #4A3D2E 50
+         +%, #6B5A45 100%)',                                             
+      55 +    dark: true,                                                
+      56    },
+      57  ]
+      58  const currentColor = ref(0)
+
+● 现在绑定渐变背景，并为深色模式添加 theme-dark 类：
+
+● Update(src\components\DesignColor.vue)
+  ⎿  Added 3 lines, removed 3 lines
+      170  </script>
+      171  
+      172  <template>
+      173 -  <section ref="containerRef" class="design-color">           
+      174 -    <!-- 渐变背景：色系对齐按钮配色（白巧/抹茶/可可），随滚动 
+          -渐入 -->                                                      
+      175 -    <div ref="colorBgRef" class="color-bg"></div>             
+      173 +  <section ref="containerRef" class="design-color" :class="{ '
+          +theme-dark': colors[currentColor].dark }">                    
+      174 +    <!-- 渐变背景：随配色切换，随滚动渐入 -->                 
+      175 +    <div ref="colorBgRef" class="color-bg" :style="{ backgroun
+          +d: colors[currentColor].bgGradient }"></div>                  
+      176  
+      177      <!-- 内容容器：70% 宽度居中 -->
+      178      <div class="content-wrapper">
+
+● 现在更新 CSS —— 移除静态渐变（现已改为绑定），添加 theme-dark
+  文字颜色覆盖，并调整文字位置以保持约 30% 的间距：
+● Update(src\components\DesignColor.vue)
+  ⎿  Added 2 lines, removed 2 lines
+      274      @include mo { width: 100%; }
+      275    }
+      276  
+      277 -  /* ── 渐变背景：色系对齐按钮配色（白巧/抹茶/可可）── */     
+      277 +  /* ── 渐变背景：随配色切换（inline style 绑定）── */        
+      278    .color-bg {
+      279      position: absolute;
+      280      inset: 0;
+      281      z-index: 0;
+      282 -    background: linear-gradient(180deg, #F0EDE6 0%, #E2E3D4 45
+          -%, #C8D0BE 100%);                                             
+      282      pointer-events: none;
+      283 +    transition: background 0.6s ease;                         
+      284    }
+      285  
+      286    /* ── 水印标题：顶部居中 ── */
+
+● 现在调整左右文字的位置，使它们之间的间距约为 30%（将其推至 content-wrapper
+  的边缘）：
+
+● Update(src\components\DesignColor.vue)
+  ⎿  Added 3 lines, removed 3 lines
+      356    .left-words {
+      357      position: absolute;
+      358      top: 50%;
+      359 -    left: 18%;                                                
+      359 +    left: 0;                                                  
+      360      transform: translateY(-50%);
+      361      z-index: 3;
+      362      width: 300px;
+      363      height: 140px;
+      364  
+      365 -    @include pad { left: 10%; width: 180px; height: 90px; }   
+      366 -    @include mo { left: 8%; width: 100px; height: 56px; }     
+      365 +    @include pad { left: 0; width: 180px; height: 90px; }     
+      366 +    @include mo { left: 0; width: 100px; height: 56px; }      
+      367  
+      368      .word {
+      369        position: absolute;
+
+● Update(src\components\DesignColor.vue)
+  ⎿  Added 3 lines, removed 3 lines
+      388    .right-words {
+      389      position: absolute;
+      390      top: 50%;
+      391 -    right: 18%;                                               
+      391 +    right: 0;                                                 
+      392      transform: translateY(-50%);
+      393      z-index: 3;
+      394      width: 300px;
+      395      height: 140px;
+      396  
+      397 -    @include pad { right: 10%; width: 180px; height: 90px; }  
+      398 -    @include mo { right: 8%; width: 100px; height: 56px; }    
+      397 +    @include pad { right: 0; width: 180px; height: 90px; }    
+      398 +    @include mo { right: 0; width: 100px; height: 56px; }     
+      399  
+      400      .word {
+      401        position: absolute;
+
+● 现在添加 theme-dark 的文字颜色覆盖效果。让我把它加在 .color-bg 后面：
+
+● Update(src\components\DesignColor.vue)
+  ⎿  Added 12 lines
+      283      transition: background 0.6s ease;
+      284    }
+      285  
+      286 +  /* ── 深色背景时文字变白 ── */                              
+      287 +  &.theme-dark {                                              
+      288 +    .watermark .wm-line { color: $color-white; }              
+      289 +    .subtitle .sub-gray { color: rgba(255, 255, 255, 0.45); } 
+      290 +    .subtitle .sub-black { color: $color-white; }             
+      291 +    .left-words .word,                                        
+      292 +    .right-words .word { color: $color-white; }               
+      293 +    .pill-text { color: $color-white; }                       
+      294 +    .desc-title { color: $color-white; }                      
+      295 +    .modal-link { color: $color-white; }                      
+      296 +  }                                                           
+      297 +                                                              
+      298    /* ── 水印标题：顶部居中 ── */
+      299    .watermark {
+      300      position: absolute;
+
+● 现在为文本元素添加 transition: color，以便在切换主题时实现颜色的平滑过渡。其中
+   .word 元素需要同时包含透明度和颜色过渡：
+
+● Update(src\components\DesignColor.vue)
+  ⎿  Added 3 lines, removed 3 lines
+      385        font-weight: 700;
+      386        color: $color-black;
+      387        opacity: 0;
+      388 -      transition: opacity 0.4s ease;                          
+      388 +      transition: opacity 0.4s ease, color 0.4s ease;         
+      389        letter-spacing: 5px;
+      390        white-space: nowrap;
+      391  
+     ...
+      417        font-weight: 700;
+      418        color: $color-black;
+      419        opacity: 0;
+      420 -      transition: opacity 0.4s ease;                          
+      420 +      transition: opacity 0.4s ease, color 0.4s ease;         
+      421        letter-spacing: 5px;
+      422        white-space: nowrap;
+      423  
+     ...
+      524          top: 0;
+      525          left: 0;
+      526          opacity: 0;
+      527 -        transition: opacity 0.4s ease;                        
+      527 +        transition: opacity 0.4s ease, color 0.4s ease;       
+      528  
+      529          &.active { opacity: 1; }
+      530  
+
+● Update(src\components\DesignColor.vue)
+  ⎿  Added 1 line
+      311        color: $color-black;
+      312        opacity: 0.15;
+      313        letter-spacing: 2px;
+      314 +      transition: color 0.4s ease;                            
+      315  
+      316        @include pad { font-size: 36px; }
+      317        @include mo { font-size: 28px; }
+
+● Update(src\components\DesignColor.vue)
+  ⎿  Added 1 line
+      327      font-size: 48px;
+      328      font-weight: 500;
+      329      line-height: 1.2;
+      330 +    transition: color 0.4s ease;                              
+      331  
+      332      @include pad { font-size: 26px; top: 12vh; left: 24px; }
+      333      @include mo { font-size: 24px; top: 10vh; left: 16px; }
+
+● Update(src\components\DesignColor.vue)
+  ⎿  Added 1 line
+      493          font-weight: 500;
+      494          color: $color-black;
+      495          white-space: nowrap;
+      496 +        transition: color 0.4s ease;                          
+      497  
+      498          @include pad { font-size: 9px; }
+      499          @include mo { font-size: 12px; }
+
+● Update(src\components\DesignColor.vue)
+  ⎿  Added 1 line
+      536            font-weight: 500;
+      537            color: $color-black;
+      538            line-height: 1.4;
+      539 +          transition: color 0.4s ease;                        
+      540  
+      541            @include pad { font-size: 12px; }
+      542            @include mo { font-size: 12px; }
+
+● Update(src\components\DesignColor.vue)
+  ⎿  Added 1 line
+      552        font-size: 16px;
+      553        color: $color-black;
+      554        white-space: nowrap;
+      555 +      transition: color 0.4s ease;                            
+      556  
+      557        @include pad { gap: 6px; font-size: 9px; }
+      558        @include mo { gap: 6px; font-size: 12px; }
+
+● 现在更新
+  watch(currentColor)，以便在切换颜色时为背景添加一个快速淡入淡出效果（因为 CSS
+  无法对渐变色进行动画处理）：
+
+● Update(src\components\DesignColor.vue)
+  ⎿  Added 20 lines, removed 9 lines
+      57  ]
+      58  const currentColor = ref(0)
+      59  
+      60 -/* 点击切换配色：图片淡入切换 */                               
+      60 +/* 点击切换配色：图片+背景渐变切换 */                          
+      61  watch(currentColor, () => {
+      62 -  if (!phoneImgRef.value) return                               
+      63 -  gsap.fromTo(phoneImgRef.value, {                             
+      64 -    opacity: 0.2,                                              
+      65 -  }, {                                                         
+      66 -    opacity: 1,                                                
+      67 -    duration: 0.5,                                             
+      68 -    ease: 'power2.out',                                        
+      69 -  })                                                           
+      62 +  if (phoneImgRef.value) {                                     
+      63 +    gsap.fromTo(phoneImgRef.value, {                           
+      64 +      opacity: 0.2,                                            
+      65 +    }, {                                                       
+      66 +      opacity: 1,                                              
+      67 +      duration: 0.5,                                           
+      68 +      ease: 'power2.out',                                      
+      69 +    })                                                         
+      70 +  }                                                            
+      71 +  /* 背景：短暂降低透明度再恢复，模拟渐变切换过渡 */           
+      72 +  if (colorBgRef.value) {                                      
+      73 +    gsap.fromTo(colorBgRef.value, {                            
+      74 +      opacity: 0.4,                                            
+      75 +    }, {                                                       
+      76 +      opacity: 1,                                              
+      77 +      duration: 0.6,                                           
+      78 +      ease: 'power2.out',                                      
+      79 +    })                                                         
+      80 +  }                                                            
+      81  })
+      82  
+      83  let ctx
+
+● 我来检查一下最终文件。
+
+  Read 1 file (ctrl+o to expand)
+
+● 全部改好，总结：
+
+  1. 图片互换
+  - 治愈白巧 -> phone-0，纯粹可可 -> phone-1（互换了）
+
+  2. 左右词距 ~30%
+  - 左词 left: 0、右词 right: 0（推到 70% 内容容器两端）
+  - 两个 210px 大字之间留出约 30% 的间距给手机
+
+  3. 渐变背景随配色切换
+  - 治愈白巧：linear-gradient(180deg, #FAFAFA, #F0EDE6, #E8E4D9) 浅奶白
+  - 松弛抹茶：linear-gradient(180deg, #1a2e1a 31%, #e1fccf)
+  深绿到浅绿（你给的示例风格）
+  - 纯粹可可：linear-gradient(180deg, #2a2018, #4A3D2E, #6B5A45) 深棕
+  - 通过 :style="{ background: colors[currentColor].bgGradient }" 绑定，切换时
+  GSAP 短暂降透明度再恢复模拟过渡
+
+  4. 文字颜色随配色切换
+  - section 上动态 :class="{ 'theme-dark': colors[currentColor].dark }"
+  - 深色背景（抹茶/可可）时：水印、副标题、左右词、按钮文字、底部描述、链接全部
+  变白
+  - 所有文字加 transition: color 0.4s ease 平滑过渡
+
+  治愈白巧是浅色背景（dark: false），文字保持黑色；抹茶和可是深色背景（dark: 
+  true），文字变白。
+
+✻ Cogitated for 3m 44s
+
+❯ 轻巧的一小部                                                                  
+                                                                                
+漂亮的一大步，这个文本随着上滑彻底消失，然后“全白小屏机，小屏党的白月光。设计美 
+图大赏”这几个字向上一点。                                                       
+
+● Update(src\components\DesignColor.vue)
+  ⎿  Added 3 lines, removed 4 lines
+      105        ease: 'power2.out',
+      106      }, 0)
+      107  
+      108 -    // ── 1. 水印标题渐入（CSS 文字 0.15 亮度，容器 0->1）──  
+      109 -    tl.fromTo(watermarkRef.value, {                           
+      108 +    // ── 1. 水印标题：随滚动上移+彻底淡出 ──                 
+      109 +    tl.to(watermarkRef.value, {                               
+      110 +      y: -100,                                                
+      111        opacity: 0,
+      111 -    }, {                                                      
+      112 -      opacity: 1,                                             
+      112        duration: 0.3,
+      113        ease: 'power2.out',
+      114      }, 0)
+
+● 现在将底部文字向上移动——增加 bottom 的值：
+● Update(src\components\DesignColor.vue)
+  ⎿  Added 1 line, removed 1 line
+      514    /* ── 底部：描述 + 设计美图大赏链接 ── */
+      515    .bottom-bar {
+      516      position: absolute;
+      517 -    bottom: 6vh;                                              
+      517 +    bottom: 12vh;                                             
+      518      left: 64px;
+      519      right: 64px;
+      520      display: flex;
+
+● 两处改好：
+
+  1. 水印"轻巧的一小部/漂亮的一大步"随滚动彻底消失 -- 改为 tl.to(watermarkRef, {
+   y: -100, opacity: 0 })，向上移 100px 同时淡出到完全透明
+  2. 底部文字上移 -- .bottom-bar 从 bottom: 6vh 改为 bottom: 
+  12vh，"全白小屏机..."和"设计美图大赏"整体上移
+
+❯ 松弛绿茶的背景颜色，从上到下白色到绿色渐变，可可的也是，然后这两个图片换一下  
+，你整错了                                                                      
+
+● Update(src\components\DesignColor.vue)
+  ⎿  Added 6 lines, removed 6 lines
+      40      rightWord: '抹茶',
+      41      desc: '超美小直屏，美得清新脱俗。',
+      42      btnIcon: '/assets/images/color/images-color-btn-1-1-cd2823.
+          png.webp',
+      43 -    image: '/assets/images/color/images-color-phone-2-1-372a9d.
+         -png',                                                          
+      44 -    bgGradient: 'linear-gradient(180deg, #1a2e1a 31%, #e1fccf 1
+         -00%)',                                                         
+      45 -    dark: true,                                                
+      43 +    image: '/assets/images/color/images-color-phone-1-1-84e994.
+         +png',                                                          
+      44 +    bgGradient: 'linear-gradient(180deg, #FFFFFF 0%, #e1fccf 10
+         +0%)',                                                          
+      45 +    dark: false,                                               
+      46    },
+      47    {
+      48      name: '纯粹可可',
+     ...
+      50      rightWord: '可可',
+      51      desc: '超美小直屏，你的时尚搭子。',
+      52      btnIcon: '/assets/images/color/images-color-btn-2-1-d5aa74.
+          png.webp',
+      53 -    image: '/assets/images/color/images-color-phone-1-1-84e994.
+         -png',                                                          
+      54 -    bgGradient: 'linear-gradient(180deg, #2a2018 0%, #4A3D2E 50
+         -%, #6B5A45 100%)',                                             
+      55 -    dark: true,                                                
+      53 +    image: '/assets/images/color/images-color-phone-2-1-372a9d.
+         +png',                                                          
+      54 +    bgGradient: 'linear-gradient(180deg, #FFFFFF 0%, #D4C4B0 10
+         +0%)',                                                          
+      55 +    dark: false,                                               
+      56    },
+      57  ]
+      58  const currentColor = ref(0)
+
+● 改好：
+
+  图片互换（松弛抹茶 <-> 纯粹可可）：
+  - 松弛抹茶 -> phone-1
+  - 纯粹可可 -> phone-2
+
+  渐变背景改为白到色（上白下色）：
+  - 松弛抹茶：linear-gradient(180deg, #FFFFFF 0%, #e1fccf 100%) 白到浅绿
+  - 纯粹可可：linear-gradient(180deg, #FFFFFF 0%, #D4C4B0 100%) 白到浅棕
+
+  两个都改为 dark: 
+  false（浅色背景，文字保持黑色）。现在三色都是浅色渐变背景，文字始终深色。
+
+❯ src\components\NarrowBezel.vue这个页面请你根据D:\test\一加 15T                
+又小又强又美又全面.html这个页面进行还原，                                       
+  ⎿  ⧉ Selected 1 lines from src\components\NarrowBezel.vue in Visual Studio 
+     Code
+
+  Read 2 files (ctrl+o to expand)
+
+● 我已经有了官方的 section-thin 结构。让我检查一下可用的图像资源，然后重写
+  NarrowBezel.vue 以使其保持一致。
+
+● Write(src\components\NarrowBezel.vue)
+  ⎿  Added 129 lines, removed 55 lines
+        1 -<!-- 1.1mm超窄四等边：大字标题 + 手机产品图展示窄边框设计 --> 
+        1 +<!--                                                          
+        2 +  1.1mm 超窄四等边：大字标题居中 + 副标题描述 + 两台手机对角放
+          +置（部分溢出）                                                
+        3 +  对齐官方 section-thin 布局，GSAP 滚动入场动画               
+        4 +-->                                                           
+        5  <script setup>
+        3 -// 1.1mm 超窄四等边：静态展示模块                             
+        6 +import { ref, onMounted, onUnmounted } from 'vue'             
+        7 +import gsap from 'gsap'                                       
+        8 +import { ScrollTrigger } from 'gsap/ScrollTrigger'            
+        9 +                                                              
+       10 +gsap.registerPlugin(ScrollTrigger)                            
+       11 +                                                              
+       12 +const sectionRef = ref(null)                                  
+       13 +let ctx                                                       
+       14 +                                                              
+       15 +onMounted(() => {                                             
+       16 +  ctx = gsap.context(() => {                                  
+       17 +    const tl = gsap.timeline({                                
+       18 +      scrollTrigger: {                                        
+       19 +        trigger: sectionRef.value,                            
+       20 +        start: 'top 80%',                                     
+       21 +        toggleActions: 'play none none none',                 
+       22 +      },                                                      
+       23 +    })                                                        
+       24 +                                                              
+       25 +    // 大标题渐入上移                                         
+       26 +    tl.from('.narrow-bezel .main-title', {                    
+       27 +      y: 40,                                                  
+       28 +      opacity: 0,                                             
+       29 +      duration: 0.6,                                          
+       30 +      ease: 'power2.out',                                     
+       31 +    })                                                        
+       32 +    // 副标题+描述渐入                                        
+       33 +    tl.from('.narrow-bezel .text-wrapper', {                  
+       34 +      y: 30,                                                  
+       35 +      opacity: 0,                                             
+       36 +      duration: 0.6,                                          
+       37 +      ease: 'power2.out',                                     
+       38 +    }, '-=0.3')                                               
+       39 +    // 左侧手机从左下角滑入                                   
+       40 +    tl.from('.narrow-bezel .phone-left', {                    
+       41 +      x: -150,                                                
+       42 +      y: 150,                                                 
+       43 +      opacity: 0,                                             
+       44 +      duration: 0.8,                                          
+       45 +      ease: 'power2.out',                                     
+       46 +    }, '-=0.5')                                               
+       47 +    // 右侧手机从右上角滑入（同时）                           
+       48 +    tl.from('.narrow-bezel .phone-right', {                   
+       49 +      x: 150,                                                 
+       50 +      y: -150,                                                
+       51 +      opacity: 0,                                             
+       52 +      duration: 0.8,                                          
+       53 +      ease: 'power2.out',                                     
+       54 +    }, '<')                                                   
+       55 +  }, sectionRef.value)                                        
+       56 +})                                                            
+       57 +                                                              
+       58 +onUnmounted(() => {                                           
+       59 +  if (ctx) ctx.revert()                                       
+       60 +})                                                            
+       61  </script>
+       62  
+       63  <template>
+        7 -  <section class="narrow-bezel">                              
+        8 -    <div class="bezel-inner">                                 
+        9 -      <h2 class="main-title animate-in">1.1mm 超窄四等边</h2> 
+       10 -      <div class="sub-text animate-in">                       
+       64 +  <section ref="sectionRef" class="narrow-bezel">             
+       65 +    <!-- 居中文字内容 -->                                     
+       66 +    <div class="content-center">                              
+       67 +      <h2 class="main-title">1.1mm 超窄四等边</h2>            
+       68 +      <div class="text-wrapper">                              
+       69          <p class="sub-title">窄出手机新高度，满屏精彩框不住。<
+           /p>
+       12 -        <p class="desc">                                      
+       13 -          1.1mm 极窄四等边¹，小屏大视野，观感超惊艳。一眼望去 
+          -，满眼都沉浸，满屏皆精彩。                                    
+       14 -        </p>                                                  
+       70 +        <p class="desc">1.1mm 极窄四等边<sup>1</sup>，小屏大视
+          +野，观感超惊艳。一眼望去，满眼都沉浸，满屏皆精彩。</p>        
+       71        </div>
+       16 -      <div class="phone-images">                              
+       17 -        <img                                                  
+       18 -          src="/assets/images/thin/images-thin-phone-0-1-2366b
+          -7.png.webp"                                                   
+       19 -          alt="一加15T 窄边框"                                
+       20 -          class="phone-img"                                   
+       21 -        />                                                    
+       22 -      </div>                                                  
+       72      </div>
+       73 +                                                              
+       74 +    <!-- 左侧手机：从左上延伸，origin-bottom-right -->        
+       75 +    <div class="phone phone-left">                            
+       76 +      <img src="/assets/images/thin/images-thin-phone-0-1-2366
+          +b7.png.webp" alt="一加15T 窄边框" />                          
+       77 +    </div>                                                    
+       78 +    <!-- 右侧手机：从右下延伸，origin-top-left -->            
+       79 +    <div class="phone phone-right">                           
+       80 +      <img src="/assets/images/thin/images-thin-phone-0-1-2366
+          +b7.png.webp" alt="一加15T 窄边框" />                          
+       81 +    </div>                                                    
+       82    </section>
+       83  </template>
+       84  
+       85  <style scoped lang="scss">
+       86  .narrow-bezel {
+       87    width: 100%;
+       30 -  min-height: calc(100vh - #{$nav-height});                   
+       31 -  display: flex;                                              
+       32 -  align-items: center;                                        
+       33 -  justify-content: center;                                    
+       88 +  height: 100vh;                                              
+       89    background: $color-white;
+       90    position: relative;
+       91    overflow: hidden;
+       92 +  display: flex;                                              
+       93 +  align-items: center;                                        
+       94 +  justify-content: center;                                    
+       95  
+       38 -  .bezel-inner {                                              
+       96 +  /* ── 居中文字内容 ── */                                    
+       97 +  .content-center {                                           
+       98      position: relative;
+       40 -    width: 100%;                                              
+       41 -    max-width: $max-width;                                    
+       42 -    height: 600px;                                            
+       43 -    @include flex-center;                                     
+       99 +    z-index: 2;                                               
+      100 +    display: flex;                                            
+      101 +    flex-direction: column;                                   
+      102 +    align-items: center;                                      
+      103 +    justify-content: center;                                  
+      104 +    text-align: center;                                       
+      105    }
+      106  
+      107    .main-title {
+     ...
+      110      line-height: 1;
+      111      color: $color-black;
+      112      text-align: center;
+       52 -    z-index: 2;                                               
+      113  
+       54 -    @include pad {                                            
+       55 -      font-size: 69px;                                        
+       56 -    }                                                         
+       57 -    @include mo {                                             
+       58 -      font-size: 40px;                                        
+       59 -    }                                                         
+      114 +    @include pad { font-size: 69px; }                         
+      115 +    @include mo { font-size: 40px; }                          
+      116    }
+      117  
+       62 -  .sub-text {                                                 
+       63 -    position: absolute;                                       
+       64 -    bottom: 10%;                                              
+      118 +  .text-wrapper {                                             
+      119 +    margin-top: 42px;                                         
+      120      text-align: center;
+       66 -    z-index: 2;                                               
+      121  
+      122 +    @include pad { margin-top: 32px; }                        
+      123 +    @include mo { margin-top: 12px; }                         
+      124 +                                                              
+      125      .sub-title {
+      126        font-size: 48px;
+      127        font-weight: 300;
+      128        line-height: 1;
+      129        color: $color-black;
+      130  
+       74 -      @include pad {                                          
+       75 -        font-size: 26px;                                      
+       76 -      }                                                       
+       77 -      @include mo {                                           
+       78 -        font-size: 32px;                                      
+       79 -      }                                                       
+      131 +      @include pad { font-size: 26px; }                       
+      132 +      @include mo { font-size: 32px; line-height: 1.3; }      
+      133      }
+      134  
+      135      .desc {
+      136        font-size: 18px;
+       84 -      color: $color-text-secondary;                           
+      137 +      font-weight: 400;                                       
+      138 +      line-height: 1.4;                                       
+      139 +      color: rgba(0, 0, 0, 0.55);                             
+      140        margin-top: 16px;
+      141        max-width: 600px;
+      142  
+       88 -      @include mo {                                           
+       89 -        font-size: 14px;                                      
+       90 -        width: 328px;                                         
+       91 -        margin: 4px auto 0;                                   
+       92 -      }                                                       
+      143 +      @include pad { font-size: 10px; margin-top: 8px; }      
+      144 +      @include mo { font-size: 14px; width: 328px; margin: 4px
+          + auto 0; }                                                    
+      145      }
+      146    }
+      147  
+       96 -  .phone-images {                                             
+      148 +  /* ── 手机图：对角放置，部分溢出被 overflow:hidden 裁切 ── *
+          +/                                                             
+      149 +  .phone {                                                    
+      150      position: absolute;
+       98 -    top: 50%;                                                 
+       99 -    left: 50%;                                                
+      100 -    transform: translate(-50%, -50%);                         
+      151      z-index: 1;
+      152  
+      103 -    .phone-img {                                              
+      104 -      max-height: 500px;                                      
+      153 +    img {                                                     
+      154 +      width: 100%;                                            
+      155 +      height: 100%;                                           
+      156        object-fit: contain;
+      106 -      opacity: 0.3;                                           
+      157      }
+      158 +                                                              
+      159 +    /* 左侧手机：左上角延伸，transform-origin: bottom right */
+      160 +    &.phone-left {                                            
+      161 +      width: 800px;                                           
+      162 +      height: 1660px;                                         
+      163 +      left: -347px;                                           
+      164 +      top: -1390px;                                           
+      165 +      transform-origin: bottom right;                         
+      166 +                                                              
+      167 +      @include pad { width: 433px; height: 898px; left: -188px
+          +; top: -752px; }                                              
+      168 +      @include mo { width: 580px; height: 1204px; left: -360px
+          +; top: -1000px; }                                             
+      169 +    }                                                         
+      170 +                                                              
+      171 +    /* 右侧手机：右下角延伸，transform-origin: top left */    
+      172 +    &.phone-right {                                           
+      173 +      width: 800px;                                           
+      174 +      height: 1660px;                                         
+      175 +      right: -288px;                                          
+      176 +      bottom: -1380px;                                        
+      177 +      transform-origin: top left;                             
+      178 +                                                              
+      179 +      @include pad { width: 433px; height: 898px; right: -156p
+          +x; bottom: -746px; }                                          
+      180 +      @include mo { width: 580px; height: 1204px; right: -342p
+          +x; bottom: -1000px; }                                         
+      181 +    }                                                         
+      182    }
+      183  }
+      184  </style>
+  ⎿  API Error: 429 {"error":{"code":"AccountQuotaExceeded","message":"You have 
+     exceeded the 5-hour usage quota. It will reset at 2026-07-11 21:24:24 +0800
+      CST. We recommend upgrading your plan for more quota, or waiting for the 
+     reset. Request id: 02178377205070679be1521b480472bd1aa7097703cfa2091a160","
+     param":"","type":"TooManyRequests"}}
+
+✻ Baked for 4m 47s
+
+❯ ok 样式有了 基础动画也有一点了，but我们需要加一些东西：上面的手机向右旋转，下 
+面的手机向左旋转，最后图片居中，但是不要挡住中间的字，，页面最开始是“1.1mm      
+超窄四等边”，随着滑动文字逐渐变小到12px，然后淡出，这时候“窄出手机新高度，满屏  
+精彩框不住。                                                                    
+1.1mm 极窄四等边1，小屏大视野，观感超惊艳。一眼望去，满眼都沉浸，满屏皆精彩。”  
+文字就可以出现了 ，你详细看一下html的动画                                       
+  ⎿  API Error: 429 {"error":{"code":"AccountQuotaExceeded","message":"You have 
+     exceeded the 5-hour usage quota. It will reset at 2026-07-11 21:24:24 +0800
+      CST. We recommend upgrading your plan for more quota, or waiting for the 
+     reset. Request id: 021783772415138b686cf77507a74aa4905f351832e66177ffca3","
+     param":"","type":"TooManyRequests"}}
+
+✻ Baked for 3m 7s
