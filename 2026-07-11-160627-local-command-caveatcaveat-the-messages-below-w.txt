@@ -1,0 +1,603 @@
+╭─── Claude Code v2.1.87 ──────────────────────────────────────────────────────╮
+│                                    │ Tips for getting started                │
+│            Welcome back!           │ Run /init to create a CLAUDE.md file w… │
+│                                    │ ─────────────────────────────────────── │
+│               ▐▛███▜▌              │ Recent activity                         │
+│              ▝▜█████▛▘             │ No recent activity                      │
+│                ▘▘ ▝▝               │                                         │
+│                                    │                                         │
+│   Sonnet 4.6 · API Usage Billing   │                                         │
+│      D:\Code\test-ai\test-ai       │                                         │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+  ↑ Opus now defaults to 1M context · 5x more room, same pricing
+
+❯ /clear                                                                        
+  ⎿  (no content)
+
+❯ 读取一下docs\superpowers，这里面的两个文件夹下面的文件，                      
+
+  Read 2 files (ctrl+o to expand)
+
+● 两个文件已读完。这是「一加 15T 官方产品页 Vue3 复刻」项目的文档，包含两份：
+
+  1. specs/ 设计文档（17KB）
+
+  整体方案设计，包含：
+  - 目标：用 Vue3 + Vite 复刻
+  https://www.oneplus.com/cn/15t（精简版，不含性能/系统栏目）
+  - 技术栈：Vue3 Composition API + Vite + SCSS scoped + GSAP ScrollTrigger
+  - 13 个组件：SiteHeader、ProductNav、HeroSection、DesignColor、NarrowBezel、Sm
+  allScreen、Appearance、DisplayScreen、LUMOCamera、Battery、Durability、NotesFo
+  oter、SiteFooter
+  - 4 个阶段：项目初始化(0.5h) → 静态页面搭建(5.5h) → 动画交互(3h) →
+  收尾交付(1h)
+  - 响应式三档断点：1920/1024/390px
+  - 素材来源：D:\test\_files\ 官方图片
+  - 验收检查清单
+
+  2. plans/ 实施计划（61KB）
+
+  按 Task 0–16 拆分的逐步执行手册，每个 Task 都给出完整可粘贴的代码：
+  - Task 0：项目初始化（vite.config.js、SCSS
+  变量/mixins/global、素材复制命令、App.vue 骨架）
+  - Task 1–13：13 个组件的完整 Vue SFC（template + script + scoped SCSS）
+  - Task 14：响应式验证 + build
+  - Task 15：GSAP 滚动动画 composable + Hero 入场动画
+  - Task 16：README + 最终交付
+
+  当前状态：git status 显示 src/components/HeroSection.vue
+  已被修改（M），项目应该已经初始化并开始实现了。你可以告诉我接下来想做什么——继
+  续执行计划、检查现有实现、还是调整方案。
+
+✻ Baked for 33s
+
+❯ 在src\components\HeroSection.vue这个文件中，需要修改一下：生成                
+HeroSection.vue，Vue3 <script setup> + scoped，Vite环境                         
+核心优先级：布局还原 > 滚动入场动画，文案/色值素材次之                          
+依据：附件一加官网HTML里hero区块DOM结构                                         
+要求：                                                                          
+1. 布局严格复刻官网结构，桌面左右分栏、移动端纵向堆叠，尺寸间距对齐原始DOM      
+2. 用GSAP ScrollTrigger做区块入场动画，元素错开渐入+上移，禁用弹性缓动          
+3. 样式基础色、字号简单匹配即可，不用极致抠像素细节                             
+4. 不使用v-html，DOM层级和官网保持一致                                          
+输出完整可直接使用的HeroSection.vue                                             
+
+● 我需要先读取参考 HTML 中的 hero 区块 DOM 结构，以及当前的 HeroSection.vue。
+
+  Read 1 file (ctrl+o to expand)
+
+● 现在读取参考 HTML 中的 hero 区块结构。
+
+  Searched for 1 pattern, read 1 file (ctrl+o to expand)
+
+● 现在我理解了官网 hero 区块的 DOM 结构。让我确认下项目的 SCSS 变量。
+
+  Read 2 files (ctrl+o to expand)
+
+● 让我确认一下 coloros 图片是否存在。
+
+  Searched for 1 pattern (ctrl+o to expand)
+
+● 所有素材确认就位。现在我已完全理解官网 hero 区块的 DOM 结构，开始编写
+  HeroSection.vue。
+
+  官网结构要点：
+  - #section-kv > flex 容器（PC 左右分栏，移动 flex-col-reverse）
+  - 左侧 .left：mo-hidden 文案组 + 视频按钮包裹层（poster + 居中播放图标）
+  - 右侧 .img-wrapper（PC absolute）：1 阴影图 + 4 手机图（phone-0
+  最右最小，phone-3 最左最大）
+  - ColorOS 徽标 absolute 定位，与 img-wrapper 同级
+
+● Write(src\components\HeroSection.vue)
+  ⎿  Added 158 lines, removed 114 lines
+       1 -<!-- Hero首屏：四个手机依次旋转15°入场，旋转完成后左侧文案浮现 
+         --->                                                            
+       1 +<!-- Hero首屏：左侧文案+视频按钮，右侧四手机产品图堆叠，GSAP Sc
+         +rollTrigger 错开渐入上移 -->                                   
+       2  <script setup>
+       3  import { onMounted } from 'vue'
+       4  import gsap from 'gsap'
+       5 +import { ScrollTrigger } from 'gsap/ScrollTrigger'             
+       6  
+       6 -// 四个手机产品图（不同配色）                                  
+       7 +gsap.registerPlugin(ScrollTrigger)                             
+       8 +                                                               
+       9 +// 四个手机产品图：phone-0 最右最小，phone-3 最左最大，对应官网
+         + img-wrapper 内顺序                                            
+      10  const phones = [
+       8 -  { src: '/assets/images/kv/images-kv-phone-0-1-fa31aa.png', al
+         -t: '一加15T 配色1' },                                          
+       9 -  { src: '/assets/images/kv/images-kv-phone-1-1-64a058.png', al
+         -t: '一加15T 配色2' },                                          
+      10 -  { src: '/assets/images/kv/images-kv-phone-2-1-5c4661.png', al
+         -t: '一加15T 配色3' },                                          
+      11 -  { src: '/assets/images/kv/images-kv-phone-3-1-2e77d2.png.webp
+         -', alt: '一加15T 配色4' },                                     
+      11 +  { src: '/assets/images/kv/images-kv-phone-0-1-fa31aa.png', cl
+         +s: 'phone-0' },                                                
+      12 +  { src: '/assets/images/kv/images-kv-phone-1-1-64a058.png', cl
+         +s: 'phone-1' },                                                
+      13 +  { src: '/assets/images/kv/images-kv-phone-2-1-5c4661.png', cl
+         +s: 'phone-2' },                                                
+      14 +  { src: '/assets/images/kv/images-kv-phone-3-1-2e77d2.png.webp
+         +', cls: 'phone-3' },                                           
+      15  ]
+      16  
+      17  onMounted(() => {
+      15 -  const isMobile = window.innerWidth < 768                     
+      16 -  const spread = isMobile ? 50 : 120                           
+      17 -  const positions = [-spread * 1.5, -spread * 0.5, spread * 0.5
+         -, spread * 1.5]                                                
+      18 -                                                               
+      19 -  // 手机初始位置：水平展开，旋转角度0                         
+      20 -  phones.forEach((_, i) => {                                   
+      21 -    gsap.set(`.phone-img-${i}`, { x: positions[i], rotation: 0 
+         -})                                                             
+      18 +  // ScrollTrigger 区块入场：元素错开渐入+上移，统一 power2.out
+         +（非弹性）                                                     
+      19 +  const tl = gsap.timeline({                                   
+      20 +    scrollTrigger: {                                           
+      21 +      trigger: '.hero-section',                                
+      22 +      start: 'top 80%',                                        
+      23 +      toggleActions: 'play none none none',                    
+      24 +    },                                                         
+      25    })
+      26  
+      24 -  // 左侧文案初始隐藏                                          
+      25 -  gsap.set(['.product-name', '.product-slogan'], { opacity: 0, 
+         -y: 40 })                                                       
+      26 -  gsap.set('.video-btn', { opacity: 0, y: 20 })                
+      27 -                                                               
+      28 -  const tl = gsap.timeline()                                   
+      29 -                                                               
+      30 -  // 四个手机依次旋转15°                                       
+      31 -  phones.forEach((_, i) => {                                   
+      32 -    tl.to(                                                     
+      33 -      `.phone-img-${i}`,                                       
+      34 -      { rotation: 15, duration: 0.5, ease: 'power2.out' },     
+      35 -      i === 0 ? 0.3 : '-=0.15'                                 
+      36 -    )                                                          
+      37 -  })                                                           
+      38 -                                                               
+      39 -  // 旋转完成后，左侧文案依次浮现                              
+      40 -  tl.to('.product-name', { opacity: 1, y: 0, duration: 0.6, eas
+         -e: 'power2.out' })                                             
+      41 -    .to('.product-slogan', { opacity: 1, y: 0, duration: 0.6, e
+         -ase: 'power2.out' }, '-=0.3')                                  
+      42 -    .to('.video-btn', { opacity: 1, y: 0, duration: 0.5, ease: 
+         -'power2.out' }, '-=0.3')                                       
+      27 +  tl.from('.hero-section .product-name', { y: 40, opacity: 0, d
+         +uration: 0.6, ease: 'power2.out' })                            
+      28 +    .from('.hero-section .product-slogan', { y: 40, opacity: 0,
+         + duration: 0.6, ease: 'power2.out' }, '-=0.3')                 
+      29 +    .from('.hero-section .video-btn-wrapper', { y: 30, opacity:
+         + 0, duration: 0.6, ease: 'power2.out' }, '-=0.3')              
+      30 +    .from('.hero-section .phone-img', { y: 60, opacity: 0, dura
+         +tion: 0.8, stagger: 0.12, ease: 'power2.out' }, '-=0.4')       
+      31 +    .from('.hero-section .shadow-img', { opacity: 0, duration: 
+         +0.6, ease: 'power2.out' }, '-=0.5')                            
+      32 +    .from('.hero-section .coloros-badge', { y: 20, opacity: 0, 
+         +duration: 0.5, ease: 'power2.out' }, '-=0.3')                  
+      33  })
+      34  </script>
+      35  
+      36  <template>
+      47 -  <section class="hero-section">                               
+      48 -    <div class="hero-inner">                                   
+      37 +  <section id="section-kv" class="hero-section">               
+      38 +    <div class="hero-container">                               
+      39 +      <!-- 左侧：文案（移动端隐藏）+ 视频按钮 -->              
+      40        <div class="hero-left">
+      50 -        <h1 class="product-name">一加 15T</h1>                 
+      51 -        <p class="product-slogan">又小又强又美又全面</p>       
+      52 -        <div class="video-btn">                                
+      53 -          <img src="/assets/images/kv/images-kv-replay-1-de3808
+         -.svg" alt="play" />                                            
+      41 +        <div class="text-group">                               
+      42 +          <div class="product-name">一加 15T</div>             
+      43 +          <div class="product-slogan">又小又强又美又全面</div> 
+      44          </div>
+      55 -      </div>                                                   
+      56 -      <div class="hero-right">                                 
+      57 -        <div class="phone-stack">                              
+      58 -          <img                                                 
+      59 -            v-for="(phone, i) in phones"                       
+      60 -            :key="i"                                           
+      61 -            :src="phone.src"                                   
+      62 -            :alt="phone.alt"                                   
+      63 -            :class="`phone-img phone-img-${i}`"                
+      64 -          />                                                   
+      45 +        <div class="video-btn-wrapper">                        
+      46 +          <div class="video-inner">                            
+      47 +            <img src="/assets/images/kv/videos-kv-pre-pc_poster
+         +-1-310a25.jpg.webp" alt="一加 15T 视频" />                     
+      48 +          </div>                                               
+      49 +          <div class="kv-btn">                                 
+      50 +            <img src="/assets/images/kv/images-kv-replay-1-de38
+         +08.svg" alt="播放" />                                          
+      51 +          </div>                                               
+      52          </div>
+      53 +      </div>                                                   
+      54 +      <!-- 右侧：阴影 + 四手机产品图堆叠（PC absolute，移动 rel
+         +ative） -->                                                    
+      55 +      <div class="img-wrapper">                                
+      56 +        <img class="shadow-img" src="/assets/images/kv/images-k
+         +v-shadow-pc-1-0773ab.png.webp" alt="" />                       
+      57          <img
+      67 -          src="/assets/images/misc/images-kv-coloros-1-34080c.p
+         -ng.webp"                                                       
+      68 -          alt="ColorOS"                                        
+      69 -          class="coloros-badge"                                
+      58 +          v-for="p in phones"                                  
+      59 +          :key="p.cls"                                         
+      60 +          :class="['phone-img', p.cls]"                        
+      61 +          :src="p.src"                                         
+      62 +          alt="一加 15T"                                       
+      63          />
+      64        </div>
+      65 +      <!-- ColorOS 标识（与 img-wrapper 同级，absolute） -->   
+      66 +      <img                                                     
+      67 +        class="coloros-badge"                                  
+      68 +        src="/assets/images/misc/images-kv-coloros-1-34080c.png
+         +.webp"                                                         
+      69 +        alt="ColorOS"                                          
+      70 +      />                                                       
+      71      </div>
+      73 -    <div class="scroll-hint">向下查看更多</div>                
+      72    </section>
+      73  </template>
+      74  
+     ...
+       80    position: relative;
+       81    overflow: hidden;
+       82  
+       85 -  .hero-inner {                                               
+       86 -    max-width: $max-width;                                    
+       83 +  .hero-container {                                           
+       84 +    position: relative;                                       
+       85 +    width: 91.1vw;                                            
+       86 +    max-width: 1920px;                                        
+       87      height: 100%;
+       88      margin: 0 auto;
+       89 -    padding: 0 64px;                                          
+       89      display: flex;
+       90      align-items: center;
+       92 -    justify-content: space-between;                           
+       91  
+       92      @include mo {
+       93 +      width: 100%;                                            
+       94        flex-direction: column-reverse;
+       95        justify-content: center;
+       97 -      padding: 0 16px;                                        
+       96      }
+       97    }
+       98  
+       99 +  /* 左侧 */                                                  
+      100    .hero-left {
+      101 +    position: relative;                                       
+      102      z-index: 2;
+      103  
+      104 +    @include mo {                                             
+      105 +      display: flex;                                          
+      106 +      flex-direction: column;                                 
+      107 +      align-items: center;                                    
+      108 +      justify-content: center;                                
+      109 +    }                                                         
+      110 +                                                              
+      111 +    .text-group {                                             
+      112 +      @include mo {                                           
+      113 +        display: none; /* 对应官网 mo-hidden */               
+      114 +      }                                                       
+      115 +    }                                                         
+      116 +                                                              
+      117      .product-name {
+      118 +      font-family: $font-family;                              
+      119        font-size: 64px;
+      106 -      font-weight: 700;                                       
+      120        line-height: 1.2;
+      121        color: $color-black;
+      122  
+      110 -      @include pad {                                          
+      111 -        font-size: 35px;                                      
+      112 -      }                                                       
+      113 -      @include mo {                                           
+      114 -        font-size: 36px;                                      
+      115 -      }                                                       
+      123 +      @include pad { font-size: 35px; }                       
+      124      }
+      125  
+      126      .product-slogan {
+      127 +      font-family: $font-family;                              
+      128        font-size: 48px;
+      120 -      font-weight: 700;                                       
+      129        line-height: 1.2;
+      130        margin-top: 8px;
+      131 +      margin-bottom: 48px;                                    
+      132        color: $color-black;
+      133  
+      125 -      @include pad {                                          
+      126 -        font-size: 26px;                                      
+      127 -      }                                                       
+      128 -      @include mo {                                           
+      129 -        font-size: 24px;                                      
+      130 -      }                                                       
+      134 +      @include pad { font-size: 26px; margin-top: 4px; margin-
+          +bottom: 26px; }                                               
+      135      }
+      136  
+      133 -    .video-btn {                                              
+      134 -      width: 56px;                                            
+      135 -      height: 56px;                                           
+      136 -      margin-top: 48px;                                       
+      137 +    .video-btn-wrapper {                                      
+      138 +      position: relative;                                     
+      139 +      overflow: hidden;                                       
+      140 +      width: 230px;                                           
+      141 +      height: 124px;                                          
+      142 +      border-radius: 12px;                                    
+      143        cursor: pointer;
+      144  
+      139 -      img {                                                   
+      145 +      @include pad { width: 122px; height: 67px; border-radius
+          +: 4px; }                                                      
+      146 +      @include mo { width: 138px; height: 76px; border-radius:
+          + 4px; }                                                       
+      147 +                                                              
+      148 +      .video-inner {                                          
+      149          width: 100%;
+      150          height: 100%;
+      151 +                                                              
+      152 +        img {                                                 
+      153 +          width: 100%;                                        
+      154 +          height: 100%;                                       
+      155 +          object-fit: cover;                                  
+      156 +        }                                                     
+      157        }
+      158 +                                                              
+      159 +      .kv-btn {                                               
+      160 +        position: absolute;                                   
+      161 +        top: 50%;                                             
+      162 +        left: 50%;                                            
+      163 +        transform: translate(-50%, -50%);                     
+      164 +        width: 56px;                                          
+      165 +        height: 56px;                                         
+      166 +                                                              
+      167 +        @include pad { width: 30px; height: 30px; }           
+      168 +        @include mo { width: 30px; height: 30px; }            
+      169 +                                                              
+      170 +        img {                                                 
+      171 +          width: 100%;                                        
+      172 +          height: 100%;                                       
+      173 +          object-fit: cover;                                  
+      174 +          border-radius: 50%;                                 
+      175 +        }                                                     
+      176 +      }                                                       
+      177      }
+      178    }
+      179  
+      146 -  .hero-right {                                               
+      147 -    position: relative;                                       
+      148 -    flex: 1;                                                  
+      149 -    height: 100%;                                             
+      150 -    display: flex;                                            
+      151 -    align-items: center;                                      
+      152 -    justify-content: flex-end;                                
+      180 +  /* 右侧：手机图堆叠（PC absolute 定位，尺寸沿用官网 vw 值） 
+          +*/                                                            
+      181 +  .img-wrapper {                                              
+      182 +    position: absolute;                                       
+      183 +    width: 62.15vw;                                           
+      184 +    height: 38.125vw;                                         
+      185 +    right: 48px;                                              
+      186  
+      154 -    .phone-stack {                                            
+      155 -      position: relative;                                     
+      156 -      width: 100%;                                            
+      157 -      height: 100%;                                           
+      158 -      @include flex-center;                                   
+      187 +    @include pad { width: 477px; height: 292px; right: 26px; }
+      188 +    @include mo { position: relative; width: 325px; height: 31
+          +0px; right: auto; z-index: 1; }                               
+      189  
+      160 -      .phone-img {                                            
+      161 -        position: absolute;                                   
+      162 -        max-height: 500px;                                    
+      163 -        object-fit: contain;                                  
+      164 -        transform-origin: center bottom;                      
+      190 +    .shadow-img {                                             
+      191 +      position: absolute;                                     
+      192 +      width: 57.01vw;                                         
+      193 +      height: 15.9vw;                                         
+      194 +      left: 3.4vw;                                            
+      195 +      top: 35.2vw;                                            
+      196 +      object-fit: cover;                                      
+      197  
+      166 -        @include pad {                                        
+      167 -          max-height: 350px;                                  
+      168 -        }                                                     
+      169 -        @include mo {                                         
+      170 -          max-height: 200px;                                  
+      171 -        }                                                     
+      172 -      }                                                       
+      198 +      @include pad { width: 437px; height: 121px; top: 270px; 
+          +left: auto; right: 12px; }                                    
+      199 +      @include mo { width: 325px; height: 90px; top: 295px; le
+          +ft: auto; right: 33px; }                                      
+      200      }
+      201  
+      175 -    .coloros-badge {                                          
+      202 +    .phone-img {                                              
+      203        position: absolute;
+      177 -      top: 8%;                                                
+      178 -      right: -2%;                                             
+      179 -      width: 140px;                                           
+      180 -      z-index: 10;                                            
+      204 +      object-fit: cover;                                      
+      205  
+      182 -      @include mo {                                           
+      183 -        width: 53px;                                          
+      206 +      &.phone-0 {                                             
+      207 +        width: 15.27vw; height: 34.09vw; left: 46.875vw; top: 
+          +4.027vw;                                                      
+      208 +        @include pad { width: 117px; height: 261px; left: 360p
+          +x; top: 30px; }                                               
+      209 +        @include mo { width: 94px; height: 216px; left: 231px;
+          + top: 94px; }                                                 
+      210        }
+      211 +      &.phone-1 {                                             
+      212 +        width: 21.1vw; height: 32vw; left: 32.291vw; top: 1.5v
+          +w;                                                            
+      213 +        @include pad { width: 161px; height: 244px; left: 248p
+          +x; top: 12px; }                                               
+      214 +        @include mo { width: 78px; height: 211px; left: 180px;
+          + top: 58px; }                                                 
+      215 +      }                                                       
+      216 +      &.phone-2 {                                             
+      217 +        width: 26.6vw; height: 26.88vw; left: 16.81vw; top: 0;
+      218 +        @include pad { width: 204px; height: 206px; left: 129p
+          +x; top: 0; }                                                  
+      219 +        @include mo { width: 117px; height: 192px; left: 95px;
+          + top: 26px; }                                                 
+      220 +      }                                                       
+      221 +      &.phone-3 {                                             
+      222 +        width: 30.97vw; height: 19.65vw; left: 0; top: 0;     
+      223 +        @include pad { width: 237px; height: 150px; left: 0; t
+          +op: 0; }                                                      
+      224 +        @include mo { width: 151px; height: 157px; left: 0; to
+          +p: 0; }                                                       
+      225 +      }                                                       
+      226      }
+      227    }
+      228  
+      188 -  .scroll-hint {                                              
+      229 +  /* ColorOS 标识（absolute，与 img-wrapper 同级） */         
+      230 +  .coloros-badge {                                            
+      231      position: absolute;
+      190 -    bottom: 30px;                                             
+      191 -    left: 50%;                                                
+      192 -    transform: translateX(-50%);                              
+      193 -    font-size: 12px;                                          
+      194 -    color: $color-text-secondary;                             
+      195 -    letter-spacing: 1px;                                      
+      232 +    width: 9.86vw;                                            
+      233 +    height: 5.49vw;                                           
+      234 +    top: 2.08vw;                                              
+      235 +    right: -2.36vw;                                           
+      236 +    object-fit: cover;                                        
+      237 +                                                              
+      238 +    @include pad { width: 75px; height: 42px; top: 15px; right
+          +: -18px; }                                                    
+      239 +    @include mo { width: 53px; height: 18px; top: auto; bottom
+          +: 12px; right: 12px; }                                        
+      240    }
+      241  }
+      242  </style>
+
+● 验证一下是否有语法错误。
+
+● ide - getDiagnostics (MCP)(uri: "file:///d:/Code/test-ai/test-ai/src/component
+                            s/HeroSection.vue")
+  ⎿  [
+       {
+         "uri": "file:///d:/Code/test-ai/test-ai/src/components/HeroSection
+     … +5 lines (ctrl+o to expand)
+
+● 无诊断错误，HeroSection.vue 已完成。改动要点：
+
+  DOM 层级（对齐官网）
+  section#section-kv
+  └─ .hero-container (flex, PC左右分栏 / 移动 flex-col-reverse)
+     ├─ .hero-left
+     │  ├─ .text-group (移动端 mo-hidden)
+     │  │  ├─ .product-name "一加 15T"
+     │  │  └─ .product-slogan "又小又强又美又全面"
+     │  └─ .video-btn-wrapper
+     │     ├─ .video-inner > img (poster)
+     │     └─ .kv-btn > img (播放图标，居中)
+     ├─ .img-wrapper (PC absolute)
+     │  ├─ .shadow-img
+     │  └─ .phone-img ×4 (phone-0 最右最小 → phone-3 最左最大)
+     └─ .coloros-badge (absolute，与 img-wrapper 同级)
+
+  布局：PC 用官网原始 vw 值定位手机图（15.27vw/46.875vw 等），pad/mo 用 px
+  值；移动端 flex-col-reverse + 文案 display:none 对应官网 mo-hidden。
+
+  动画：GSAP ScrollTrigger timeline，元素错开渐入+上移——文案 → 视频按钮 →
+  四手机（stagger 0.12）→ 阴影 → ColorOS 徽标，全程 power2.out，无弹性缓动。
+
+  可以 npm run dev 看效果了。
+
+✻ Crunched for 3m 40s
+
+❯ 布局，位置都很对，手机图片最终的显示位置很对，but                             
+手机那个动画不是从下面慢慢滑动上去的，正确的是：显示的顺序是从右侧到左侧，每台  
+机器的弹出动画是从现在的位置往前15°，接着以此旋转到现在这个位置                 
+
+● 明白了，手机动画应该是旋转入场而非上移。每台手机从当前位置往前 15°
+  起始，旋转回归到当前位置，顺序从右到左（phone-0 先，phone-3 最后）。
+
+● Update(src\components\HeroSection.vue)
+  ⎿  Added 1 line, removed 1 line
+      27    tl.from('.hero-section .product-name', { y: 40, opacity: 0, d
+          uration: 0.6, ease: 'power2.out' })
+      28      .from('.hero-section .product-slogan', { y: 40, opacity: 0,
+           duration: 0.6, ease: 'power2.out' }, '-=0.3')
+      29      .from('.hero-section .video-btn-wrapper', { y: 30, opacity:
+           0, duration: 0.6, ease: 'power2.out' }, '-=0.3')
+      30 -    .from('.hero-section .phone-img', { y: 60, opacity: 0, dura
+         -tion: 0.8, stagger: 0.12, ease: 'power2.out' }, '-=0.4')       
+      30 +    .from('.hero-section .phone-img', { rotation: 15, opacity: 
+         +0, duration: 0.5, stagger: 0.15, ease: 'power2.out' }, '-=0.4')
+      31      .from('.hero-section .shadow-img', { opacity: 0, duration: 
+          0.6, ease: 'power2.out' }, '-=0.5')
+      32      .from('.hero-section .coloros-badge', { y: 20, opacity: 0, 
+          duration: 0.5, ease: 'power2.out' }, '-=0.3')
+      33  })
+
+● Update(src\components\HeroSection.vue)
+  ⎿  Added 1 line
+      202      .phone-img {
+      203        position: absolute;
+      204        object-fit: cover;
+      205 +      transform-origin: center bottom;                        
+      206  
+      207        &.phone-0 {
+      208          width: 15.27vw; height: 34.09vw; left: 46.875vw; top: 
+           4.027vw;
+● 改好了。手机动画现在的逻辑：
+
+  - 顺序：stagger: 0.15 按 DOM 顺序 phone-0（最右）→
+  phone-3（最左），即从右到左依次出场
+  - 旋转：.from({ rotation: 15 }) 每台手机起始位置往前
+  15°，旋转回归到当前位置（0°）
+  - transform-origin: center 
+  bottom：以底部中心为旋转轴，呈现自然的扇形展开回拢效果
+  - opacity：配合渐入避免初始闪现，power2.out 非弹性缓动
+
+  文案/视频按钮仍保持上移渐入不变。可以刷新看效果。
+
+✻ Crunched for 1m 7s
+
+❯ 很完美，but，旋转方向反了。。。                                               
+
+● Update(src\components\HeroSection.vue)
+  ⎿  Added 1 line, removed 1 line
+      27    tl.from('.hero-section .product-name', { y: 40, opacity: 0, d
+          uration: 0.6, ease: 'power2.out' })
+      28      .from('.hero-section .product-slogan', { y: 40, opacity: 0,
+           duration: 0.6, ease: 'power2.out' }, '-=0.3')
+      29      .from('.hero-section .video-btn-wrapper', { y: 30, opacity:
+           0, duration: 0.6, ease: 'power2.out' }, '-=0.3')
+      30 -    .from('.hero-section .phone-img', { rotation: 15, opacity: 
+         -0, duration: 0.5, stagger: 0.15, ease: 'power2.out' }, '-=0.4')
+      30 +    .from('.hero-section .phone-img', { rotation: -15, opacity:
+         + 0, duration: 0.5, stagger: 0.15, ease: 'power2.out' }, '-=0.4'
+         +)                                                              
+      31      .from('.hero-section .shadow-img', { opacity: 0, duration: 
+          0.6, ease: 'power2.out' }, '-=0.5')
+      32      .from('.hero-section .coloros-badge', { y: 20, opacity: 0, 
+          duration: 0.5, ease: 'power2.out' }, '-=0.3')
+      33  })
+
+● 改成 rotation: -15 了，现在方向反过来了。刷新看看。
