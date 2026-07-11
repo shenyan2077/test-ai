@@ -1,16 +1,20 @@
-<!-- 一加15T产品导航：吸顶锚点导航，含总览/设计/续航/影像/屏幕5项，点击平滑滚动 -->
+<!-- 一加15T产品导航：始终显示的产品名+锚点导航，含总览/设计/续航/影像/屏幕5项 -->
 <template>
-  <div class="product-nav" :class="{ visible: showNav }">
+  <div class="product-nav">
     <div class="nav-inner">
-      <div
-        v-for="(item, index) in navItems"
-        :key="item.id"
-        class="nav-item"
-        :class="{ active: activeIndex === index }"
-        @click="scrollTo(index)"
-      >
-        <span class="nav-label">{{ item.label }}</span>
+      <span class="product-name">一加 15T</span>
+      <div class="nav-links">
+        <span
+          v-for="(item, index) in navItems"
+          :key="item.id"
+          class="nav-item"
+          :class="{ active: activeIndex === index }"
+          @click="scrollTo(index)"
+        >
+          {{ item.label }}
+        </span>
       </div>
+      <a href="#" class="btn-buy">立即抢购</a>
     </div>
   </div>
 </template>
@@ -46,18 +50,11 @@ const scrollTo = (index) => {
   }
 }
 
-// 滚动超过 Hero 后显示
-const showNav = ref(false)
-const checkShow = () => {
-  showNav.value = window.scrollY > window.innerHeight * 0.8
-}
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)
-  window.addEventListener('scroll', checkShow)
 })
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll)
-  window.removeEventListener('scroll', checkShow)
 })
 </script>
 
@@ -72,10 +69,6 @@ onUnmounted(() => {
   backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   z-index: 999;
-  transform: translateY(-100%);
-  transition: transform 0.3s ease;
-
-  &.visible { transform: translateY(0); }
 
   .nav-inner {
     max-width: $max-width;
@@ -84,9 +77,27 @@ onUnmounted(() => {
     padding: 0 64px;
     display: flex;
     align-items: center;
-    gap: 40px;
 
-    @include mo { padding: 0 16px; gap: 20px; }
+    @include mo { padding: 0 16px; }
+  }
+
+  .product-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: $color-black;
+    margin-right: 48px;
+    white-space: nowrap;
+
+    @include mo { margin-right: 16px; font-size: 16px; }
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    flex: 1;
+
+    @include mo { gap: 16px; }
   }
 
   .nav-item {
@@ -95,7 +106,9 @@ onUnmounted(() => {
     cursor: pointer;
     padding: 4px 0;
     transition: color 0.2s;
-    position: relative;
+    white-space: nowrap;
+
+    @include mo { font-size: 12px; }
 
     &.active {
       color: $color-black;
@@ -103,6 +116,22 @@ onUnmounted(() => {
     }
 
     &:hover { color: $color-text-primary; }
+  }
+
+  .btn-buy {
+    flex-shrink: 0;
+    padding: 6px 20px;
+    background: #f50514;
+    color: $color-white;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: opacity 0.2s;
+    white-space: nowrap;
+
+    &:hover { opacity: 0.85; }
+
+    @include mo { padding: 4px 14px; font-size: 12px; }
   }
 }
 </style>
