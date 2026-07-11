@@ -3,6 +3,7 @@
 import SiteHeader from '@/components/SiteHeader.vue'
 import ProductNav from '@/components/ProductNav.vue'
 import HeroSection from '@/components/HeroSection.vue'
+import OverviewSection from '@/components/OverviewSection.vue'
 import DesignColor from '@/components/DesignColor.vue'
 import NarrowBezel from '@/components/NarrowBezel.vue'
 import SmallScreen from '@/components/SmallScreen.vue'
@@ -34,6 +35,7 @@ useScrollAnimation()
     <main>
       <!-- 总览 -->
       <div id="section-kv"><HeroSection /></div>
+      <OverviewSection />
 
       <!-- 设计 -->
       <div id="section-color"><DesignColor /></div>
