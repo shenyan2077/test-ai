@@ -29,11 +29,11 @@ const activeIndex = ref(0)
 const isVisible = ref(false)
 
 const handleScroll = () => {
-  // 滚动过 OverviewSection（总览6卡片）后显示
+  // 总览6卡片底部滚入视口即显示
   const overview = document.querySelector('.overview-section')
   if (overview) {
     const bottom = overview.getBoundingClientRect().bottom
-    isVisible.value = bottom < 0
+    isVisible.value = bottom < window.innerHeight
   }
 
   // 高亮当前 section
@@ -103,7 +103,8 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
     width: 32px;
     height: 32px;
     object-fit: contain;
-    opacity: 0.45;
+    filter: brightness(0);
+    opacity: 0.4;
     transition: opacity 0.2s;
   }
 
@@ -114,7 +115,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
   .nav-label {
     font-size: 16px;
     font-weight: 500;
-    color: rgba(0, 0, 0, 0.55);
+    color: rgba(0, 0, 0, 0.4);
     transition: color 0.2s;
   }
 
