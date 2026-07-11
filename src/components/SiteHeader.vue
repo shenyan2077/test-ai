@@ -9,7 +9,7 @@ const scrolled = ref(false)
 const mobileMenuOpen = ref(false)
 
 const handleScroll = () => {
-  scrolled.value = window.scrollY > 10
+  scrolled.value = window.scrollY > window.innerHeight * 0.8
 }
 onMounted(() => window.addEventListener('scroll', handleScroll))
 onUnmounted(() => window.removeEventListener('scroll', handleScroll))
