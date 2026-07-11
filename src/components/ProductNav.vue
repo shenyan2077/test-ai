@@ -35,7 +35,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
 <style scoped lang="scss">
 .product-nav {
   position: fixed;
-  top: 0;
+  top: $nav-height;
   left: 0;
   width: 100%;
   height: $nav-height;
@@ -43,11 +43,10 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
   backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   z-index: 1001;
-  transform: translateY(-100%);
-  transition: transform 0.3s ease;
+  transition: top 0.3s ease;
 
   &.scrolled {
-    transform: translateY(0);
+    top: 0;
   }
 
   .nav-inner {

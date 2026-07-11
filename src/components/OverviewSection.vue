@@ -94,7 +94,7 @@ const features = [
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
     gap: 8px;
-    height: calc(100vh - #{$nav-height} - 48px);
+    height: calc(100vh - #{$nav-height} - #{$nav-height});
 
     @include mo {
       grid-template-columns: repeat(2, 1fr);

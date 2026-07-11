@@ -75,8 +75,8 @@ onMounted(() => {
 <style scoped lang="scss">
 .hero-section {
   width: 100%;
-  height: calc(100vh - #{$nav-height});
-  margin-top: $nav-height;
+  height: calc(100vh - #{$nav-height} - #{$nav-height});
+  margin-top: calc(#{$nav-height} + #{$nav-height});
   position: relative;
   overflow: hidden;
 
