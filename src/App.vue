@@ -66,7 +66,7 @@ useScrollAnimation()
     <ContactSupport />
     <NotesFooter />
     <ProductFooter />
-    
+    <BottomNav />
   </div>
 </template>
 

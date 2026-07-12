@@ -45,12 +45,13 @@ onMounted(() => {
     const lightImg = sectionRef.value.querySelector('.light-layer')
     const discImg = sectionRef.value.querySelector('.disc-layer')
     const batterIntro = sectionRef.value.querySelector('.batter-intro')
+    const tipsOverlay = sectionRef.value.querySelector('.tips-overlay')
 
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.value,
         start: 'top top',
-        end: '+=1200',
+        end: '+=3000',
         scrub: 1,
         pin: true,
       },
@@ -60,14 +61,20 @@ onMounted(() => {
     tl.fromTo(
       emojiSqueeze.querySelectorAll('.split-char'),
       { opacity: 0.15 },
-      { opacity: 1, duration: 0.5, stagger: 0.05, ease: 'none' }
+      { opacity: 1, duration: 0.4, stagger: 0.05, ease: 'none' }
     )
     // 2. 发光层淡入
-    tl.fromTo(lightImg, { opacity: 0 }, { opacity: 1, duration: 0.5 }, '-=0.3')
+    tl.fromTo(lightImg, { opacity: 0 }, { opacity: 1, duration: 0.4 }, '-=0.25')
     // 3. disc 层淡入
-    tl.fromTo(discImg, { opacity: 0 }, { opacity: 1, duration: 0.3 }, '-=0.2')
-    // 4. batter-intro 从下方滑上来，覆盖电池图
-    tl.fromTo(batterIntro, { y: '90vh' }, { y: 0, duration: 1.2, ease: 'none' }, '-=0.3')
+    tl.fromTo(discImg, { opacity: 0 }, { opacity: 1, duration: 0.25 }, '-=0.15')
+    // 4. emoji 文案随 batter-intro 上滑逐渐淡出
+    tl.to(emojiSqueeze, { opacity: 0, duration: 0.4, ease: 'none' }, '-=0.2')
+    // 5. batter-intro 从下方滑上来，覆盖电池图
+    tl.fromTo(batterIntro, { y: '100vh' }, { y: 0, duration: 0.8, ease: 'none' }, '-=0.2')
+    // 6. batter-intro 继续上滑，完全滑出屏幕（用元素自身高度确保底部也滚出）
+    tl.to(batterIntro, { y: -batterIntro.offsetHeight, duration: 1.0, ease: 'none' })
+    // 7. tips 文字淡入，出现在电池视觉中央
+    tl.fromTo(tipsOverlay, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.4, ease: 'none' }, '-=0.2')
   }, sectionRef.value)
 })
 
@@ -89,6 +96,13 @@ onUnmounted(() => {
         <img src="/assets/images/battery/images-battery-grey-battery-pc-1-1b4a8a.png.webp" alt="电池" class="battery-layer" />
         <img src="/assets/images/battery/images-battery-light-battery-pc-1-5a1683.png.webp" alt="发光" class="battery-layer light-layer" />
         <img src="/assets/images/battery/images-battery-three-battery-1-2c8437.png.webp" alt="disc" class="battery-layer disc-layer" />
+      </div>
+      <!-- tips-overlay：batter-intro 滑出后淡入，出现在电池视觉中央 -->
+      <div class="tips-overlay">
+        <div class="tips-overlay-inner">
+          <p class="tips-overlay-main">超豪华充电组合<br />有线无线都闪充，<br />回血只要分分钟。</p>
+          <p class="tips-overlay-sub">要快充有快充，要无线有无线，要反充有反充，<span>不管是在家里、办公室、车上，甚至在玩游戏，充电补电都特方便。</span></p>
+        </div>
       </div>
     </div>
 
@@ -137,16 +151,6 @@ onUnmounted(() => {
             <p class="stat-label">{{ s.label }}</p>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ====== 超豪华充电组合 tips ====== -->
-  <section class="tips-section">
-    <div class="tips-inner">
-      <div class="tips-row">
-        <p class="tips-main">超豪华充电组合<br />有线无线都闪充，<br />回血只要分分钟。</p>
-        <p class="tips-sub">要快充有快充，要无线有无线，要反充有反充，<span>不管是在家里、办公室、车上，甚至在玩游戏，充电补电都特方便。</span></p>
       </div>
     </div>
   </section>
@@ -375,49 +379,53 @@ onUnmounted(() => {
   }
 }
 
-/* ============================================================
-   超豪华充电组合 tips
-   ============================================================ */
-.tips-section {
-  width: 100%;
-  background: $color-white;
+/* tips-overlay：batter-intro 滑出后显示在电池视觉中央 */
+.tips-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  opacity: 0;
+  pointer-events: none;
 
-  .tips-inner {
+  .tips-overlay-inner {
+    position: relative;
     max-width: 1440px;
-    margin: 0 auto;
-    padding: 48px 64px 40px;
-    @include mo { padding: 32px 16px 24px; }
-    @include pad { padding: 36px 24px 32px; }
+    width: 100%;
+    height: 100%;
+    padding: 0 64px;
+    @include mo { padding: 0 16px; }
+    @include pad { padding: 0 24px; }
   }
 
-  .tips-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    @include mo { flex-direction: column; }
-  }
-
-  .tips-main {
+  .tips-overlay-main {
+    position: absolute;
+    top: 18%;
+    left: 64px;
     font-size: 48px;
     font-weight: 500;
     line-height: 1.2;
     color: rgba(0, 0, 0, 0.95);
-    @include mo { font-size: 28px; }
+    @include mo { font-size: 28px; left: 16px; top: 10%; }
+    @include pad { left: 24px; }
   }
 
-  .tips-sub {
+  .tips-overlay-sub {
+    position: absolute;
+    bottom: 18%;
+    right: 64px;
     font-size: 18px;
     font-weight: 500;
     line-height: 1.4;
     color: rgba(0, 0, 0, 0.95);
     width: 478px;
-    align-self: flex-end;
-    @include mo { font-size: 16px; width: auto; margin-top: 24px; }
-    @include pad { width: 360px; }
+    text-align: right;
+    @include mo { font-size: 16px; width: auto; right: 16px; bottom: 10%; }
+    @include pad { width: 360px; right: 24px; }
     span { color: rgba(0, 0, 0, 0.3); }
   }
-
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 /* ============================================================

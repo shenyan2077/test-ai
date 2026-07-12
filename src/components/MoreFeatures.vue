@@ -1,4 +1,4 @@
-<!-- 全面大升级 — GSAP pin 整屏 + 滚动驱动6张卡片横滑 + 进度条 -->
+<!-- 全面大升级 — 首图全屏 → 缩至卡片位 → 6图横滑 + 进度条 -->
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import gsap from 'gsap'
@@ -23,8 +23,10 @@ onMounted(() => {
     const rowWrapper = sectionRef.value.querySelector('.row-wrapper')
     const slider = sectionRef.value.querySelector('.slider')
     const viewport = sectionRef.value.querySelector('.sticky-viewport')
+    const heroCard = sectionRef.value.querySelector('.hero-card')
+    const heroImg = sectionRef.value.querySelector('.hero-img')
 
-    // 标题逐字变黑：从左到右、从上到下依次亮起
+    // 标题逐字变黑
     const splitChars = sectionRef.value.querySelectorAll('.split-char')
     gsap.fromTo(splitChars,
       { opacity: 0.15 },
@@ -39,7 +41,16 @@ onMounted(() => {
       }
     )
 
-    gsap.timeline({
+    const vw = window.innerWidth
+    const vh = window.innerHeight
+    const startLeft = vw * 0.025      // 2.5vw，几乎贴边
+    const startWidth = vw * 0.95      // 95vw，几乎撑满
+    const startImgH = vh * 0.75       // 75vh，初始很高
+    const endWidth = vh * 0.830572    // 83.0572vh → px
+    const endImgH = vh * 0.496815     // 49.6815vh → px
+    const endLeft = 64                // sticky-content 左内边距
+
+    const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.value.querySelector('.sticky-container'),
         start: 'top top',
@@ -48,8 +59,32 @@ onMounted(() => {
         pin: viewport,
       },
     })
-    .to(rowWrapper, { x: () => -(rowWrapper.scrollWidth - window.innerWidth), ease: 'none' }, 0)
-    .to(slider, { x: 275, ease: 'none' }, 0)
+
+    // 阶段1：首图从全屏缩到卡片位（占 35%），期间 row-wrapper 从不可见到淡入
+    tl.fromTo(heroCard,
+      { left: startLeft, width: startWidth },
+      { left: endLeft, width: endWidth, duration: 0.35, ease: 'none' },
+      0
+    )
+    tl.fromTo(heroImg,
+      { height: startImgH },
+      { height: endImgH, duration: 0.35, ease: 'none' },
+      0
+    )
+    // row-wrapper 淡入（0.15 → 0.35）
+    tl.fromTo(rowWrapper,
+      { opacity: 0 },
+      { opacity: 1, duration: 0.20, ease: 'none' },
+      0.15
+    )
+    // hero 淡出，交接给第一张卡片（0.25 → 0.35）
+    tl.to(heroCard,
+      { opacity: 0, duration: 0.10, ease: 'none' },
+      0.25
+    )
+    // 阶段2：6 图横滑（占 65% 滚动距离）
+    tl.to(rowWrapper, { x: () => -(rowWrapper.scrollWidth - vw), ease: 'none' }, 0.35)
+    tl.to(slider, { x: 275, ease: 'none' }, 0.35)
   }, sectionRef.value)
 })
 
@@ -75,6 +110,17 @@ onUnmounted(() => {
     <!-- Sticky 横滑容器 -->
     <div class="sticky-container">
       <div class="sticky-viewport">
+        <!-- Hero 首图：初始全屏居中仅图片，随滚动缩到第一张卡片位置 -->
+        <div class="hero-card">
+          <img
+            :src="features[0].img"
+            :alt="features[0].title"
+            class="hero-img"
+            :class="{ 'card-img-shoumo': features[0].isShoumo }"
+          />
+        </div>
+
+        <!-- 6 卡片横滑（hero 到位后自然衔接，首个卡片同内容不可见） -->
         <div class="sticky-content">
           <div class="line" />
           <div class="row-wrapper">
@@ -149,14 +195,38 @@ onUnmounted(() => {
   width: 100%;
   height: 100vh;
   overflow: hidden;
+  position: relative;
 }
 
+/* ====== Hero 首图：全屏居中 → 缩到卡片位 ====== */
+.hero-card {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  // left / width 由 GSAP 驱动
+
+  .hero-img {
+    width: 100%;
+    // height 由 GSAP 驱动
+    object-fit: contain;
+    object-position: bottom;
+  }
+}
+
+/* ====== 横滑卡片 ====== */
 .sticky-content {
   display: flex;
   flex-direction: column;
   justify-content: center;
   height: 100%;
   padding: 0 64px;
+  position: relative;
+  z-index: 1;
+  // row-wrapper 初始透明，阶段1 淡入
+  .row-wrapper {
+    opacity: 0;
+  }
 
   @include pad {
     padding: 0 24px;
@@ -165,8 +235,6 @@ onUnmounted(() => {
 
 .line {
   width: 100%;
-   //height: 1px;
-  // background: rgba(42, 42, 42, 0.15);
 }
 
 .row-wrapper {

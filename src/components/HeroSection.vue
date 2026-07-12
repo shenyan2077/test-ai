@@ -28,12 +28,16 @@ onMounted(() => {
     },
   })
 
-  tl.from('.hero-section .product-name', { y: 40, opacity: 0, duration: 0.6, ease: 'power2.out' })
-    .from('.hero-section .product-slogan', { y: 40, opacity: 0, duration: 0.6, ease: 'power2.out' }, '-=0.3')
-    .from('.hero-section .video-btn-wrapper', { y: 30, opacity: 0, duration: 0.6, ease: 'power2.out' }, '-=0.3')
-    .from('.hero-section .phone-img', { rotation: -15, opacity: 0, duration: 0.5, stagger: 0.15, ease: 'power2.out' }, '-=0.4')
-    .from('.hero-section .shadow-img', { opacity: 0, duration: 0.6, ease: 'power2.out' }, '-=0.5')
-    .from('.hero-section .coloros-badge', { y: 20, opacity: 0, duration: 0.5, ease: 'power2.out' }, '-=0.3')
+  // 1. 先：右侧四部手机 staggered 入场
+  tl.from('.hero-section .phone-img', { rotation: -15, opacity: 0, duration: 0.5, stagger: 0.15, ease: 'power2.out' })
+    .from('.hero-section .shadow-img', { opacity: 0, duration: 0.4, ease: 'power2.out' }, '-=0.25')
+    .from('.hero-section .coloros-badge', { y: 20, opacity: 0, duration: 0.4, ease: 'power2.out' }, '-=0.15')
+    // 2. "一加 15T"
+    .from('.hero-section .product-name', { y: 40, opacity: 0, duration: 0.6, ease: 'power2.out' })
+    // 3. "又小又强又美又全面"
+    .from('.hero-section .product-slogan', { y: 40, opacity: 0, duration: 0.6, ease: 'power2.out' }, '-=0.2')
+    // 4. 视频模块
+    .from('.hero-section .video-btn-wrapper', { y: 30, opacity: 0, duration: 0.6, ease: 'power2.out' }, '-=0.2')
 })
 </script>
 
