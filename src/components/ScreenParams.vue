@@ -1,5 +1,38 @@
 <!-- 屏幕分屏2：屏幕参数 — 三行规格网格 + 认证图标 -->
 <script setup>
+import { ref, onMounted, onUnmounted } from 'vue'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
+
+const sectionRef = ref(null)
+let ctx
+
+onMounted(() => {
+  ctx = gsap.context(() => {
+    const fadeEls = sectionRef.value.querySelectorAll('.fade-in')
+
+    fadeEls.forEach((el) => {
+      gsap.fromTo(el,
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1, y: 0, duration: 0.8, ease: 'power2.out',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 85%',
+            once: true,
+          },
+        }
+      )
+    })
+  }, sectionRef.value)
+})
+
+onUnmounted(() => {
+  if (ctx) ctx.revert()
+})
+
 const featureTags = [
   { label: '高刷新率', value: '165Hz 极速高刷', desc: '游戏体验巨流畅' },
   { label: '联合研发', value: '全新旗舰发光材料', desc: '显示巨通透，巨准确' },
@@ -24,7 +57,7 @@ const paramsRow2 = [
 </script>
 
 <template>
-  <section class="screen-params" id="parameter">
+  <section ref="sectionRef" class="screen-params" id="parameter">
     <div class="params-inner">
       <!-- 顶部描述 -->
       <div class="top-desc">
@@ -35,7 +68,7 @@ const paramsRow2 = [
       </div>
 
       <!-- 第一行：4个特性标签 -->
-      <div class="feature-tags">
+      <div class="feature-tags fade-in">
         <div v-for="tag in featureTags" :key="tag.label" class="tag-item">
           <div class="tag-badge">
             <p>{{ tag.label }}</p>
@@ -48,7 +81,7 @@ const paramsRow2 = [
       </div>
 
       <!-- 第二行：5个规格参数 -->
-      <div class="params-grid">
+      <div class="params-grid fade-in">
         <div v-for="(p, i) in paramsRow1" :key="'p1-'+i" class="param-cell">
           <p class="param-value">{{ p.value }}</p>
           <p class="param-desc">{{ p.desc }}</p>
@@ -56,7 +89,7 @@ const paramsRow2 = [
       </div>
 
       <!-- 第三行：4个辅助参数 -->
-      <div class="params-grid params-grid-3">
+      <div class="params-grid params-grid-3 fade-in">
         <div v-for="(p, i) in paramsRow2" :key="'p2-'+i" class="param-cell">
           <p class="param-value">{{ p.value }}</p>
           <p class="param-desc">{{ p.desc }}</p>
@@ -64,7 +97,7 @@ const paramsRow2 = [
       </div>
 
       <!-- 认证图标 -->
-      <div class="cert-icons">
+      <div class="cert-icons fade-in">
         <img src="/assets/images/rotating-screen/images-rotating-screen-icon-1-1-2f1e58.jpg.webp" alt="认证1" />
         <img src="/assets/images/rotating-screen/images-rotating-screen-icon-2-1-09b922.jpg.webp" alt="认证2" />
         <img src="/assets/images/rotating-screen/images-rotating-screen-icon-3-1-7fb4c3.jpg.webp" alt="认证3" />
@@ -96,13 +129,13 @@ const paramsRow2 = [
 
 .top-desc {
   text-align: center;
-  padding: 24px 0 48px;
+  padding: 0 0 48px;
 
   @include pad {
-    padding: 13px 0 26px;
+    padding: 0 0 26px;
   }
   @include mo {
-    padding: 32px 0 24px;
+    padding: 0 0 24px;
   }
 
   p {

@@ -6,6 +6,10 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
+function playVideo() {
+  window.open('/assets/video02.mp4', '_blank')
+}
+
 // 四个手机产品图：phone-0 最右最小，phone-3 最左最大，对应官网 img-wrapper 内顺序
 const phones = [
   { src: '/assets/images/kv/images-kv-phone-0-1-fa31aa.png', cls: 'phone-0' },
@@ -42,7 +46,7 @@ onMounted(() => {
           <div class="product-name">一加 15T</div>
           <div class="product-slogan">又小又强又美又全面</div>
         </div>
-        <div class="video-btn-wrapper">
+        <div class="video-btn-wrapper" @click="playVideo">
           <div class="video-inner">
             <img src="/assets/images/kv/videos-kv-pre-pc_poster-1-310a25.jpg.webp" alt="一加 15T 视频" />
           </div>

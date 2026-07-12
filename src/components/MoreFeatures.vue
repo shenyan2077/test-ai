@@ -1,4 +1,4 @@
-<!-- 屏幕分屏6：全面大升级 — sticky滚动驱动6张功能卡片水平滑动 + 进度条 -->
+<!-- 全面大升级 — GSAP pin 整屏 + 滚动驱动6张卡片横滑 + 进度条 -->
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import gsap from 'gsap'
@@ -10,7 +10,7 @@ const sectionRef = ref(null)
 let ctx
 
 const features = [
-  { title: '3D 超声波指纹', desc: '指纹解锁超迅速，湿手油手也秒开。', img: '/assets/images/more-points/images-more-points-shoumo-1-65ce27.png.webp' },
+  { title: '3D 超声波指纹', desc: '指纹解锁超迅速，湿手油手也秒开。', img: '/assets/images/more-points/images-more-points-shoumo-1-65ce27.png.webp', isShoumo: true },
   { title: 'IP66/68/69/69K 满级防尘防水¹⁴', desc: '满级防水更安心，玩水嬉戏超自在。', img: '/assets/images/more-points/images-more-points-pic2-1-4b33d9.jpg.webp' },
   { title: '超耐用「晶盾玻璃」', desc: '不贴膜也耐刮，无惧生活小磨擦。', img: '/assets/images/more-points/images-more-points-pic3-1-9dc118.jpg' },
   { title: '立体声双扬声器', desc: '听歌、追剧、游戏，好音质，更沉浸。', img: '/assets/images/more-points/images-more-points-pic4-1-50c298.jpg.webp' },
@@ -22,7 +22,22 @@ onMounted(() => {
   ctx = gsap.context(() => {
     const rowWrapper = sectionRef.value.querySelector('.row-wrapper')
     const slider = sectionRef.value.querySelector('.slider')
-    if (!rowWrapper) return
+    const viewport = sectionRef.value.querySelector('.sticky-viewport')
+
+    // 标题逐字变黑：从左到右、从上到下依次亮起
+    const splitChars = sectionRef.value.querySelectorAll('.split-char')
+    gsap.fromTo(splitChars,
+      { opacity: 0.15 },
+      {
+        opacity: 1, stagger: 0.04, ease: 'none',
+        scrollTrigger: {
+          trigger: sectionRef.value.querySelector('.emoji-squeeze'),
+          start: 'top 75%',
+          end: 'top 30%',
+          scrub: 0.5,
+        },
+      }
+    )
 
     gsap.timeline({
       scrollTrigger: {
@@ -30,10 +45,11 @@ onMounted(() => {
         start: 'top top',
         end: 'bottom bottom',
         scrub: 0.5,
+        pin: viewport,
       },
     })
-    .to(rowWrapper, { x: () => -(rowWrapper.scrollWidth - window.innerWidth), duration: 3, ease: 'none' }, 0)
-    .to(slider, { x: 275, duration: 3, ease: 'none' }, 0)
+    .to(rowWrapper, { x: () => -(rowWrapper.scrollWidth - window.innerWidth), ease: 'none' }, 0)
+    .to(slider, { x: 275, ease: 'none' }, 0)
   }, sectionRef.value)
 })
 
@@ -43,14 +59,16 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <section ref="sectionRef" class="more-features" id="section-points">
+  <section ref="sectionRef" class="more-features mo-hidden" id="section-points">
     <!-- 大字标题 -->
-    <div class="emoji-squeeze">
-      <div class="line">
-        <span class="split-char">全</span><span class="split-char">面</span><span class="split-char">大</span><span class="split-char">升</span><span class="split-char">级</span>
-      </div>
-      <div class="line">
-        <span class="split-char">全</span><span class="split-char">部</span><span class="split-char">超</span><span class="split-char">好</span><span class="split-char">用</span>
+    <div class="content">
+      <div class="emoji-squeeze">
+        <div class="line">
+          <span class="split-char">全</span><span class="split-char">面</span><span class="split-char">大</span><span class="split-char">升</span><span class="split-char">级</span>
+        </div>
+        <div class="line">
+          <span class="split-char">全</span><span class="split-char">部</span><span class="split-char">超</span><span class="split-char">好</span><span class="split-char">用</span>
+        </div>
       </div>
     </div>
 
@@ -58,19 +76,27 @@ onUnmounted(() => {
     <div class="sticky-container">
       <div class="sticky-viewport">
         <div class="sticky-content">
-          <div class="line line-top"></div>
+          <div class="line" />
           <div class="row-wrapper">
-            <div v-for="(f, i) in features" :key="i" class="feature-card" :class="{ endcard: i === features.length - 1 }">
-              <!-- 第一张是特殊手机图 -->
-              <img v-if="i === 0" :src="f.img" :alt="f.title" class="card-img card-img-shoumo" />
-              <img v-else :src="f.img" :alt="f.title" class="card-img" />
+            <div
+              v-for="(f, i) in features"
+              :key="i"
+              class="feature-card"
+              :class="{ endcard: i === features.length - 1 }"
+            >
+              <img
+                :src="f.img"
+                :alt="f.title"
+                class="card-img"
+                :class="{ 'card-img-shoumo': f.isShoumo }"
+              />
               <div class="card-intro">
                 <p class="card-title">{{ f.title }}</p>
                 <p class="card-desc">{{ f.desc }}</p>
               </div>
             </div>
           </div>
-          <div class="line line-bottom"></div>
+          <div class="line" />
         </div>
       </div>
     </div>
@@ -78,7 +104,7 @@ onUnmounted(() => {
     <!-- 进度条 -->
     <div class="progress-bar-wrap">
       <div class="progress-bar">
-        <div class="slider"></div>
+        <div class="slider" />
       </div>
     </div>
   </section>
@@ -88,7 +114,11 @@ onUnmounted(() => {
 .more-features {
   width: 100%;
   background: $color-white;
-  margin-top: 15vh;
+  margin-top: 15.0955vh;
+}
+
+.content {
+  opacity: 1;
 }
 
 .emoji-squeeze {
@@ -116,10 +146,8 @@ onUnmounted(() => {
 }
 
 .sticky-viewport {
-  position: sticky;
-  top: $nav-height;
   width: 100%;
-  height: calc(100vh - #{$nav-height});
+  height: 100vh;
   overflow: hidden;
 }
 
@@ -137,8 +165,8 @@ onUnmounted(() => {
 
 .line {
   width: 100%;
-  height: 1px;
-  background: rgba(42, 42, 42, 0.15);
+   //height: 1px;
+  // background: rgba(42, 42, 42, 0.15);
 }
 
 .row-wrapper {
@@ -147,7 +175,7 @@ onUnmounted(() => {
 }
 
 .feature-card {
-  width: 83vh;
+  width: 83.0572vh;
   flex-shrink: 0;
 
   @include pad {
@@ -156,7 +184,7 @@ onUnmounted(() => {
 
   .card-img {
     width: 100%;
-    height: 49.68vh;
+    height: 49.6815vh;
     object-fit: cover;
 
     @include pad {
@@ -204,7 +232,7 @@ onUnmounted(() => {
 
 .progress-bar-wrap {
   width: 100%;
-  padding: 5vh 0 5vh 64px;
+  padding: 5.0955vh 0 5.0955vh 64px;
 
   @include pad {
     padding: 32px 0 32px 35px;

@@ -7,7 +7,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 
 const sectionRef = ref(null)
+const videoRef = ref(null)
 let ctx
+let observer
 
 onMounted(() => {
   ctx = gsap.context(() => {
@@ -28,10 +30,26 @@ onMounted(() => {
       }
     )
   }, sectionRef.value)
+
+  // 滚动到视频区域时自动播放，离开时暂停
+  if (videoRef.value) {
+    observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          videoRef.value.play()
+        } else {
+          videoRef.value.pause()
+        }
+      },
+      { threshold: 0.3 }
+    )
+    observer.observe(videoRef.value)
+  }
 })
 
 onUnmounted(() => {
   if (ctx) ctx.revert()
+  if (observer) observer.disconnect()
 })
 </script>
 
@@ -75,9 +93,12 @@ onUnmounted(() => {
           <p class="live-title">4K 超清实况</p>
           <p class="live-desc">拍视频时也能拍实况，更高清</p>
           <div class="live-video-wrap">
-            <img
-              src="/assets/images/livephoto/images-livephoto-live3-1-e78cc4.jpg.webp"
-              alt="4K 超清实况"
+            <video
+              ref="videoRef"
+              src="/assets/video03.mp4"
+              loop
+              muted
+              playsinline
               class="live-video-poster"
             />
             <div class="live-logo-badge">

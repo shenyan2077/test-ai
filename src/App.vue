@@ -20,6 +20,8 @@ import DarkNightDisplay from '@/components/DarkNightDisplay.vue'
 import EyeProtection from '@/components/EyeProtection.vue'
 import DimLightEye from '@/components/DimLightEye.vue'
 import MoreFeatures from '@/components/MoreFeatures.vue'
+import ContactSupport from '@/components/ContactSupport.vue'
+import ProductFooter from '@/components/ProductFooter.vue'
 import BottomNav from '@/components/BottomNav.vue'
 import NotesFooter from '@/components/NotesFooter.vue'
 import SiteFooter from '@/components/SiteFooter.vue'
@@ -61,9 +63,10 @@ useScrollAnimation()
       <div id="section-light"><DimLightEye /></div>
       <div id="section-points"><MoreFeatures /></div>
     </main>
+    <ContactSupport />
     <NotesFooter />
-    <SiteFooter />
-    <BottomNav />
+    <ProductFooter />
+    
   </div>
 </template>
 

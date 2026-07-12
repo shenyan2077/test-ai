@@ -1,12 +1,43 @@
 <!-- 屏幕分屏4：明眸护眼 — 黑色背景视差人眼图 + 底部毛玻璃护眼技术标签面板 -->
 <script setup>
+import { ref, onMounted, onUnmounted } from 'vue'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
+
+const sectionRef = ref(null)
+let ctx
+
+onMounted(() => {
+  ctx = gsap.context(() => {
+    const bgImg = sectionRef.value.querySelector('.eye-bg-img')
+
+    // 背景图视差：滚动速度比前景慢，营造深度感
+    gsap.to(bgImg, {
+      y: -800,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: sectionRef.value,
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: 0.5,
+      },
+    })
+  }, sectionRef.value)
+})
+
+onUnmounted(() => {
+  if (ctx) ctx.revert()
+})
+
 // 明眸护眼模块：parallax背景 + 毛玻璃面板展示7个护眼技术
 const techRow1 = ['AI 色彩增强', 'AI 眨眼提示', 'AI 距离提示', '晕车舒缓']
 const techRow2 = ['降低白点值', '舒适色温 3.0', '节律健康 3.0']
 </script>
 
 <template>
-  <section class="eye-protection" id="section-eyes">
+  <section ref="sectionRef" class="eye-protection" id="section-eyes">
     <div class="eye-bg">
       <img
         src="/assets/images/eyes/images-eyes-3071_1021-1-8f2e7b.png.webp"
@@ -166,7 +197,7 @@ const techRow2 = ['降低白点值', '舒适色温 3.0', '节律健康 3.0']
   left: 0;
   width: 100%;
   background: rgba(255, 255, 255, 0.84);
-  backdrop-filter: blur(20px);
+ // backdrop-filter: blur(20px);
   display: flex;
   justify-content: center;
   padding: 105px 64px;
